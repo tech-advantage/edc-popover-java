@@ -3,6 +3,7 @@ package fr.techad.edc.popover.swing;
 import fr.techad.edc.popover.EdcHelp;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Use i to create a Swing Component to display the documentation.
@@ -17,4 +18,11 @@ public interface EdcSwingHelp extends EdcHelp {
      * @return the GUI component
      */
     JComponent createComponent(String mainKey, String subKey);
+
+    /**
+     * Define the background color for the component summary
+     *
+     * @param backgroundColor the color to set
+     */
+    void setBackgroundColor(Color backgroundColor);
 }

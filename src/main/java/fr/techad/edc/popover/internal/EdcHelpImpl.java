@@ -22,7 +22,26 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setCloseIconPath(String iconPath) {
+        helpConfiguration.setCloseIconPath(iconPath);
+    }
+
+    @Override
     public void setLanguageCode(String languageCode) {
         helpConfiguration.setLanguageCode(languageCode);
+    }
+
+    @Override
+    public void setTooltipLabel(String label) {
+        helpConfiguration.setTooltipLabel(label);
+    }
+
+    @Override
+    public void setSummaryDisplay(boolean enable) {
+        helpConfiguration.setSummaryDisplay(enable);
+    }
+
+    protected HelpConfiguration getHelpConfiguration() {
+        return helpConfiguration;
     }
 }

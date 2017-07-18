@@ -20,6 +20,20 @@ public interface HelpConfiguration {
     void setIconPath(String iconPath);
 
     /**
+     * Return the close icon path
+     *
+     * @return the icon path
+     */
+    String getCloseIconPath();
+
+    /**
+     * Set the close icon path
+     *
+     * @param iconPath the icon path to set
+     */
+    void setCloseIconPath(String iconPath);
+
+    /**
      * Get the language code
      *
      * @return the language code
@@ -33,4 +47,46 @@ public interface HelpConfiguration {
      * @param languageCode the language code to set
      */
     void setLanguageCode(String languageCode);
+
+    /**
+     * Return the tooltip label
+     *
+     * @return the label
+     */
+    String getTooltipLabel();
+
+    /**
+     * Define the tooltip
+     *
+     * @param label the label to set
+     */
+    void setTooltipLabel(String label);
+
+    /**
+     * Return the status for the summary display of the help.
+     *
+     * @return the state
+     */
+    boolean getSummaryDisplay();
+
+    /**
+     * If false, the help will be displayed in the help component else a component will display it partially (ie popover for example)
+     *
+     * @param enabled the new state to set
+     */
+    void setSummaryDisplay(boolean enabled);
+
+    /**
+     * Return the background color
+     *
+     * @return the background color
+     */
+    int getBackgroundColor();
+
+    /**
+     * Define the background color for the component summary
+     *
+     * @param backgroundColor the color to set
+     */
+    void setBackgroundColor(int backgroundColor);
 }

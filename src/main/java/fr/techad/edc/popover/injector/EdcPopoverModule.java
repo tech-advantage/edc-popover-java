@@ -7,14 +7,17 @@ package fr.techad.edc.popover.injector;
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
-import fr.techad.edc.popover.injector.builder.ContextualComponentBuilder;
-import fr.techad.edc.popover.injector.provider.HelpActionListenerProvider;
+import fr.techad.edc.popover.builder.ContextualComponentBuilder;
+import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
+import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.model.HelpConfigurationImpl;
 import fr.techad.edc.popover.internal.swing.EdcSwingHelpImpl;
 import fr.techad.edc.popover.internal.swing.builder.ContextualComponentBuilderImpl;
+import fr.techad.edc.popover.internal.swing.builder.ContextualContentComponentBuilderImpl;
+import fr.techad.edc.popover.internal.swing.components.Popover;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
-import fr.techad.edc.popover.swing.HelpActionListener;
+import fr.techad.edc.popover.swing.HelpListener;
 
 import javax.swing.*;
 
@@ -28,12 +31,14 @@ public class EdcPopoverModule extends AbstractModule {
         bind(HelpConfiguration.class).to(HelpConfigurationImpl.class).in(Scopes.SINGLETON);
 
         // Builder
-        bind(new TypeLiteral<ContextualComponentBuilder<JComponent>>(){}).to(ContextualComponentBuilderImpl.class);
+        bind(new TypeLiteral<ContextualComponentBuilder<JComponent>>() {}).to(ContextualComponentBuilderImpl.class);
+        bind(new TypeLiteral<ContextualContentComponentBuilder<JComponent>>() {}).to(ContextualContentComponentBuilderImpl.class);
 
         // Provider
-        bind(HelpActionListener.class).toProvider(HelpActionListenerProvider.class);
+        bind(HelpListener.class).toProvider(HelpListenerProvider.class);
 
         // The Helper
         bind(EdcSwingHelp.class).to(EdcSwingHelpImpl.class).in(Scopes.SINGLETON);
+        bind(Popover.class).in(Scopes.SINGLETON);
     }
 }

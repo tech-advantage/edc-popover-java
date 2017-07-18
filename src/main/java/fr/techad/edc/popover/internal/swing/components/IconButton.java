@@ -1,5 +1,6 @@
 package fr.techad.edc.popover.internal.swing.components;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 
 /**
  * Define a extra button to add effect for the help.
- *
+ * <p>
  * On mouse over, the icon is scaled.
  */
 public class IconButton extends JButton {
@@ -16,11 +17,15 @@ public class IconButton extends JButton {
 
     /**
      * The constructor
-     * @param icon the icon to display
+     *
+     * @param label the label to display
+     * @param icon  the icon to display
      */
-    public IconButton(Icon icon) {
+    public IconButton(String label, Icon icon) {
         super(icon);
 
+        if (StringUtils.isNotBlank(label))
+            setToolTipText(label);
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusable(false);
@@ -46,10 +51,11 @@ public class IconButton extends JButton {
 
     /**
      * Create a scaled image from base icon.
+     *
      * @param baseIcon the icon to scale
-     * @param width the new width
-     * @param height the new height
-     * @param hints the new hints
+     * @param width    the new width
+     * @param height   the new height
+     * @param hints    the new hints
      * @return the scaled icon
      */
     private ImageIcon getScaledIcon(ImageIcon baseIcon, int width, int height, int hints) {

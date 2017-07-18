@@ -1,32 +1,42 @@
 package fr.techad.edc.popover.internal.swing.components;
 
 import fr.techad.edc.client.EdcClient;
+import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.InvalidUrlException;
-import fr.techad.edc.popover.swing.HelpActionListener;
+import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
+import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.swing.HelpListener;
+import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
- * Implementation of {@link HelpActionListener} for the {@link IconButton}
+ * Implementation of {@link HelpListener} for the {@link IconButton}
  */
-public class IconButtonListener implements HelpActionListener {
+public class IconButtonListener implements HelpListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(IconButton.class);
-    private EdcClient edcClient;
+    private final EdcClient edcClient;
+    private final HelpConfiguration helpConfiguration;
+    private final ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder;
+    private final Popover popover;
 
     private String maiKey;
     private String subKey;
     private String languageCode;
 
     @Inject
-    public IconButtonListener(EdcClient edcClient) {
+    public IconButtonListener(EdcClient edcClient, HelpConfiguration helpConfiguration, ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder, Popover popover) {
         this.edcClient = edcClient;
+        this.helpConfiguration = helpConfiguration;
+        this.contextualContentComponentBuilder = contextualContentComponentBuilder;
+        this.popover = popover;
     }
 
     @Override
@@ -37,19 +47,64 @@ public class IconButtonListener implements HelpActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                String url = edcClient.getContextWebHelpUrl(maiKey, subKey, languageCode);
-                try {
-                    desktop.browse(new URL(url).toURI());
-                } catch (URISyntaxException | IOException ex) {
-                    LOGGER.error("Impossible to open the browser with url:{}", url);
-                }
-            } catch (InvalidUrlException | IOException e1) {
-                LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", maiKey, subKey, languageCode);
-            }
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (this.helpConfiguration.getSummaryDisplay()) {
+            openPopover(e.getXOnScreen(), e.getYOnScreen());
+        } else {
+            openBrowser();
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    private void openBrowser() {
+        String url = "";
+        try {
+            url = edcClient.getContextWebHelpUrl(maiKey, subKey, languageCode);
+            OpenUrlAction openUrlAction = new OpenUrlAction();
+            openUrlAction.openUrl(url);
+        } catch (InvalidUrlException e) {
+            LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", maiKey, subKey, languageCode);
+        } catch (URISyntaxException e) {
+            LOGGER.error("Impossible to open the browser with url:{}", url);
+        } catch (IOException e) {
+            LOGGER.error("Error on IO", e);
+        }
+    }
+
+    private void openPopover(int x, int y) {
+        try {
+            ContextItem contextItem = edcClient.getContextItem(maiKey, subKey, languageCode);
+            JComponent jComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
+            Color color = new Color(helpConfiguration.getBackgroundColor());
+            popover.setContentBackground(color);
+            popover.clear();
+            popover.add(jComponent);
+            popover.setIconPath(helpConfiguration.getCloseIconPath());
+            popover.pack();
+            popover.setVisible(true);
+            popover.setLocation(x, y);
+            LOGGER.debug("Popover size: {}", popover.getSize());
+            LOGGER.debug("component size: {}", jComponent.getSize());
+        } catch (InvalidUrlException | IOException e) {
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", maiKey, subKey, languageCode);
         }
     }
 }

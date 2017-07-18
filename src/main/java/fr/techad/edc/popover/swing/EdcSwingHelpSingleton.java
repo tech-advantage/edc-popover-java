@@ -7,6 +7,7 @@ import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * This classe declare a singleton to configure and create a Swing component.
@@ -73,8 +74,27 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setCloseIconPath(String iconPath) {
+        edcSwingHelp.setCloseIconPath(iconPath);
+    }
+
+    @Override
     public void setLanguageCode(String languageCode) {
         edcSwingHelp.setLanguageCode(languageCode);
     }
 
+    @Override
+    public void setTooltipLabel(String label) {
+        edcSwingHelp.setTooltipLabel(label);
+    }
+
+    @Override
+    public void setSummaryDisplay(boolean enable) {
+        edcSwingHelp.setSummaryDisplay(enable);
+    }
+
+    @Override
+    public void setBackgroundColor(Color backgroundColor) {
+        edcSwingHelp.setBackgroundColor(backgroundColor);
+    }
 }

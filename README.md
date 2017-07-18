@@ -4,6 +4,17 @@ To use edc publication in your Java application, you can use this utility. Work 
 
 ## Configuration 
 
+We will be able to configure the url to get the documentation and the widget properties.
+
+| Properties | Method | Default | Description |
+|--|--|--|--|
+| Icon Path| ``setIconPath`` | icons/icon-32px.png| The help icon displays in the component |
+| Language Code | ``setLanguageCode`` | en | The help language code |
+| Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
+| Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
+| Background color | ``setBackgroundColor`` | WHITE | Background color of the summary dialog |
+| Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
+
 ### with Injection
 
 Based on Guice, you need to include EdcClientModule and EdcPopoverModule in the injector creation.
@@ -14,8 +25,9 @@ Injector injector = Guice.createInjector(new EdcClientModule(), new EdcPopoverMo
 
 To declare the server url, you have to inject ``EdcClient``
 
-To change the icon and the language, you have to inject ``EdcSwingHelp``.
-Then call ``setIconPath`` and ``setLanguageCode`` to define the new value
+To customise this widget, you have to inject ``EdcSwingHelp``.
+Then call the following method
+
 
 ```java
 public class Example {
@@ -29,16 +41,12 @@ public class Example {
   public void configure() {
     help.setIconPath("my-icon.png");
     help.setLanguageCode("fr");
-  }
+    help.setTooltipLabel("edc Help");
+    help.setSummaryDisplay(true);
+    help.setBackgroundColor(Color.BLUE);
+    help.setCloseIconPath("popover/close2.png");  }
 }
 ```
-
-The default value : 
-
-Members | Default value
---------|--------------
-Icon Path| icons/icon-32px.png
-Language Code | en
 
 ### with Singleton
 
@@ -53,6 +61,10 @@ To change the icon path and the default language
 ```java
 EdcSwingHelpSingleton.getInstance().setIconPath("my-icon.png");
 EdcSwingHelpSingleton.getInstance().setLanguageCode("fr");
+EdcSwingHelpSingleton.getInstance().setTooltipLabel("edc Help");
+EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
+EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
+EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 ```
 
 ## Add the contextual button
@@ -112,6 +124,10 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
         EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
         EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
+        EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
+        EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
+        EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
+        EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
