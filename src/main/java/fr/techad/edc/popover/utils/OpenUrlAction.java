@@ -1,8 +1,11 @@
 package fr.techad.edc.popover.utils;
 
+import fr.techad.edc.popover.browser.Browser;
+import fr.techad.edc.popover.model.HelpConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -17,8 +20,14 @@ import java.net.URL;
 public class OpenUrlAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenUrlAction.class);
 
-    public OpenUrlAction() {
+    private final Browser browser;
+    private final HelpConfiguration helpConfiguration;
+
+    @Inject
+    public OpenUrlAction(Browser browser, HelpConfiguration helpConfiguration) {
         super();
+        this.browser = browser;
+        this.helpConfiguration = helpConfiguration;
     }
 
     /**
@@ -30,9 +39,14 @@ public class OpenUrlAction {
      */
     public void openUrl(String url) throws IOException, URISyntaxException {
         LOGGER.debug("Open the url: {}", url);
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            desktop.browse(new URL(url).toURI());
+        if (helpConfiguration.isInternalBrowser()) {
+            browser.showBrowser(true);
+            browser.loadURL(url);
+        } else {
+            Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+            if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                desktop.browse(new URL(url).toURI());
+            }
         }
     }
 }

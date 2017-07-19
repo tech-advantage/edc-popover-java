@@ -44,4 +44,9 @@ public class EdcHelpImpl implements EdcHelp {
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;
     }
+
+    @Override
+    public void setInternalBrowser(boolean state) {
+        helpConfiguration.setInternalBrowser(state);
+    }
 }

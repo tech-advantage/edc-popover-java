@@ -14,6 +14,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the summary dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
+| Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 
 ### with Injection
 
@@ -44,7 +45,9 @@ public class Example {
     help.setTooltipLabel("edc Help");
     help.setSummaryDisplay(true);
     help.setBackgroundColor(Color.BLUE);
-    help.setCloseIconPath("popover/close2.png");  }
+    help.setCloseIconPath("popover/close2.png");
+    help.setInternalBrowser(false);
+  }
 }
 ```
 
@@ -65,6 +68,7 @@ EdcSwingHelpSingleton.getInstance().setTooltipLabel("edc Help");
 EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
 EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
 EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
+EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
 ```
 
 ## Add the contextual button
@@ -128,7 +132,8 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
-
+        EdcSwingHelpSingleton.getInstance().setInternalBrowser(true);
+        
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
         layout.setAlignment(FlowLayout.TRAILING);

@@ -3,6 +3,7 @@ package fr.techad.edc.popover.internal.swing.builder;
 import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.swing.components.IconButton;
+import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
 import fr.techad.edc.popover.swing.HelpListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
 
     @Override
     public JComponent build() {
-        ImageIcon imageIcon = createImageIcon(iconPath);
+        ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
         IconButton iconButton = new IconButton(label, imageIcon);
         HelpListener helpListener = helpListenerProvider.get();
         helpListener.setKeysAndLanguageCode(mainKey, subKey, languageCode);
@@ -59,19 +60,5 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
         return iconButton;
     }
 
-    /**
-     * Create an {@link ImageIcon}
-     *
-     * @param path        the path of the icon
-     * @return the ImageIcon
-     */
-    private ImageIcon createImageIcon(String path) {
-        URL imgURL = ClassLoader.getSystemClassLoader().getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            LOGGER.error("Couldn't find file: {}", path);
-        }
-        return new ImageIcon(path);
-    }
+
 }

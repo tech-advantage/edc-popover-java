@@ -25,11 +25,13 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
 
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
-    private EdcClient edcClient;
+    private final EdcClient edcClient;
+    private final OpenUrlAction openUrlAction;
 
     @Inject
-    public ContextualContentComponentBuilderImpl(EdcClient edcClient) {
+    public ContextualContentComponentBuilderImpl(EdcClient edcClient,OpenUrlAction openUrlAction) {
         this.edcClient = edcClient;
+        this.openUrlAction=openUrlAction;
     }
 
     @Override
@@ -111,7 +113,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         return new JLabel("Error to get information about this component");
     }
 
-    private void openUrl(OpenUrlAction openUrlAction, String url) {
+    private void openUrl(String url) {
         try {
             openUrlAction.openUrl(url);
         } catch (IOException e) {
@@ -130,8 +132,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         button.setOpaque(false);
         button.setBackground(this.backgroundColor);
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        final OpenUrlAction openUrlAction = new OpenUrlAction();
-        button.addActionListener(e -> openUrl(openUrlAction, url));
+        button.addActionListener(e -> openUrl(url));
         return button;
     }
 }

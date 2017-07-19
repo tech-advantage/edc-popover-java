@@ -14,6 +14,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private String tooltipLabel = null;
     private boolean summaryDisplay = false;
     private int backgroundColor;
+    private boolean internalBrowser = true;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -78,4 +79,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
+
+    @Override
+    public boolean isInternalBrowser() {
+        return internalBrowser;
+    }
+
+    @Override
+    public void setInternalBrowser(boolean state) {
+        this.internalBrowser = state;
+    }
+
+
 }

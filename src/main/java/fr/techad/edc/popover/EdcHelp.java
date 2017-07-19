@@ -43,4 +43,11 @@ public interface EdcHelp {
      */
     void setSummaryDisplay(boolean enable);
 
+    /**
+     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     *
+     * @param state true to use the internal brower
+     */
+    void setInternalBrowser(boolean state);
+
 }

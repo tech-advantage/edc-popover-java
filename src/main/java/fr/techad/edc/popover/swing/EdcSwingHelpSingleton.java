@@ -97,4 +97,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setBackgroundColor(Color backgroundColor) {
         edcSwingHelp.setBackgroundColor(backgroundColor);
     }
+
+    @Override
+    public void setInternalBrowser(boolean state) {
+        edcSwingHelp.setInternalBrowser(state);
+    }
 }

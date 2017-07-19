@@ -1,16 +1,14 @@
 package fr.techad.edc.popover.internal.swing.components;
 
+import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.net.URL;
 
 /**
- * TECH ADVANTAGE
- * All right reserved
- * Created by cochon on 13/07/2017.
+ * Popover to display the documentation.
  */
 public class Popover extends JFrame {
     public static final int HORIZONTAL = 1;
@@ -28,17 +26,16 @@ public class Popover extends JFrame {
     private String iconPath = "popover/close1.png";
 
     /**
-     * Creates a new popover in the vertical direction (arrow pointing up).
+     * Creates a new popover in the vertical direction (pad the popover on X Axis)
      */
     public Popover() {
         this(VERTICAL);
     }
 
     /**
-     * Creates a new popover in the specified direction, either <code>JSPopover.VERTICAL</code> for
-     * an upward-pointing arrow, or <code>JSPopover.HORIZONTAL</code> for a left-pointing arrow.
+     * Creates a new popover with a specific direction (create a padding according the direction)
      *
-     * @param direction an integer representing the direction for the arrow to point.
+     * @param direction an integer representing the direction for the padding.
      */
     public Popover(int direction) {
         this.direction = direction;
@@ -74,6 +71,11 @@ public class Popover extends JFrame {
         mainPanel.setBackground(c);
     }
 
+    /**
+     * Define the icon path for the close button
+     *
+     * @param iconPath the icon path
+     */
     public void setIconPath(String iconPath) {
         if (iconPath != null && !iconPath.equals(this.iconPath)) {
             this.iconPath = iconPath;
@@ -81,6 +83,11 @@ public class Popover extends JFrame {
         }
     }
 
+    /**
+     * Define the position for the close button : TOP or BOTTOM position.
+     *
+     * @param closePosition the TOP or BOTTOM position.
+     */
     public final void setClosePosition(int closePosition) {
         if (this.closableComponent != null)
             mainPanel.remove(this.closableComponent);
@@ -140,6 +147,9 @@ public class Popover extends JFrame {
         super.setLocation(newX, newY);
     }
 
+    /**
+     * Clear the content panel.
+     */
     public void clear() {
         contentPanel.removeAll();
     }
@@ -155,33 +165,11 @@ public class Popover extends JFrame {
         }
     }
 
-    /**
-     * Sets the direction for the arrow to point in, either <code>JSPopover.VERTICAL</code> for
-     * an upward-pointing arrow, or <code>JSPopover.HORIZONTAL</code> for a left-pointing arrow.
-     *
-     * @param direction an integer representing the direction for the arrow to point.
-     */
-    public void setDirection(int direction) {
-        if (this.direction != direction) {
-            Point old = getLocationOnScreen();
-            this.direction = direction;
-            if (this.direction == VERTICAL) {
-                setSize(getWidth() - 20, getHeight());
-                old.y += (getHeight() / 2) - 10;
-            } else {
-                setSize(getWidth(), getHeight() - 20);
-                old.x += (getWidth() / 2) - 10;
-            }
-            repaint();
-            setLocation(old);
-        }
-    }
-
-    private JComponent getHeader() {
+     private JComponent getHeader() {
         JPanel header = new JPanel();
         header.setBackground(contentPanel.getBackground());
         header.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JButton closeButton = new JButton(createImageIcon(iconPath));
+        JButton closeButton = new JButton(ImageIconCreator.createImageIcon(iconPath));
         closeButton.setMargin(new java.awt.Insets(1, 2, 1, 2));
         closeButton.setBorderPainted(false);
         closeButton.setContentAreaFilled(false);
@@ -197,26 +185,10 @@ public class Popover extends JFrame {
         JPanel header = new JPanel();
         header.setBackground(contentPanel.getBackground());
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-        JButton closeButton = new JButton(createImageIcon(iconPath));
+        JButton closeButton = new JButton(ImageIconCreator.createImageIcon(iconPath));
         closeButton.addActionListener(e -> this.setVisible(false));
         header.add(closeButton);
 
         return header;
-    }
-
-    /**
-     * Create an {@link ImageIcon}
-     *
-     * @param path the path of the icon
-     * @return the ImageIcon
-     */
-    private ImageIcon createImageIcon(String path) {
-        URL imgURL = ClassLoader.getSystemClassLoader().getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            LOGGER.error("Couldn't find file: {}", path);
-        }
-        return new ImageIcon(path);
     }
 }

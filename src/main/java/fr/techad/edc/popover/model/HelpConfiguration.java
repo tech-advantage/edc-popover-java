@@ -89,4 +89,18 @@ public interface HelpConfiguration {
      * @param backgroundColor the color to set
      */
     void setBackgroundColor(int backgroundColor);
+
+    /**
+     * Return true if the browser to use is the internal browser
+     *
+     * @return true if the browser to use is the internal browser
+     */
+    boolean isInternalBrowser();
+
+    /**
+     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     *
+     * @param state true to use the internal brower
+     */
+    void setInternalBrowser(boolean state);
 }

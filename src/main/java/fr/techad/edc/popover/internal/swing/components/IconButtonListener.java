@@ -26,17 +26,23 @@ public class IconButtonListener implements HelpListener {
     private final HelpConfiguration helpConfiguration;
     private final ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder;
     private final Popover popover;
+    private final OpenUrlAction openUrlAction;
 
     private String maiKey;
     private String subKey;
     private String languageCode;
 
     @Inject
-    public IconButtonListener(EdcClient edcClient, HelpConfiguration helpConfiguration, ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder, Popover popover) {
+    public IconButtonListener(EdcClient edcClient,
+                              HelpConfiguration helpConfiguration,
+                              ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder,
+                              Popover popover,
+                              OpenUrlAction openUrlAction) {
         this.edcClient = edcClient;
         this.helpConfiguration = helpConfiguration;
         this.contextualContentComponentBuilder = contextualContentComponentBuilder;
         this.popover = popover;
+        this.openUrlAction=openUrlAction;
     }
 
     @Override
@@ -78,7 +84,6 @@ public class IconButtonListener implements HelpListener {
         String url = "";
         try {
             url = edcClient.getContextWebHelpUrl(maiKey, subKey, languageCode);
-            OpenUrlAction openUrlAction = new OpenUrlAction();
             openUrlAction.openUrl(url);
         } catch (InvalidUrlException e) {
             LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", maiKey, subKey, languageCode);

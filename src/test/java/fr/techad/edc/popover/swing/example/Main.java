@@ -41,11 +41,11 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
         // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
         // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
+        // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
-
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
         layout.setAlignment(FlowLayout.TRAILING);
