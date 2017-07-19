@@ -184,6 +184,7 @@ public class Popover extends JFrame {
         JButton closeButton = new JButton(createImageIcon(iconPath));
         closeButton.setMargin(new java.awt.Insets(1, 2, 1, 2));
         closeButton.setBorderPainted(false);
+        closeButton.setContentAreaFilled(false);
         closeButton.setOpaque(false);
         closeButton.setBackground(contentPanel.getBackground());
         closeButton.addActionListener(e -> this.setVisible(false));

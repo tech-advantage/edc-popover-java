@@ -126,8 +126,10 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         button.setText("<HTML><FONT color=\"#000099\"><U>" + label + "</U></FONT></HTML>");
         button.setHorizontalAlignment(SwingConstants.LEFT);
         button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
         button.setOpaque(false);
         button.setBackground(this.backgroundColor);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         final OpenUrlAction openUrlAction = new OpenUrlAction();
         button.addActionListener(e -> openUrl(openUrlAction, url));
         return button;
