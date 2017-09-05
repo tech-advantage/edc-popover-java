@@ -5,6 +5,7 @@ import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.DocumentationItem;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
+import fr.techad.edc.popover.internal.swing.components.Popover;
 import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,16 +23,17 @@ import java.net.URISyntaxException;
  */
 public class ContextualContentComponentBuilderImpl implements ContextualContentComponentBuilder<JComponent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ContextualContentComponentBuilderImpl.class);
-
-    private ContextItem contextItem;
-    private Color backgroundColor = Color.WHITE;
     private final EdcClient edcClient;
     private final OpenUrlAction openUrlAction;
+    private final Popover popover;
+    private ContextItem contextItem;
+    private Color backgroundColor = Color.WHITE;
 
     @Inject
-    public ContextualContentComponentBuilderImpl(EdcClient edcClient,OpenUrlAction openUrlAction) {
+    public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
         this.edcClient = edcClient;
-        this.openUrlAction=openUrlAction;
+        this.openUrlAction = openUrlAction;
+        this.popover = popover;
     }
 
     @Override
@@ -116,6 +118,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private void openUrl(String url) {
         try {
             openUrlAction.openUrl(url);
+            popover.setVisible(false);
         } catch (IOException e) {
             LOGGER.error("Error on IO", e);
         } catch (URISyntaxException e) {
