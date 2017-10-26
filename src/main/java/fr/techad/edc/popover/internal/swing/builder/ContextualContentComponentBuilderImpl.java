@@ -68,45 +68,57 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     }
 
     private JComponent getHeader() {
-        return new JLabel(contextItem.getDescription());
+        JLabel label;
+        if (contextItem != null)
+            label = new JLabel(contextItem.getDescription());
+        else {
+            label = new JLabel("Warning");
+            Font f = label.getFont();
+            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+        }
+        return label;
     }
 
     private JComponent getBody() throws IOException, InvalidUrlException {
         JPanel body = new JPanel();
         body.setLayout(new BorderLayout());
         body.setBackground(this.backgroundColor);
-        LOGGER.debug("article size: {}", contextItem.articleSize());
-        if (contextItem.articleSize() != 0) {
-            JPanel articlePanel = new JPanel();
-            articlePanel.setBackground(this.backgroundColor);
-            articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
-            int i = 0;
-            for (DocumentationItem documentationItem : contextItem.getArticles()) {
-                LOGGER.debug("Display article: {}", documentationItem);
-                String url = edcClient.getContextWebHelpUrl(contextItem.getMainKey(), contextItem.getSubKey(), i++, contextItem.getLanguageCode());
-                articlePanel.add(createButton(url, documentationItem.getLabel()));
+        if (contextItem != null) {
+            LOGGER.debug("article size: {}", contextItem.articleSize());
+            if (contextItem.articleSize() != 0) {
+                JPanel articlePanel = new JPanel();
+                articlePanel.setBackground(this.backgroundColor);
+                articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
+                int i = 0;
+                for (DocumentationItem documentationItem : contextItem.getArticles()) {
+                    LOGGER.debug("Display article: {}", documentationItem);
+                    String url = edcClient.getContextWebHelpUrl(contextItem.getMainKey(), contextItem.getSubKey(), i++, contextItem.getLanguageCode());
+                    articlePanel.add(createButton(url, documentationItem.getLabel()));
+                }
+                body.add(articlePanel, BorderLayout.NORTH);
             }
-            body.add(articlePanel, BorderLayout.NORTH);
-        }
-        LOGGER.debug("link size: {}", contextItem.linkSize());
-        if (contextItem.linkSize() != 0) {
-            JPanel linkPanel = new JPanel();
-            linkPanel.setLayout(new BorderLayout());
-            linkPanel.setBackground(this.backgroundColor);
-            JLabel title = new JLabel("Related Topics");
-            Font f = title.getFont();
-            title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
-            linkPanel.add(title, BorderLayout.NORTH);
-            JPanel linkContentPanel = new JPanel();
-            linkContentPanel.setLayout(new BoxLayout(linkContentPanel, BoxLayout.Y_AXIS));
-            linkContentPanel.setBackground(this.backgroundColor);
-            linkPanel.add(linkContentPanel, BorderLayout.CENTER);
-            for (DocumentationItem documentationItem : contextItem.getLinks()) {
-                LOGGER.debug("Display link: {}", documentationItem);
-                String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId());
-                linkContentPanel.add(createButton(url, documentationItem.getLabel()));
+            LOGGER.debug("link size: {}", contextItem.linkSize());
+            if (contextItem.linkSize() != 0) {
+                JPanel linkPanel = new JPanel();
+                linkPanel.setLayout(new BorderLayout());
+                linkPanel.setBackground(this.backgroundColor);
+                JLabel title = new JLabel("Related Topics");
+                Font f = title.getFont();
+                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                linkPanel.add(title, BorderLayout.NORTH);
+                JPanel linkContentPanel = new JPanel();
+                linkContentPanel.setLayout(new BoxLayout(linkContentPanel, BoxLayout.Y_AXIS));
+                linkContentPanel.setBackground(this.backgroundColor);
+                linkPanel.add(linkContentPanel, BorderLayout.CENTER);
+                for (DocumentationItem documentationItem : contextItem.getLinks()) {
+                    LOGGER.debug("Display link: {}", documentationItem);
+                    String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId());
+                    linkContentPanel.add(createButton(url, documentationItem.getLabel()));
+                }
+                body.add(linkPanel, BorderLayout.CENTER);
             }
-            body.add(linkPanel, BorderLayout.CENTER);
+        } else {
+            body.add(getFailure());
         }
         return body;
     }
