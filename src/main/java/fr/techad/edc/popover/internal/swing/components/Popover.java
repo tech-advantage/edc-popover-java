@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 /**
  * Popover to display the documentation.
@@ -43,7 +45,7 @@ public class Popover extends JFrame {
         setLayout(new BorderLayout());
         setUndecorated(true);
         setAlwaysOnTop(true);
-        setFocusableWindowState(false);
+        setFocusableWindowState(true);
         getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
 
         mainPanel = new JPanel();
@@ -58,6 +60,23 @@ public class Popover extends JFrame {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
         setClosePosition(this.closablePosition);
         add(mainPanel);
+
+        this.addWindowFocusListener(new WindowFocusListener() {
+            private boolean gained = false;
+
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                gained = true;
+            }
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                if (gained) {
+                    Popover.this.setVisible(false);
+                    gained = false;
+                }
+            }
+        });
     }
 
     /**
@@ -165,7 +184,7 @@ public class Popover extends JFrame {
         }
     }
 
-     private JComponent getHeader() {
+    private JComponent getHeader() {
         JPanel header = new JPanel();
         header.setBackground(contentPanel.getBackground());
         header.setLayout(new FlowLayout(FlowLayout.RIGHT));
