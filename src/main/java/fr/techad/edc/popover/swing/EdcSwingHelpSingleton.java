@@ -8,6 +8,7 @@ import fr.techad.edc.popover.injector.EdcPopoverModule;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 /**
  * This classe declare a singleton to configure and create a Swing component.
@@ -66,6 +67,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public JComponent createComponent(String mainKey, String subKey) {
         return edcSwingHelp.createComponent(mainKey, subKey);
+    }
+
+    @Override
+    public MouseListener getMouseListener(String mainKey, String subKey) {
+        return edcSwingHelp.getMouseListener(mainKey, subKey);
     }
 
     @Override
