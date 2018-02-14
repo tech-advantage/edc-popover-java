@@ -41,12 +41,17 @@ public class EdcHelpImpl implements EdcHelp {
         helpConfiguration.setSummaryDisplay(enable);
     }
 
-    protected HelpConfiguration getHelpConfiguration() {
-        return helpConfiguration;
-    }
-
     @Override
     public void setInternalBrowser(boolean state) {
         helpConfiguration.setInternalBrowser(state);
+    }
+
+    @Override
+    public void setAutoDisabledMode(boolean state) {
+        helpConfiguration.setAutoDisabledInMissingContent(state);
+    }
+
+    protected HelpConfiguration getHelpConfiguration() {
+        return helpConfiguration;
     }
 }

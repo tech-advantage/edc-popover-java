@@ -28,7 +28,7 @@ public class IconButtonListener implements HelpListener {
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
 
-    private String maiKey;
+    private String mainKey;
     private String subKey;
     private String languageCode;
 
@@ -42,12 +42,12 @@ public class IconButtonListener implements HelpListener {
         this.helpConfiguration = helpConfiguration;
         this.contextualContentComponentBuilder = contextualContentComponentBuilder;
         this.popover = popover;
-        this.openUrlAction=openUrlAction;
+        this.openUrlAction = openUrlAction;
     }
 
     @Override
     public void setKeysAndLanguageCode(String mainKey, String subKey, String languageCode) {
-        this.maiKey = mainKey;
+        this.mainKey = mainKey;
         this.subKey = subKey;
         this.languageCode = languageCode;
     }
@@ -83,10 +83,10 @@ public class IconButtonListener implements HelpListener {
     private void openBrowser() {
         String url = "";
         try {
-            url = edcClient.getContextWebHelpUrl(maiKey, subKey, languageCode);
+            url = edcClient.getContextWebHelpUrl(mainKey, subKey, languageCode);
             openUrlAction.openUrl(url);
         } catch (InvalidUrlException e) {
-            LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", maiKey, subKey, languageCode);
+            LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
         } catch (URISyntaxException e) {
             LOGGER.error("Impossible to open the browser with url:{}", url);
         } catch (IOException e) {
@@ -96,20 +96,22 @@ public class IconButtonListener implements HelpListener {
 
     private void openPopover(int x, int y) {
         try {
-            ContextItem contextItem = edcClient.getContextItem(maiKey, subKey, languageCode);
-            JComponent jComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
-            Color color = new Color(helpConfiguration.getBackgroundColor());
-            popover.setContentBackground(color);
-            popover.clear();
-            popover.add(jComponent);
-            popover.setIconPath(helpConfiguration.getCloseIconPath());
-            popover.pack();
-            popover.setVisible(true);
-            popover.setLocation(x, y);
-            LOGGER.debug("Popover size: {}", popover.getSize());
-            LOGGER.debug("component size: {}", jComponent.getSize());
+            ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, languageCode);
+            if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
+                JComponent jComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
+                Color color = new Color(helpConfiguration.getBackgroundColor());
+                popover.setContentBackground(color);
+                popover.clear();
+                popover.add(jComponent);
+                popover.setIconPath(helpConfiguration.getCloseIconPath());
+                popover.pack();
+                popover.setVisible(true);
+                popover.setLocation(x, y);
+                LOGGER.debug("Popover size: {}", popover.getSize());
+                LOGGER.debug("component size: {}", jComponent.getSize());
+            }
         } catch (InvalidUrlException | IOException e) {
-            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", maiKey, subKey, languageCode);
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
         }
     }
 }
