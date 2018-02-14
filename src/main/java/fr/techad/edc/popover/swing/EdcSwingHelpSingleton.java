@@ -108,4 +108,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setInternalBrowser(boolean state) {
         edcSwingHelp.setInternalBrowser(state);
     }
+
+    @Override
+    public void setAutoDisabledMode(boolean state) {
+        edcSwingHelp.setAutoDisabledMode(state);
+    }
 }

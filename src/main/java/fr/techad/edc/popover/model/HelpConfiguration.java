@@ -98,9 +98,23 @@ public interface HelpConfiguration {
     boolean isInternalBrowser();
 
     /**
-     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     * Define the browser to use : true to use the internal browser, false to use the system browser.
      *
-     * @param state true to use the internal brower
+     * @param state true to use the internal browser
      */
     void setInternalBrowser(boolean state);
+
+    /**
+     * Return the mode
+     *
+     * @return true if the auto disabled mode is active
+     */
+    boolean isAutoDisabledInMissingContent();
+
+    /**
+     * Define the behavior to auto disabled the component if the content doesn't exist.
+     *
+     * @param state the state to defined
+     */
+    void setAutoDisabledInMissingContent(boolean state);
 }

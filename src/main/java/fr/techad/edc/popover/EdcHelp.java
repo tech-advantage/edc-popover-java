@@ -25,7 +25,7 @@ public interface EdcHelp {
      * Define the language code which will be used to display the documentation.
      * The language code is 2 digits and lowercase: en, fr, ....
      *
-     * @param languageCode
+     * @param languageCode the language code
      */
     void setLanguageCode(String languageCode);
 
@@ -50,4 +50,10 @@ public interface EdcHelp {
      */
     void setInternalBrowser(boolean state);
 
+    /**
+     * Define the behavior : If true, the component will be disabled if the content is missing
+     *
+     * @param state the state to set
+     */
+    void setAutoDisabledMode(boolean state);
 }

@@ -1,9 +1,11 @@
 package fr.techad.edc.popover.swing.example;
 
+import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * TECH ADVANTAGE
@@ -12,7 +14,7 @@ import java.awt.*;
  */
 public class Main {
     public static void main(String[] args) {
-         /* Use an appropriate Look and Feel */
+        /* Use an appropriate Look and Feel */
         try {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -36,8 +38,8 @@ public class Main {
         });
     }
 
-    private static void createAndShowGUI() {
-         /* Configuration */
+    private static void createAndShowGUI()  {
+        /* Configuration */
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
         // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
         // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
@@ -46,6 +48,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
+        EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
         layout.setAlignment(FlowLayout.TRAILING);
@@ -53,8 +56,13 @@ public class Main {
 
 
         // Create the button
+        try {
+            EdcSwingHelpSingleton.getInstance().getEdcClient().loadContext();
+        } catch (IOException | InvalidUrlException e) {
+            e.printStackTrace();
+        }
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
-        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses"));
+        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses2"));
         f.setPreferredSize(new Dimension(400, 400));
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
