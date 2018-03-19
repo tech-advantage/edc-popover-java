@@ -2,6 +2,25 @@
 
 To use edc publication in your Java application, you can use this utility. Work only for swing application.
 
+## How can I get the latest release?
+
+You can pull it from the central Maven repositories:
+
+### Maven
+```xml
+<dependency>
+  <groupId>fr.techad</groupId>
+  <artifactId>edc-popover</artifactId>
+  <version>2.2.0</version>
+</dependency>
+```
+
+### Gradle
+```groovy
+    compile group: 'fr.techad', name: 'edc-popover', version: '2.2.0'
+
+```
+
 ## Configuration 
 
 We will be able to configure the url to get the documentation and the widget properties.
@@ -149,6 +168,12 @@ public class Main {
     }
 }
 ```
+
+## How can I build this project ?
+
+This project is based on *gradle*. You can install the artefacts oion your local cache with:
+
+``gradle clean PublishToMavenLocal``
 
 ## License
 

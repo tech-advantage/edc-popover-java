@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 /**
  * The edc Swing Help Singleton Test
@@ -15,17 +15,17 @@ public class EdcSwingHelpSingletonTest {
 
     @Test
     public void shouldGetAJComponent() {
-                 /* Configuration */
+        /* Configuration */
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
         EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon1-32px.png");
         EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
         JComponent component = EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center");
         Assert.assertTrue(component instanceof IconButton);
         IconButton iconButton = (IconButton) component;
-        ActionListener[] actionListeners = iconButton.getActionListeners();
+        MouseListener[] mouseListeners = iconButton.getMouseListeners();
         boolean contain = false;
-        for (ActionListener actionListener : actionListeners) {
-            contain |= actionListener instanceof IconButtonListener;
+        for (MouseListener mouseListener : mouseListeners) {
+            contain |= mouseListener instanceof IconButtonListener;
         }
         Assert.assertTrue(contain);
     }
