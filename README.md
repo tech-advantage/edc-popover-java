@@ -2,6 +2,10 @@
 
 To use edc publication in your Java application, you can use this utility. Work only for swing application.
 
+## edc Version
+
+Current release is compatible with edc v2.1+
+
 ## How can I get the latest release?
 
 You can pull it from the central Maven repositories:
