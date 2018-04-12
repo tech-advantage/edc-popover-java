@@ -1,7 +1,6 @@
 package fr.techad.edc.popover.internal.swing;
 
 import fr.techad.edc.client.EdcClient;
-import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
@@ -46,13 +45,13 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
                 .setLabel(helpConfiguration.getTooltipLabel())
                 .build();
         if (helpConfiguration.isAutoDisabledInMissingContent()) {
+            boolean enabled = false;
             try {
-                ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, languageCode);
-                if (contextItem == null)
-                    component.setEnabled(false);
+                enabled = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
             } catch (InvalidUrlException | IOException e) {
                 LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
             }
+            component.setEnabled(enabled);
         }
         return component;
     }
