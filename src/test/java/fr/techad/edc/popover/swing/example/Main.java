@@ -40,7 +40,7 @@ public class Main {
 
     private static void createAndShowGUI()  {
         /* Configuration */
-        EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
+        EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://beta.easydoccontents.com");
         // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
         // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
         // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
@@ -63,6 +63,7 @@ public class Main {
         }
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses2"));
+        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "popover/close1.png"));
         f.setPreferredSize(new Dimension(400, 400));
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();

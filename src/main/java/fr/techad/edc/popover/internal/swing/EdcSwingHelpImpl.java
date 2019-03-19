@@ -36,12 +36,12 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
-    public JComponent createComponent(String mainKey, String subKey) {
+    public JComponent createComponent(String mainKey, String subKey, String iconPath) {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         String languageCode = helpConfiguration.getLanguageCode();
 
         JComponent component = contextualComponentBuilder.setKeys(mainKey, subKey, languageCode)
-                .setIconPath(helpConfiguration.getIconPath())
+                .setIconPath(iconPath)
                 .setLabel(helpConfiguration.getTooltipLabel())
                 .build();
         if (helpConfiguration.isAutoDisabledInMissingContent()) {
@@ -54,6 +54,13 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
             component.setEnabled(enabled);
         }
         return component;
+    }
+
+
+    @Override
+    public JComponent createComponent(String mainKey, String subKey) {
+        HelpConfiguration helpConfiguration = getHelpConfiguration();
+        return createComponent(mainKey, subKey, helpConfiguration.getIconPath());
     }
 
     @Override

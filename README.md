@@ -103,17 +103,36 @@ To create the component, you just need to
 
 ### with injection
 
-Inject ``EdcSwingHelp`` and call the method ``createComponent`` with two parameter : the main and sub key, you are defined in the brick  
+Inject ``EdcSwingHelp`` and call the method ``createComponent`` with two parameters : the main and sub key, you are defined in the brick  
 ```java
-EdcSwingHelp.createComponent("fr.techad.edc", "help.center")
+EdcSwingHelp.createComponent("fr.techad.edc", "help.center");
 ```
 
 ### with Singleton
 
-Get the instance of ``EdcSwingHelpSingleton`` and call the method ``createComponent`` with two parameter : the main and sub key, you are defined in the brick  
+Get the instance of ``EdcSwingHelpSingleton`` and call the method ``createComponent`` with two parameters : the main and sub key, you are defined in the brick  
 
 ```java
-EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center")
+EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center");
+```
+
+## Add the contextual button with a customized icon
+
+If you want to change the default icon for some button, you can call the createComponent method and set the icon path. 
+
+### with injection
+
+Inject ``EdcSwingHelp`` and call the method ``createComponent`` with 3 parameters : the main and sub key, you are defined in the brick and the icon path
+```java
+EdcSwingHelp.createComponent("fr.techad.edc", "help.center", "popover/close1.png");
+```
+
+### with Singleton
+
+Get the instance of ``EdcSwingHelpSingleton`` and call the method ``createComponent`` with 3 parameters : the main and sub key, you are defined in the brick and the icon path 
+
+```java
+EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "popover/close1.png");
 ```
 
 ## Example
@@ -163,8 +182,10 @@ public class Main {
         f.setLayout(layout);
 
 
-        // Create the button
+        // Create the button with default icon
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
+        // Create the button with a user defined icon
+        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "popover/close1.png"));
         f.setPreferredSize(new Dimension(400,400));
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
@@ -175,7 +196,7 @@ public class Main {
 
 ## How can I build this project ?
 
-This project is based on *gradle*. You can install the artefacts oion your local cache with:
+This project is based on *gradle*. You can install the artefacts in your local cache with:
 
 ``gradle clean PublishToMavenLocal``
 

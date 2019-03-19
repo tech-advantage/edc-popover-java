@@ -15,10 +15,20 @@ public interface EdcSwingHelp extends EdcHelp {
      * Create a Swing component which will display the documentation.
      *
      * @param mainKey the main key
-     * @param subKey  the subket
+     * @param subKey  the subkey
      * @return the GUI component
      */
     JComponent createComponent(String mainKey, String subKey);
+
+    /**
+     * Create a Swing component which will display the documentation.
+     *
+     * @param mainKey  the main key
+     * @param subKey   the subkey
+     * @param iconPath the icon path to override the default
+     * @return the GUI component
+     */
+    JComponent createComponent(String mainKey, String subKey, String iconPath);
 
     /**
      * Create a Swing Mouse Listener which will manage the mouse event to display the documentation

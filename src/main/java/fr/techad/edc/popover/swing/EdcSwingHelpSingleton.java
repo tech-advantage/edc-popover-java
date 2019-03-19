@@ -70,6 +70,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public JComponent createComponent(String mainKey, String subKey, String iconPath) {
+        return edcSwingHelp.createComponent(mainKey, subKey, iconPath);
+    }
+
+    @Override
     public MouseListener getMouseListener(String mainKey, String subKey) {
         return edcSwingHelp.getMouseListener(mainKey, subKey);
     }
