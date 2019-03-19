@@ -40,7 +40,7 @@ public class Main {
 
     private static void createAndShowGUI()  {
         /* Configuration */
-        EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://beta.easydoccontents.com");
+        EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
         // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
         // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
         // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
