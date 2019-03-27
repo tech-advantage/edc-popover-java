@@ -6,6 +6,34 @@ package fr.techad.edc.popover.model;
 public interface HelpConfiguration {
 
     /**
+     * Return the browser width
+     *
+     * @return the browser width
+     */
+    int getWidthBrowser();
+
+    /**
+     * Define the browser width
+     *
+     * @param width the width
+     */
+    void setWidthBrowser(int width);
+
+    /**
+     * Return the browser height
+     *
+     * @return the browser height
+     */
+    int getHeightBrowser();
+
+    /**
+     * Define the browser height
+     *
+     * @param height the height
+     */
+    void setHeightBrowser(int height);
+
+    /**
      * Return the icon path
      *
      * @return the icon path

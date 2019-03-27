@@ -38,6 +38,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the summary dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
+| Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
 
 ### with Injection
 
@@ -70,6 +71,7 @@ public class Example {
     help.setBackgroundColor(Color.BLUE);
     help.setCloseIconPath("popover/close2.png");
     help.setInternalBrowser(false);
+    help.setBrowserSize(1600, 900);
   }
 }
 ```
@@ -92,6 +94,7 @@ EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
 EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
 EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
+EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 ```
 
 ## Add the contextual button
@@ -175,6 +178,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
         EdcSwingHelpSingleton.getInstance().setInternalBrowser(true);
+        EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
         
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();

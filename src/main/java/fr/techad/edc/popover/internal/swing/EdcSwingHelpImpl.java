@@ -74,4 +74,11 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     public void setBackgroundColor(Color backgroundColor) {
         getHelpConfiguration().setBackgroundColor(backgroundColor.getRGB());
     }
+
+    @Override
+    public void setBrowserSize(int width, int height) {
+        HelpConfiguration helpConfiguration = getHelpConfiguration();
+        helpConfiguration.setWidthBrowser(width);
+        helpConfiguration.setHeightBrowser(height);
+    }
 }

@@ -118,4 +118,10 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setAutoDisabledMode(boolean state) {
         edcSwingHelp.setAutoDisabledMode(state);
     }
+
+    @Override
+    public void setBrowserSize(int width, int height) {
+        edcSwingHelp.setBrowserSize(width, height);
+    }
+
 }

@@ -38,7 +38,7 @@ public class Main {
         });
     }
 
-    private static void createAndShowGUI()  {
+    private static void createAndShowGUI() {
         /* Configuration */
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
         // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
@@ -49,6 +49,8 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
+        EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
+
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
         layout.setAlignment(FlowLayout.TRAILING);

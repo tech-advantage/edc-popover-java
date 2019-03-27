@@ -16,9 +16,32 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int backgroundColor;
     private boolean internalBrowser = true;
     private boolean autoDisabled = true;
+    private int widthBrowser = 1024;
+    private int heightBrowser = 600;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
+    }
+
+
+    @Override
+    public int getWidthBrowser() {
+        return widthBrowser;
+    }
+
+    @Override
+    public void setWidthBrowser(int width) {
+        this.widthBrowser = width;
+    }
+
+    @Override
+    public int getHeightBrowser() {
+        return heightBrowser;
+    }
+
+    @Override
+    public void setHeightBrowser(int height) {
+        this.heightBrowser = height;
     }
 
     @Override

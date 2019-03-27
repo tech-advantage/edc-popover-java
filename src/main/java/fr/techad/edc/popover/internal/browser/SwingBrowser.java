@@ -28,10 +28,19 @@ public class SwingBrowser extends JFrame implements Browser {
     private JFXPanel jfxPanel;
     private WebEngine engine;
 
+    private int widthBrowser = 1024;
+    private int heightBrowser = 600;
+
     private boolean isInit = false;
 
     public SwingBrowser() {
         super();
+    }
+
+    @Override
+    public void setSize(int width, int height) {
+        this.widthBrowser = width;
+        this.heightBrowser = height;
     }
 
     private static String toURL(String str) {
@@ -71,7 +80,7 @@ public class SwingBrowser extends JFrame implements Browser {
 
         getContentPane().add(panel);
 
-        setPreferredSize(new Dimension(1024, 600));
+        setPreferredSize(new Dimension(widthBrowser, heightBrowser));
         pack();
         isInit = true;
         LOGGER.debug("Init components done!");

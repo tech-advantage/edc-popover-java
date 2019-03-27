@@ -45,4 +45,12 @@ public interface EdcSwingHelp extends EdcHelp {
      * @param backgroundColor the color to set
      */
     void setBackgroundColor(Color backgroundColor);
+
+    /**
+     * Define the browser size
+     *
+     * @param width  the browser width
+     * @param height the browser height
+     */
+    void setBrowserSize(int width, int height);
 }

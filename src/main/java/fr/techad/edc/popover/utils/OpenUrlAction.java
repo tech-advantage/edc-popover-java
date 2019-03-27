@@ -40,6 +40,7 @@ public class OpenUrlAction {
     public void openUrl(String url) throws IOException, URISyntaxException {
         LOGGER.debug("Open the url: {}", url);
         if (helpConfiguration.isInternalBrowser()) {
+            browser.setSize(helpConfiguration.getWidthBrowser(), helpConfiguration.getHeightBrowser());
             browser.showBrowser(true);
             browser.loadURL(url);
         } else {
