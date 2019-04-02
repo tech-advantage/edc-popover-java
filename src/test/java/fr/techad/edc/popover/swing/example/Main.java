@@ -47,7 +47,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
-        EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
+        EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 
@@ -65,7 +65,7 @@ public class Main {
         }
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses2"));
-        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "popover/close1.png"));
+        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "icons/icon2-32px.png"));
         f.setPreferredSize(new Dimension(400, 400));
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();

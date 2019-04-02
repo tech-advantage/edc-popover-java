@@ -47,18 +47,19 @@ public class Popover extends JFrame {
         setAlwaysOnTop(true);
         setFocusableWindowState(true);
         getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
+        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.lightGray));
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-
         mainPanel.setBackground(Color.WHITE);
 
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(1, 1));
         contentPanel.setBackground(Color.WHITE);
-        mainPanel.setBorder(new EmptyBorder(0, 5, 10, 5));
+        mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
         mainPanel.add(contentPanel, BorderLayout.CENTER);
         setClosePosition(this.closablePosition);
+
         add(mainPanel);
 
         this.addWindowFocusListener(new WindowFocusListener() {
@@ -187,9 +188,10 @@ public class Popover extends JFrame {
     private JComponent getHeader() {
         JPanel header = new JPanel();
         header.setBackground(contentPanel.getBackground());
-        header.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JButton closeButton = new JButton(ImageIconCreator.createImageIcon(iconPath));
-        closeButton.setMargin(new java.awt.Insets(1, 2, 1, 2));
+        header.setLayout(new FlowLayout(FlowLayout.RIGHT, 2, 2));
+        ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
+        IconButton closeButton = new IconButton("Close", imageIcon);
+        closeButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         closeButton.setBorderPainted(false);
         closeButton.setContentAreaFilled(false);
         closeButton.setOpaque(false);

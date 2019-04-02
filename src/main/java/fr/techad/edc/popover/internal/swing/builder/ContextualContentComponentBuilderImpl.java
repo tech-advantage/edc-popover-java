@@ -69,12 +69,16 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
 
     private JComponent getHeader() {
         JLabel label;
-        if (contextItem != null)
+        if (contextItem != null) {
             label = new JLabel(contextItem.getDescription());
-        else {
+            Font f = label.getFont();
+            label.setFont(f.deriveFont((float)(f.getSize()+1)));
+            label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
+        } else {
             label = new JLabel("Warning");
             Font f = label.getFont();
-            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD ^ f.getSize()+1));
+            label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         }
         return label;
     }
@@ -89,6 +93,11 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 JPanel articlePanel = new JPanel();
                 articlePanel.setBackground(this.backgroundColor);
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
+                articlePanel.setBorder(BorderFactory.createEmptyBorder(18, 0, 0, 0));
+                JLabel title = new JLabel("Need more...");
+                Font f = title.getFont();
+                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                articlePanel.add(title, BorderLayout.NORTH);
                 int i = 0;
                 for (DocumentationItem documentationItem : contextItem.getArticles()) {
                     LOGGER.debug("Display article: {}", documentationItem);
@@ -101,8 +110,9 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
             if (contextItem.linkSize() != 0) {
                 JPanel linkPanel = new JPanel();
                 linkPanel.setLayout(new BorderLayout());
+                linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
                 linkPanel.setBackground(this.backgroundColor);
-                JLabel title = new JLabel("Related Topics");
+                JLabel title = new JLabel("Related topics");
                 Font f = title.getFont();
                 title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
                 linkPanel.add(title, BorderLayout.NORTH);
