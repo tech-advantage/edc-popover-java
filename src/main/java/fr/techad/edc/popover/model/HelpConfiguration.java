@@ -105,6 +105,20 @@ public interface HelpConfiguration {
     void setSummaryDisplay(boolean enabled);
 
     /**
+     * Return true if the title is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowTitle();
+
+    /**
+     * Set the visibility of the title
+     *
+     * @param showTitle the visibility status to set
+     */
+    void setShowTitle(boolean showTitle);
+
+    /**
      * Return the background color
      *
      * @return the background color
@@ -117,6 +131,20 @@ public interface HelpConfiguration {
      * @param backgroundColor the color to set
      */
     void setBackgroundColor(int backgroundColor);
+
+    /**
+     * Return the underline color
+     *
+     * @return the underline color
+     */
+    int getUnderlineColor();
+
+    /**
+     * Define the underline color for the title component
+     *
+     * @param underlineColor the color to set
+     */
+    void setUnderlineColor(int underlineColor);
 
     /**
      * Return true if the browser to use is the internal browser

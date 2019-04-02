@@ -52,6 +52,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
 
     @Override
     public JComponent build() {
+        LOGGER.debug("Build the context item: {}", contextItem != null ? contextItem.getLabel() : "null");
 
         JPanel container = new JPanel();
         container.setLayout(new BorderLayout());
@@ -72,12 +73,12 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         if (contextItem != null) {
             label = new JLabel(contextItem.getDescription());
             Font f = label.getFont();
-            label.setFont(f.deriveFont((float)(f.getSize()+1)));
+            label.setFont(f.deriveFont((float) (f.getSize() + 1)));
             label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         } else {
             label = new JLabel("Warning");
             Font f = label.getFont();
-            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD ^ f.getSize()+1));
+            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD ^ f.getSize() + 1));
             label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         }
         return label;

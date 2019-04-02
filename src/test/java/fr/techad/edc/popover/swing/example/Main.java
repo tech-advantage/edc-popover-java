@@ -46,7 +46,9 @@ public class Main {
         // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
+        EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
+        EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
@@ -64,6 +66,7 @@ public class Main {
             e.printStackTrace();
         }
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
+        f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses"));
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses2"));
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "icons/icon2-32px.png"));
         f.setPreferredSize(new Dimension(400, 400));

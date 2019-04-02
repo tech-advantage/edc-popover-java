@@ -37,7 +37,7 @@ public interface EdcHelp {
     void setTooltipLabel(String label);
 
     /**
-     * Active or deactivate the summary display. A summary display is displayed on click on the component help else the help is opened.
+     * Active or deactivate the summary display. A summary is displayed on click on the component help else the help is opened.
      *
      * @param enable the new status
      */
@@ -56,4 +56,11 @@ public interface EdcHelp {
      * @param state the state to set
      */
     void setAutoDisabledMode(boolean state);
+
+    /**
+     * Show the title if enabled
+     *
+     * @param enable true to enable the title display.
+     */
+    void setTitleDisplay(boolean enable);
 }

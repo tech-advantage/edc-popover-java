@@ -35,7 +35,9 @@ We will be able to configure the url to get the documentation and the widget pro
 | Language Code | ``setLanguageCode`` | en | The help language code |
 | Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
-| Background color | ``setBackgroundColor`` | WHITE | Background color of the summary dialog |
+| Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
+| Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
+| Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 | Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
@@ -175,7 +177,9 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
+        EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
+        EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
         EdcSwingHelpSingleton.getInstance().setInternalBrowser(true);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);

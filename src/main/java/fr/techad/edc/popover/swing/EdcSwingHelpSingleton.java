@@ -110,6 +110,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setSeparatorColor(Color separatorColor) {
+        edcSwingHelp.setSeparatorColor(separatorColor);
+    }
+
+    @Override
     public void setInternalBrowser(boolean state) {
         edcSwingHelp.setInternalBrowser(state);
     }
@@ -117,6 +122,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public void setAutoDisabledMode(boolean state) {
         edcSwingHelp.setAutoDisabledMode(state);
+    }
+
+    @Override
+    public void setTitleDisplay(boolean enable) {
+        edcSwingHelp.setTitleDisplay(enable);
     }
 
     @Override

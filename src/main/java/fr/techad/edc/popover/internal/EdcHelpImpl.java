@@ -51,6 +51,11 @@ public class EdcHelpImpl implements EdcHelp {
         helpConfiguration.setAutoDisabledInMissingContent(state);
     }
 
+    @Override
+    public void setTitleDisplay(boolean enable) {
+        helpConfiguration.setShowTitle(enable);
+    }
+
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;
     }

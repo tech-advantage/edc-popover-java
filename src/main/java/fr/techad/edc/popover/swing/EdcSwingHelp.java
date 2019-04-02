@@ -47,6 +47,13 @@ public interface EdcSwingHelp extends EdcHelp {
     void setBackgroundColor(Color backgroundColor);
 
     /**
+     * Define the separator color for the title component
+     *
+     * @param separatorColor the color to set
+     */
+    void setSeparatorColor(Color separatorColor);
+
+    /**
      * Define the browser size
      *
      * @param width  the browser width

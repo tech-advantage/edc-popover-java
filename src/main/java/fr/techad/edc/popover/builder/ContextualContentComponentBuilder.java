@@ -8,12 +8,13 @@ import fr.techad.edc.client.model.ContextItem;
 public interface ContextualContentComponentBuilder<T> {
 
     /**
-     * Define the keys for the component
+     * Define the context item for the component
      *
      * @param contextItem the context item
      * @return the builder
      */
     ContextualContentComponentBuilder<T> setContextItem(ContextItem contextItem);
+
     /**
      * Define the rgb color for the background
      *

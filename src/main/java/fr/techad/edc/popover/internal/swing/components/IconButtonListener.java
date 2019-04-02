@@ -4,6 +4,7 @@ import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
+import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.swing.HelpListener;
 import fr.techad.edc.popover.utils.OpenUrlAction;
@@ -25,6 +26,7 @@ public class IconButtonListener implements HelpListener {
     private final EdcClient edcClient;
     private final HelpConfiguration helpConfiguration;
     private final ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder;
+    private final ContextualTitleComponentBuilder<JComponent> contextualTitleComponentBuilder;
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
 
@@ -36,11 +38,13 @@ public class IconButtonListener implements HelpListener {
     public IconButtonListener(EdcClient edcClient,
                               HelpConfiguration helpConfiguration,
                               ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder,
+                              ContextualTitleComponentBuilder<JComponent> contextualTitleComponentBuilder,
                               Popover popover,
                               OpenUrlAction openUrlAction) {
         this.edcClient = edcClient;
         this.helpConfiguration = helpConfiguration;
         this.contextualContentComponentBuilder = contextualContentComponentBuilder;
+        this.contextualTitleComponentBuilder = contextualTitleComponentBuilder;
         this.popover = popover;
         this.openUrlAction = openUrlAction;
     }
@@ -98,17 +102,20 @@ public class IconButtonListener implements HelpListener {
         try {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, languageCode);
             if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
-                JComponent jComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
-                Color color = new Color(helpConfiguration.getBackgroundColor());
-                popover.setContentBackground(color);
+                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
+                JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).enableTitle(helpConfiguration.isShowTitle()).build();
+                Color bgColor = new Color(helpConfiguration.getBackgroundColor());
+                popover.setContentBackground(bgColor);
+                popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 popover.clear();
-                popover.add(jComponent);
+                popover.setTitle(jTitleComponent);
+                popover.add(jBodyComponent);
                 popover.setIconPath(helpConfiguration.getCloseIconPath());
                 popover.pack();
                 popover.setVisible(true);
                 popover.setLocation(x, y);
                 LOGGER.debug("Popover size: {}", popover.getSize());
-                LOGGER.debug("component size: {}", jComponent.getSize());
+                LOGGER.debug("component size: {}", jBodyComponent.getSize());
             }
         } catch (InvalidUrlException | IOException e) {
             LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);

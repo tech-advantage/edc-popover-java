@@ -2,6 +2,7 @@ package fr.techad.edc.popover.injector.provider;
 
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
+import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
 import fr.techad.edc.popover.internal.swing.components.IconButtonListener;
 import fr.techad.edc.popover.internal.swing.components.Popover;
 import fr.techad.edc.popover.model.HelpConfiguration;
@@ -23,22 +24,25 @@ public class HelpListenerProvider implements Provider<HelpListener> {
     private final ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder;
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
+    private final ContextualTitleComponentBuilder<JComponent> contextualTitleComponentBuilder;
 
     @Inject
     HelpListenerProvider(EdcClient edcClient,
                          HelpConfiguration helpConfiguration,
                          ContextualContentComponentBuilder<JComponent> contextualContentComponentBuilder,
+                         ContextualTitleComponentBuilder<JComponent> contextualTitleComponentBuilder,
                          Popover popover,
                          OpenUrlAction openUrlAction) {
         this.edcClient = edcClient;
         this.helpConfiguration = helpConfiguration;
         this.contextualContentComponentBuilder = contextualContentComponentBuilder;
+        this.contextualTitleComponentBuilder = contextualTitleComponentBuilder;
         this.popover = popover;
         this.openUrlAction = openUrlAction;
     }
 
     @Override
     public HelpListener get() {
-        return new IconButtonListener(edcClient, helpConfiguration, contextualContentComponentBuilder, popover, openUrlAction);
+        return new IconButtonListener(edcClient, helpConfiguration, contextualContentComponentBuilder, contextualTitleComponentBuilder, popover, openUrlAction);
     }
 }

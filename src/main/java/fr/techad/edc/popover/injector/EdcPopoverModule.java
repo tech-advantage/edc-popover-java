@@ -10,12 +10,14 @@ import com.google.inject.TypeLiteral;
 import fr.techad.edc.popover.browser.Browser;
 import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
+import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.browser.SwingBrowser;
 import fr.techad.edc.popover.internal.model.HelpConfigurationImpl;
 import fr.techad.edc.popover.internal.swing.EdcSwingHelpImpl;
 import fr.techad.edc.popover.internal.swing.builder.ContextualComponentBuilderImpl;
 import fr.techad.edc.popover.internal.swing.builder.ContextualContentComponentBuilderImpl;
+import fr.techad.edc.popover.internal.swing.builder.ContextualTitleComponentBuilderImpl;
 import fr.techad.edc.popover.internal.swing.components.Popover;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
@@ -35,6 +37,7 @@ public class EdcPopoverModule extends AbstractModule {
         // Builder
         bind(new TypeLiteral<ContextualComponentBuilder<JComponent>>() {}).to(ContextualComponentBuilderImpl.class);
         bind(new TypeLiteral<ContextualContentComponentBuilder<JComponent>>() {}).to(ContextualContentComponentBuilderImpl.class);
+        bind(new TypeLiteral<ContextualTitleComponentBuilder<JComponent>>() {}).to(ContextualTitleComponentBuilderImpl.class);
 
         // Provider
         bind(HelpListener.class).toProvider(HelpListenerProvider.class);

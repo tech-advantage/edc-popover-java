@@ -21,7 +21,10 @@ public class Popover extends JFrame {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Popover.class);
     private JPanel mainPanel;
+    private JPanel headerPanel;
     private JPanel contentPanel;
+    private Component titlePanel;
+    private JSeparator headerSeparator;
     private JComponent closableComponent;
     private int direction;
     private int closablePosition;
@@ -49,15 +52,26 @@ public class Popover extends JFrame {
         getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
         getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.lightGray));
 
+        // Main Panel
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
+        mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
 
+        // Header Panel (Contains the title and the closable icon if it's top position)
+        this.headerPanel = new JPanel(new BorderLayout());
+        this.headerSeparator = new JSeparator();
+        headerSeparator.setForeground(Color.BLACK);
+        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
+        mainPanel.add(this.headerPanel, BorderLayout.NORTH);
+
+        // Body Panel (contains the brick information)
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(1, 1));
         contentPanel.setBackground(Color.WHITE);
-        mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
+        contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
         mainPanel.add(contentPanel, BorderLayout.CENTER);
+
         setClosePosition(this.closablePosition);
 
         add(mainPanel);
@@ -92,6 +106,17 @@ public class Popover extends JFrame {
     }
 
     /**
+     * The separator color
+     *
+     * @param c the color to set
+     */
+    public void setSeparatorColor(Color c) {
+        LOGGER.debug("Define new content separator color: {}", c);
+        if (c != null)
+            this.headerSeparator.setForeground(c);
+    }
+
+    /**
      * Define the icon path for the close button
      *
      * @param iconPath the icon path
@@ -114,12 +139,12 @@ public class Popover extends JFrame {
         String borderLayout = BorderLayout.NORTH;
         if (closePosition == TOP) {
             this.closableComponent = getHeader();
+            this.headerPanel.add(this.closableComponent, BorderLayout.EAST);
         } else {
             this.closableComponent = getFooter();
-            borderLayout = BorderLayout.SOUTH;
+            mainPanel.add(this.closableComponent, BorderLayout.SOUTH);
         }
         this.closablePosition = closePosition;
-        mainPanel.add(this.closableComponent, borderLayout);
     }
 
     @Override
@@ -172,6 +197,19 @@ public class Popover extends JFrame {
      */
     public void clear() {
         contentPanel.removeAll();
+    }
+
+    /**
+     * Set the title. Set null to remove the current title.
+     * @param comp
+     */
+    public void setTitle(Component comp) {
+        if (this.titlePanel != null)
+            this.headerPanel.remove(this.titlePanel);
+        if (comp != null) {
+            this.titlePanel = comp;
+            this.headerPanel.add(this.titlePanel, BorderLayout.CENTER);
+        }
     }
 
     @Override

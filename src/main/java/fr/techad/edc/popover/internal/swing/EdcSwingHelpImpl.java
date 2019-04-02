@@ -76,6 +76,11 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
+    public void setSeparatorColor(Color separatorColor) {
+        getHelpConfiguration().setUnderlineColor(separatorColor.getRGB());
+    }
+
+    @Override
     public void setBrowserSize(int width, int height) {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         helpConfiguration.setWidthBrowser(width);

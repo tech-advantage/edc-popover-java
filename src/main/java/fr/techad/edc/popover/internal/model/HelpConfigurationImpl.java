@@ -18,11 +18,13 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean autoDisabled = true;
     private int widthBrowser = 1024;
     private int heightBrowser = 600;
+    private int underlineColor;
+    private boolean showTitle = true;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
+        this.underlineColor = new Color(60, 141, 188).getRGB();
     }
-
 
     @Override
     public int getWidthBrowser() {
@@ -105,6 +107,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
+    public int getUnderlineColor() {
+        return this.underlineColor;
+    }
+
+    @Override
+    public void setUnderlineColor(int underlineColor) {
+        this.underlineColor = underlineColor;
+    }
+
+    @Override
     public boolean isInternalBrowser() {
         return internalBrowser;
     }
@@ -124,5 +136,13 @@ public class HelpConfigurationImpl implements HelpConfiguration {
         this.autoDisabled = state;
     }
 
+    @Override
+    public boolean isShowTitle() {
+        return showTitle;
+    }
 
+    @Override
+    public void setShowTitle(boolean showTitle) {
+        this.showTitle = showTitle;
+    }
 }
