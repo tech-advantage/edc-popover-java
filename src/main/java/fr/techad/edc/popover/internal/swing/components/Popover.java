@@ -112,8 +112,10 @@ public class Popover extends JFrame {
      */
     public void setSeparatorColor(Color c) {
         LOGGER.debug("Define new content separator color: {}", c);
-        if (c != null)
+        if (c != null) {
             this.headerSeparator.setForeground(c);
+            this.headerSeparator.setBackground(c);
+        }
     }
 
     /**
@@ -201,6 +203,7 @@ public class Popover extends JFrame {
 
     /**
      * Set the title. Set null to remove the current title.
+     *
      * @param comp
      */
     public void setTitle(Component comp) {
