@@ -1,10 +1,13 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
+import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 
 /**
@@ -64,6 +67,9 @@ public class Main {
         helpIconPanel.setLayout(layout);
         f.add(helpIconPanel, BorderLayout.NORTH);
 
+        JComboBox<String> langSelect = createLangSelector();
+        helpIconPanel.add(langSelect);
+
         helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
         helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses"));
         helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses2"));
@@ -105,5 +111,23 @@ public class Main {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
         f.setVisible(true);
+    }
+
+    private static JComboBox<String> createLangSelector() {
+        EdcSwingHelp edcSwingHelp = EdcSwingHelpSingleton.getInstance();
+        String[] langOptions = {"en", "fr", "ru", "vi", "zh", "it", "es"};
+
+        JComboBox comboBox = new JComboBox(langOptions);
+        comboBox.setSelectedIndex(0);
+
+        comboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    String newLang = (String) event.getItem();
+                    edcSwingHelp.setLanguageCode(newLang);
+                }
+            }
+        });
+        return comboBox;
     }
 }

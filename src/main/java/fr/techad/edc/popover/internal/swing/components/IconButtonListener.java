@@ -87,7 +87,7 @@ public class IconButtonListener implements HelpListener {
     private void openBrowser() {
         String url = "";
         try {
-            url = edcClient.getContextWebHelpUrl(mainKey, subKey, languageCode);
+            url = edcClient.getContextWebHelpUrl(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             openUrlAction.openUrl(url);
         } catch (InvalidUrlException e) {
             LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
@@ -100,7 +100,7 @@ public class IconButtonListener implements HelpListener {
 
     private void openPopover(int x, int y) {
         try {
-            ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, languageCode);
+            ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
                 JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
@@ -118,7 +118,7 @@ public class IconButtonListener implements HelpListener {
                 LOGGER.debug("component size: {}", jBodyComponent.getSize());
             }
         } catch (InvalidUrlException | IOException e) {
-            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, this.helpConfiguration.getLanguageCode());
         }
     }
 }
