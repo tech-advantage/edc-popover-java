@@ -96,7 +96,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 articlePanel.setBackground(this.backgroundColor);
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
                 articlePanel.setBorder(BorderFactory.createEmptyBorder(18, 0, 0, 0));
-                JLabel title = new JLabel(getLabelTranslation(TranslationConstants.ARTICLES_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
+                JLabel title = new JLabel(getLabel(TranslationConstants.ARTICLES_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 Font f = title.getFont();
                 title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
                 articlePanel.add(title, BorderLayout.NORTH);
@@ -114,7 +114,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.setLayout(new BorderLayout());
                 linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
                 linkPanel.setBackground(this.backgroundColor);
-                JLabel title = new JLabel(getLabelTranslation(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
+                JLabel title = new JLabel(getLabel(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 Font f = title.getFont();
                 title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
                 linkPanel.add(title, BorderLayout.NORTH);
@@ -124,7 +124,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.add(linkContentPanel, BorderLayout.CENTER);
                 for (DocumentationItem documentationItem : contextItem.getLinks()) {
                     LOGGER.debug("Display link: {}", documentationItem);
-                    String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId());
+                    String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId(), contextItem.getLanguageCode());
                     linkContentPanel.add(createButton(url, documentationItem.getLabel()));
                 }
                 body.add(linkPanel, BorderLayout.CENTER);
@@ -176,8 +176,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
      * @param publicationId the publication identifier, for the default language
      * @return the translated label corresponding to the key, in the requested or default language
      */
-    private String getLabelTranslation(String key, String languageCode, String publicationId) {
+    private String getLabel(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
         LOGGER.debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
-        return this.edcClient.getTranslatedLabel(key ,languageCode, publicationId);
+        return this.edcClient.getLabel(key ,languageCode, publicationId);
     }
 }

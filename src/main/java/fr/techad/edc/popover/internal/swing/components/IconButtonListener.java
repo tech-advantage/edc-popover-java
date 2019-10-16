@@ -32,7 +32,6 @@ public class IconButtonListener implements HelpListener {
 
     private String mainKey;
     private String subKey;
-    private String languageCode;
 
     @Inject
     public IconButtonListener(EdcClient edcClient,
@@ -50,10 +49,9 @@ public class IconButtonListener implements HelpListener {
     }
 
     @Override
-    public void setKeysAndLanguageCode(String mainKey, String subKey, String languageCode) {
+    public void setKeys(String mainKey, String subKey) {
         this.mainKey = mainKey;
         this.subKey = subKey;
-        this.languageCode = languageCode;
     }
 
     @Override
@@ -90,7 +88,7 @@ public class IconButtonListener implements HelpListener {
             url = edcClient.getContextWebHelpUrl(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             openUrlAction.openUrl(url);
         } catch (InvalidUrlException e) {
-            LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
+            LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", mainKey, subKey, this.helpConfiguration.getLanguageCode());
         } catch (URISyntaxException e) {
             LOGGER.error("Impossible to open the browser with url:{}", url);
         } catch (IOException e) {

@@ -113,6 +113,11 @@ public class Main {
         f.setVisible(true);
     }
 
+    /**
+     * Return a JComboBox for selecting the popover language
+     *
+     * @return the JComboBox<String> containing languages
+     */
     private static JComboBox<String> createLangSelector() {
         EdcSwingHelp edcSwingHelp = EdcSwingHelpSingleton.getInstance();
         String[] langOptions = {"en", "fr", "ru", "vi", "zh", "it", "es"};
@@ -124,6 +129,7 @@ public class Main {
             public void itemStateChanged(ItemEvent event) {
                 if (event.getStateChange() == ItemEvent.SELECTED) {
                     String newLang = (String) event.getItem();
+                    // Change the language to be used in popover for content and labels
                     edcSwingHelp.setLanguageCode(newLang);
                 }
             }
