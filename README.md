@@ -15,13 +15,13 @@ You can pull it from the central Maven repositories:
 <dependency>
   <groupId>fr.techad</groupId>
   <artifactId>edc-popover</artifactId>
-  <version>2.5.0-SNAPSHOT</version>
+  <version>2.5.1-SNAPSHOT</version>
 </dependency>
 ```
 
 ### Gradle
 ```groovy
-    compile group: 'fr.techad', name: 'edc-popover', version: '2.5.0-SNAPSHOT'
+    compile group: 'fr.techad', name: 'edc-popover', version: '2.6.0-SNAPSHOT'
 
 ```
 
@@ -140,6 +140,27 @@ Get the instance of ``EdcSwingHelpSingleton`` and call the method ``createCompon
 EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "popover/close1.png");
 ```
 
+## Language selection
+You can set the language for the content and the popover labels by calling the method edcHelp.setLanguageCode(newLang).
+
+Label translations can be modified in the associated i18n json files, present in the documentation export (at [yourDocPath]/i18n/ (*.json)).
+
+There is one file per language (see file structure below), and files should be named following the ISO639-1 two letters standards 
+(ie en.json, it.json...).
+
+As an example, here is the en.json file used by default:
+
+```json
+{
+  "labels": {
+    "articles": "Need more...",
+    "links": "Related topics"
+  }
+}
+```
+
+You can find a simple implementation in a swing environment in the example section below
+
 ## Example
 To see this utility in action, just run this example
 
@@ -189,6 +210,9 @@ public class Main {
         layout.setAlignment(FlowLayout.TRAILING);
         f.setLayout(layout);
 
+        // Add the language selector
+        JComboBox<String> langSelect = createLangSelector();
+        helpIconPanel.add(langSelect);
 
         // Create the button with default icon
         f.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
@@ -199,6 +223,26 @@ public class Main {
         f.pack();
         f.setVisible(true);
     }
+    
+    private static JComboBox<String> createLangSelector() {
+        EdcSwingHelp edcSwingHelp = EdcSwingHelpSingleton.getInstance();
+        String[] langOptions = {"en", "fr", "ru", "vi", "zh", "it", "es"};
+
+        JComboBox comboBox = new JComboBox(langOptions);
+        comboBox.setSelectedIndex(0);
+
+        comboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    String newLang = (String) event.getItem();
+                    // Change the language to be used in popover for content and labels
+                    edcSwingHelp.setLanguageCode(newLang);
+                }
+            }
+        });
+        return comboBox;
+    }
+
 }
 ```
 

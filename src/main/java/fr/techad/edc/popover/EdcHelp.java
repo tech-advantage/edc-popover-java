@@ -22,7 +22,12 @@ public interface EdcHelp {
 
 
     /**
-     * Define the language code which will be used to display the documentation.
+     * Define the language code which will be used to display the documentation and the popover labels.
+     * If content was not found in the requested language, publication default language will be used.
+     *
+     * Popover label translations can be modified in the i18n json files present in the documentation export
+     * (at [yourDocPath]/i18n/ (*.json))
+     *
      * The language code is 2 digits and lowercase: en, fr, ....
      *
      * @param languageCode the language code

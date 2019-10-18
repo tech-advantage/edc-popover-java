@@ -41,7 +41,6 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
         return this;
     }
 
-
     @Override
     public JComponent build() {
         LOGGER.debug("Build the context item: {}", contextItem != null ? contextItem.getLabel() : "null");
