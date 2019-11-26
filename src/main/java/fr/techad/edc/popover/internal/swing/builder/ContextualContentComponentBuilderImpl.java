@@ -124,7 +124,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.add(linkContentPanel, BorderLayout.CENTER);
                 for (DocumentationItem documentationItem : contextItem.getLinks()) {
                     LOGGER.debug("Display link: {}", documentationItem);
-                    String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId(), contextItem.getLanguageCode());
+                    String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId(), contextItem.getLanguageCode(), contextItem.getPublicationId());
                     linkContentPanel.add(createButton(url, documentationItem.getLabel()));
                 }
                 body.add(linkPanel, BorderLayout.CENTER);
