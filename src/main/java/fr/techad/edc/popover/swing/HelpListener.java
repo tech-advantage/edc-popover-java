@@ -12,8 +12,7 @@ public interface HelpListener extends MouseListener {
      *
      * @param mainKey      the main key
      * @param subKey       the sub key
-     * @param languageCode the language code
      */
-    void setKeysAndLanguageCode(String mainKey, String subKey, String languageCode);
+    void setKeys(String mainKey, String subKey);
 
 }

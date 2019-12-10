@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.swing.*;
-import java.net.URL;
 
 /**
  * Implementation of {@link ContextualComponentBuilder} in case of swing.
@@ -55,7 +54,7 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
         ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
         IconButton iconButton = new IconButton(label, imageIcon);
         HelpListener helpListener = helpListenerProvider.get();
-        helpListener.setKeysAndLanguageCode(mainKey, subKey, languageCode);
+        helpListener.setKeys(mainKey, subKey);
         iconButton.addMouseListener(helpListener);
         return iconButton;
     }

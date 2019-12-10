@@ -66,7 +66,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     @Override
     public MouseListener getMouseListener(String mainKey, String subKey) {
         HelpListener helpListener = helpListenerProvider.get();
-        helpListener.setKeysAndLanguageCode(mainKey, subKey, getHelpConfiguration().getLanguageCode());
+        helpListener.setKeys(mainKey, subKey);
         return helpListener;
     }
 
