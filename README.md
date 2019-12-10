@@ -4,7 +4,7 @@ To use edc publication in your Java application, you can use this utility. Work 
 
 ## edc Version
 
-Current release is compatible with edc v2.1+
+Current release is compatible with edc v3.0+
 
 ## How can I get the latest release?
 
@@ -15,7 +15,7 @@ You can pull it from the central Maven repositories:
 <dependency>
   <groupId>fr.techad</groupId>
   <artifactId>edc-popover</artifactId>
-  <version>2.5.1-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
