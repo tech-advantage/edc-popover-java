@@ -15,13 +15,13 @@ You can pull it from the central Maven repositories:
 <dependency>
   <groupId>fr.techad</groupId>
   <artifactId>edc-popover</artifactId>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
 ### Gradle
 ```groovy
-    compile group: 'fr.techad', name: 'edc-popover', version: '3.0.0-SNAPSHOT'
+    compile group: 'fr.techad', name: 'edc-popover', version: '3.0.0'
 
 ```
 
