@@ -21,7 +21,7 @@ You can pull it from the central Maven repositories:
 
 ### Gradle
 ```groovy
-    compile group: 'fr.techad', name: 'edc-popover', version: '2.6.0-SNAPSHOT'
+    compile group: 'fr.techad', name: 'edc-popover', version: '3.0.0-SNAPSHOT'
 
 ```
 
@@ -141,9 +141,9 @@ EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.cente
 ```
 
 ## Language selection
-You can set the language for the content and the popover labels by calling the method edcHelp.setLanguageCode(newLang).
+You can set the language for the content and the popover labels by calling the method ``setLanguageCode`` (see the Example section below).
 
-Label translations can be modified in the associated i18n json files, present in the documentation export (at [yourDocPath]/i18n/ (*.json)).
+Label translations can be modified in the associated i18n json files, present in the documentation export (at [yourDocPath]/popover/i18n/ (*.json)).
 
 There is one file per language (see file structure below), and files should be named following the ISO639-1 two letters standards 
 (ie en.json, it.json...).
