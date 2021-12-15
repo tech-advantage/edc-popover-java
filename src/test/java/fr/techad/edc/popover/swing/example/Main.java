@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
+import fr.techad.edc.popover.internal.model.HelpViewer;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
 
@@ -47,6 +48,7 @@ public class Main {
         // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
         // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
         // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
+        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.DESKTOP_VIEWER);
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);

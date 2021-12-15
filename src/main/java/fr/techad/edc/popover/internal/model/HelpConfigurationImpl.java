@@ -20,6 +20,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private HelpViewer helpViewer;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -120,6 +121,14 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public boolean isInternalBrowser() {
         return internalBrowser;
     }
+
+    @Override
+    public HelpViewer getHelpViewer(){
+        return this.helpViewer;
+    }
+
+    @Override
+    public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
 
     @Override
     public void setInternalBrowser(boolean state) {

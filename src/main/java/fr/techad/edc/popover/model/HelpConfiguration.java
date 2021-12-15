@@ -1,5 +1,7 @@
 package fr.techad.edc.popover.model;
 
+import fr.techad.edc.popover.internal.model.HelpViewer;
+
 /**
  * Define the help configuration
  */
@@ -152,6 +154,18 @@ public interface HelpConfiguration {
      * @return true if the browser to use is the internal browser
      */
     boolean isInternalBrowser();
+
+    /**
+     *
+     * @return Enum
+     */
+    HelpViewer getHelpViewer();
+
+    /**
+     *
+     * @param viewer
+     */
+    void setHelpViewer(HelpViewer viewer);
 
     /**
      * Define the browser to use : true to use the internal browser, false to use the system browser.

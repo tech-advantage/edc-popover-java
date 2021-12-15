@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.utils;
 
 import fr.techad.edc.popover.browser.Browser;
+import fr.techad.edc.popover.internal.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,11 +40,23 @@ public class OpenUrlAction {
      */
     public void openUrl(String url) throws IOException, URISyntaxException {
         LOGGER.debug("Open the url: {}", url);
-        if (helpConfiguration.isInternalBrowser()) {
+
+        if(helpConfiguration.getHelpViewer() == HelpViewer.DESKTOP_VIEWER){
+            Runtime runtime = Runtime.getRuntime();
+            try
+            {
+                // Here write the good path to executable Desktop help viewer app
+                runtime.exec("C:\\Users\\Desktop\\EDC help viewer\\EDC help viewer.exe");
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }else if(helpConfiguration.getHelpViewer() == HelpViewer.INTERNAL_BROWSER){
             browser.setSize(helpConfiguration.getWidthBrowser(), helpConfiguration.getHeightBrowser());
             browser.showBrowser(true);
             browser.loadURL(url);
-        } else {
+        }else{
             Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
                 desktop.browse(new URL(url).toURI());
