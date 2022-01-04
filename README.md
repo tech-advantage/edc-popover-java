@@ -39,7 +39,6 @@ We will be able to configure the url to get the documentation and the widget pro
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
-| Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 | Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
 
 ### with Injection
@@ -72,7 +71,7 @@ public class Example {
     help.setSummaryDisplay(true);
     help.setBackgroundColor(Color.BLUE);
     help.setCloseIconPath("popover/close2.png");
-    help.setInternalBrowser(false);
+    help.setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
     help.setBrowserSize(1600, 900);
   }
 }
@@ -98,6 +97,10 @@ EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
 EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 ```
+
+#### Config desktop viewer path
+
+If you want to use the desktop viewer, you should add the relatif path in fr.techad.edc.popover.AppConfig.
 
 ## Add the contextual button
 
@@ -202,7 +205,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
-        EdcSwingHelpSingleton.getInstance().setInternalBrowser(true);
+        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
         
         JFrame f = new JFrame();

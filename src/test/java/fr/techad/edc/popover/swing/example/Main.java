@@ -1,7 +1,7 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
-import fr.techad.edc.popover.internal.model.HelpViewer;
+import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
 
@@ -45,10 +45,6 @@ public class Main {
     private static void createAndShowGUI() {
         /* Configuration */
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
-        // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
-        // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
-        // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
-        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.DESKTOP_VIEWER);
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
@@ -56,6 +52,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
+        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 
         /* Main wndow */

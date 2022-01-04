@@ -1,7 +1,7 @@
 package fr.techad.edc.popover.internal;
 
 import fr.techad.edc.popover.EdcHelp;
-import fr.techad.edc.popover.internal.model.HelpViewer;
+import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 
 import javax.inject.Inject;
@@ -40,11 +40,6 @@ public class EdcHelpImpl implements EdcHelp {
     @Override
     public void setSummaryDisplay(boolean enable) {
         helpConfiguration.setSummaryDisplay(enable);
-    }
-
-    @Override
-    public void setInternalBrowser(boolean state) {
-        helpConfiguration.setInternalBrowser(state);
     }
 
     @Override

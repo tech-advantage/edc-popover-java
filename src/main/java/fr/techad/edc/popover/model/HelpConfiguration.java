@@ -1,7 +1,5 @@
 package fr.techad.edc.popover.model;
 
-import fr.techad.edc.popover.internal.model.HelpViewer;
-
 /**
  * Define the help configuration
  */
@@ -156,23 +154,18 @@ public interface HelpConfiguration {
     boolean isInternalBrowser();
 
     /**
+     * Return the selected viewer type between : SYSTEM_BROWSER, EDC_DESKTOP_VIEWER and EMBEDDED_VIEWER
      *
-     * @return Enum
+     * @return Enum for the viewer selected
      */
     HelpViewer getHelpViewer();
 
     /**
+     * Define the selected viewer type to display documentation
      *
-     * @param viewer
+     * @param viewer the viewer type to set
      */
     void setHelpViewer(HelpViewer viewer);
-
-    /**
-     * Define the browser to use : true to use the internal browser, false to use the system browser.
-     *
-     * @param state true to use the internal browser
-     */
-    void setInternalBrowser(boolean state);
 
     /**
      * Return the mode

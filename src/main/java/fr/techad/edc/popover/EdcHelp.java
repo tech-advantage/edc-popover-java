@@ -1,8 +1,6 @@
 package fr.techad.edc.popover;
 
-import fr.techad.edc.popover.internal.model.HelpViewer;
-
-import java.awt.*;
+import fr.techad.edc.popover.model.HelpViewer;
 
 /**
  * Define the base functionality to manage the help display.
@@ -51,13 +49,6 @@ public interface EdcHelp {
      * @param enable the new status
      */
     void setSummaryDisplay(boolean enable);
-
-    /**
-     * Define the browser to use : true to use the internal brower, false to use the system browser.
-     *
-     * @param state true to use the internal brower
-     */
-    void setInternalBrowser(boolean state);
 
     /**
      * Define the browser to use with Enum Type: DESKTOP_VIEWER, INTERNAL_BROWSER, BROWSER

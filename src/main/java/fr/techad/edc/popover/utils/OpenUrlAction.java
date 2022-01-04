@@ -1,7 +1,8 @@
 package fr.techad.edc.popover.utils;
 
+import fr.techad.edc.popover.AppConfig;
 import fr.techad.edc.popover.browser.Browser;
-import fr.techad.edc.popover.internal.model.HelpViewer;
+import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,18 +42,19 @@ public class OpenUrlAction {
     public void openUrl(String url) throws IOException, URISyntaxException {
         LOGGER.debug("Open the url: {}", url);
 
-        if(helpConfiguration.getHelpViewer() == HelpViewer.DESKTOP_VIEWER){
+        if(helpConfiguration.getHelpViewer() == HelpViewer.EDC_DESKTOP_VIEWER){
             Runtime runtime = Runtime.getRuntime();
             try
             {
                 // Here write the good path to executable Desktop help viewer app
-                runtime.exec("C:\\Users\\Desktop\\EDC help viewer\\EDC help viewer.exe");
+                runtime.exec(AppConfig.getViewerDesktopPath());
+                LOGGER.info("Desktop viewer is running");
             }
             catch (IOException e)
             {
-                e.printStackTrace();
+                LOGGER.error(String.valueOf(e));
             }
-        }else if(helpConfiguration.getHelpViewer() == HelpViewer.INTERNAL_BROWSER){
+        }else if(helpConfiguration.getHelpViewer() == HelpViewer.EMBEDDED_VIEWER){
             browser.setSize(helpConfiguration.getWidthBrowser(), helpConfiguration.getHeightBrowser());
             browser.showBrowser(true);
             browser.loadURL(url);

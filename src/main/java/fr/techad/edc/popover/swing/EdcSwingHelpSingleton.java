@@ -5,7 +5,7 @@ import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
-import fr.techad.edc.popover.internal.model.HelpViewer;
+import fr.techad.edc.popover.model.HelpViewer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -113,11 +113,6 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public void setSeparatorColor(Color separatorColor) {
         edcSwingHelp.setSeparatorColor(separatorColor);
-    }
-
-    @Override
-    public void setInternalBrowser(boolean state) {
-        edcSwingHelp.setInternalBrowser(state);
     }
 
     @Override

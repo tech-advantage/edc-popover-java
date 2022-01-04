@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.HelpViewer;
 
 import java.awt.*;
 
@@ -129,11 +130,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
 
     @Override
     public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
-
-    @Override
-    public void setInternalBrowser(boolean state) {
-        this.internalBrowser = state;
-    }
 
     @Override
     public boolean isAutoDisabledInMissingContent() {
