@@ -44,9 +44,6 @@ public class Main {
     private static void createAndShowGUI() {
         /* Configuration */
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
-        // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
-        // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
-        // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
@@ -55,7 +52,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
-
+        EdcSwingHelpSingleton.getInstance().setSeparatorDisplay(true);
         /* Main wndow */
         JFrame f = new JFrame();
         f.setLayout(new BorderLayout());

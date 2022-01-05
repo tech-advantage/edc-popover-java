@@ -52,6 +52,9 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setSeparatorDisplay(boolean enable) { helpConfiguration.setShowSeparator(enable); }
+
+    @Override
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }

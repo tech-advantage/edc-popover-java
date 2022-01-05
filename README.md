@@ -36,6 +36,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
 | Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
+| Separator | ``setSeparatorDisplay`` | true | Display the separator in the help header |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |

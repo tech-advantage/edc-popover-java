@@ -37,6 +37,12 @@ public class Popover extends JFrame {
         this(VERTICAL);
     }
 
+    public void addSeparator(){
+        this.headerSeparator = new JSeparator();
+        headerSeparator.setForeground(Color.BLACK);
+        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
+    }
+
     /**
      * Creates a new popover with a specific direction (create a padding according the direction)
      *
@@ -60,9 +66,7 @@ public class Popover extends JFrame {
 
         // Header Panel (Contains the title and the closable icon if it's top position)
         this.headerPanel = new JPanel(new BorderLayout());
-        this.headerSeparator = new JSeparator();
-        headerSeparator.setForeground(Color.BLACK);
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
+
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
 
         // Body Panel (contains the brick information)

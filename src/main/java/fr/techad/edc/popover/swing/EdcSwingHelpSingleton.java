@@ -125,6 +125,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setSeparatorDisplay(boolean state) { edcSwingHelp.setSeparatorDisplay(state); }
+
+    @Override
     public void setTitleDisplay(boolean enable) {
         edcSwingHelp.setTitleDisplay(enable);
     }

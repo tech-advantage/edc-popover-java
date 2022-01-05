@@ -133,6 +133,20 @@ public interface HelpConfiguration {
     void setBackgroundColor(int backgroundColor);
 
     /**
+     * Return true if the separator is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowSeparator();
+
+    /**
+     * Set the visibility of the separator
+     *
+     * @param showSeparator the visibility status to set
+     */
+    void setShowSeparator(boolean showSeparator);
+
+    /**
      * Return the underline color
      *
      * @return the underline color

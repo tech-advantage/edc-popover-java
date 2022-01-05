@@ -20,6 +20,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private boolean showSeparator = true;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -135,6 +136,12 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setAutoDisabledInMissingContent(boolean state) {
         this.autoDisabled = state;
     }
+
+    @Override
+    public boolean isShowSeparator() { return showSeparator; }
+
+    @Override
+    public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
 
     @Override
     public boolean isShowTitle() {
