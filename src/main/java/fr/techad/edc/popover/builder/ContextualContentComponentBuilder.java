@@ -2,6 +2,8 @@ package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
 
+import javax.swing.*;
+
 /**
  * Builder to configure a contextual component.
  */
@@ -22,6 +24,14 @@ public interface ContextualContentComponentBuilder<T> {
      * @return the builder
      */
     ContextualContentComponentBuilder<T> setBackgroundColor(int rgbColor);
+
+    /**
+     * Enable the article display
+     *
+     * @param enable
+     * @return true if is article enabled
+     */
+    ContextualContentComponentBuilder<T> enableArticle(boolean enable);
 
     /**
      * Build the contextual component.

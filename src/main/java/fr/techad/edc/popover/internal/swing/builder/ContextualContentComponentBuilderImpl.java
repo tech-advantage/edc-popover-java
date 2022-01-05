@@ -29,6 +29,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private boolean enableArticle = true;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -48,6 +49,13 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
         LOGGER.debug("Set background color: {}", this.backgroundColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
+        this.enableArticle = enable;
+        LOGGER.debug("Set article display");
         return this;
     }
 
@@ -91,7 +99,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         body.setBackground(this.backgroundColor);
         if (contextItem != null) {
             LOGGER.debug("article size: {}", contextItem.articleSize());
-            if (contextItem.articleSize() != 0) {
+            if (this.enableArticle && contextItem.articleSize() != 0) {
                 JPanel articlePanel = new JPanel();
                 articlePanel.setBackground(this.backgroundColor);
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));

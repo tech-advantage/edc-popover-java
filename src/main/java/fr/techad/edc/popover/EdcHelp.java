@@ -68,4 +68,11 @@ public interface EdcHelp {
      * @param enable true to enable the title display.
      */
     void setTitleDisplay(boolean enable);
+
+    /**
+     * Show the article if enabled
+     *
+     * @param enable true to enable the article display.
+     */
+    void setArticleDisplay(boolean enable);
 }
