@@ -58,6 +58,13 @@ public interface EdcHelp {
     void setHelpViewer(HelpViewer viewer);
 
     /**
+     * Define the path of the executable location
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
+
+    /**
      * Define the behavior : If true, the component will be disabled if the content is missing
      *
      * @param state the state to set

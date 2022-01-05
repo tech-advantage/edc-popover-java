@@ -167,6 +167,21 @@ public interface HelpConfiguration {
      */
     void setHelpViewer(HelpViewer viewer);
 
+
+    /**
+     * Define the path to the location of the application executable
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
+
+    /**
+     * Return the path of the executable
+     *
+     * @return the path
+     */
+    String getViewerDesktopPath();
+
     /**
      * Return the mode
      *

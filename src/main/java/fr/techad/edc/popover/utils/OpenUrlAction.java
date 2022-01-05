@@ -1,6 +1,5 @@
 package fr.techad.edc.popover.utils;
 
-import fr.techad.edc.popover.AppConfig;
 import fr.techad.edc.popover.browser.Browser;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
@@ -46,9 +45,12 @@ public class OpenUrlAction {
             Runtime runtime = Runtime.getRuntime();
             try
             {
-                // Here write the good path to executable Desktop help viewer app
-                runtime.exec(AppConfig.getViewerDesktopPath());
-                LOGGER.info("Desktop viewer is running");
+                if(helpConfiguration.getViewerDesktopPath().isEmpty()){
+                    LOGGER.error("The path of the application must be entered");
+                }else{
+                    runtime.exec(helpConfiguration.getViewerDesktopPath());
+                    LOGGER.info("Desktop viewer is running");
+                }
             }
             catch (IOException e)
             {

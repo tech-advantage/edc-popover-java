@@ -22,6 +22,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int underlineColor;
     private boolean showTitle = true;
     private HelpViewer helpViewer;
+    private String desktopViewerPath = "";
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -130,6 +131,12 @@ public class HelpConfigurationImpl implements HelpConfiguration {
 
     @Override
     public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
+
+    @Override
+    public void setViewerDesktopPath(String desktopViewerPath) { this.desktopViewerPath = desktopViewerPath; }
+
+    @Override
+    public String getViewerDesktopPath() { return this.desktopViewerPath; }
 
     @Override
     public boolean isAutoDisabledInMissingContent() {

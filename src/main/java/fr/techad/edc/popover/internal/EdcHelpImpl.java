@@ -48,6 +48,11 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setViewerDesktopPath(String path) {
+        helpConfiguration.setViewerDesktopPath(path);
+    }
+
+    @Override
     public void setAutoDisabledMode(boolean state) {
         helpConfiguration.setAutoDisabledInMissingContent(state);
     }

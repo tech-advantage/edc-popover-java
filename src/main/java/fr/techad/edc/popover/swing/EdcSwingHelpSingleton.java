@@ -121,6 +121,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
+
+    @Override
     public void setAutoDisabledMode(boolean state) {
         edcSwingHelp.setAutoDisabledMode(state);
     }

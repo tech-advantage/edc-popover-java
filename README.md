@@ -100,7 +100,11 @@ EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 
 #### Config desktop viewer path
 
-If you want to use the desktop viewer, you should add the relatif path in fr.techad.edc.popover.AppConfig.
+If you want to use the desktop viewer, you should define the path
+```
+EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
+EdcSwingHelpSingleton.getInstance().setViewerDesktopPath("Define the path here");
+```
 
 ## Add the contextual button
 
