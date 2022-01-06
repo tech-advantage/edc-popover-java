@@ -144,12 +144,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
 
     @Override
-    public boolean isShowTitle() {
-        return showTitle;
-    }
+    public boolean isShowTitle() { return showTitle; }
 
     @Override
-    public void setShowTitle(boolean showTitle) {
-        this.showTitle = showTitle;
-    }
+    public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
 }
