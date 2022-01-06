@@ -161,6 +161,20 @@ public interface HelpConfiguration {
     void setInternalBrowser(boolean state);
 
     /**
+     * Return the enum placement
+     *
+     * @return Enum
+     */
+    PopoverPlacement getPopoverPlacement();
+
+    /**
+     * Define the placement of popover
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
+
+    /**
      * Return the mode
      *
      * @return true if the auto disabled mode is active

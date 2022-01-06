@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
 
@@ -44,9 +45,6 @@ public class Main {
     private static void createAndShowGUI() {
         /* Configuration */
         EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
-        // EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
-        // EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
-        // EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
         EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
         EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);

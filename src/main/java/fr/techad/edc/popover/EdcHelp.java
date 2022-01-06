@@ -1,5 +1,7 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.PopoverPlacement;
+
 /**
  * Define the base functionality to manage the help display.
  */
@@ -54,6 +56,13 @@ public interface EdcHelp {
      * @param state true to use the internal brower
      */
     void setInternalBrowser(boolean state);
+
+    /**
+     * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
 
     /**
      * Define the behavior : If true, the component will be disabled if the content is missing

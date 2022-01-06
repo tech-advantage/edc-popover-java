@@ -2,6 +2,7 @@ package fr.techad.edc.popover.internal;
 
 import fr.techad.edc.popover.EdcHelp;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.PopoverPlacement;
 
 import javax.inject.Inject;
 
@@ -44,6 +45,11 @@ public class EdcHelpImpl implements EdcHelp {
     @Override
     public void setInternalBrowser(boolean state) {
         helpConfiguration.setInternalBrowser(state);
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        helpConfiguration.setPopoverPlacement(placement);
     }
 
     @Override

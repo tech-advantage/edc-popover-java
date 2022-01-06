@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.PopoverPlacement;
 
 import java.awt.*;
 
@@ -20,6 +21,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private PopoverPlacement popoverPlacement;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -125,6 +127,17 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setInternalBrowser(boolean state) {
         this.internalBrowser = state;
     }
+
+    @Override
+    public PopoverPlacement getPopoverPlacement() {
+        if(this.popoverPlacement == null) {
+            this.popoverPlacement = popoverPlacement.BOTTOM;
+        }
+        return this.popoverPlacement;
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) { this.popoverPlacement = placement; }
 
     @Override
     public boolean isAutoDisabledInMissingContent() {
