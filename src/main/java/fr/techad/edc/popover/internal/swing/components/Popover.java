@@ -1,7 +1,6 @@
 package fr.techad.edc.popover.internal.swing.components;
 
 import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
-import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import org.slf4j.LoggerFactory;
 
@@ -32,16 +31,14 @@ public class Popover extends JFrame {
     private int direction;
     private int closablePosition;
     private String iconPath = "popover/close1.png";
-    private HelpConfiguration helpConfiguration;
+    private PopoverPlacement popoverPlacement;
 
     /**
      * Creates a new popover in the vertical direction (pad the popover on X Axis)
      */
     @Inject
-    public Popover(HelpConfiguration helpConfiguration) {
+    public Popover() {
         this(VERTICAL);
-
-        this.helpConfiguration = helpConfiguration;
     }
 
     /**
@@ -156,10 +153,13 @@ public class Popover extends JFrame {
         this.closablePosition = closePosition;
     }
 
-    void calcXOverWidthDisplay(int x, int width, int padX, int widthDisplay, int newX){
-        if(x + width + padX > widthDisplay){
-            newX = x - width;
-        }
+    /**
+     * Set popover placement
+     *
+     * @param placement
+     */
+    public void setPopoverPlacement(PopoverPlacement placement){
+        this.popoverPlacement = placement;
     }
 
     @Override
@@ -182,7 +182,6 @@ public class Popover extends JFrame {
         int padY = 0;
         boolean reverseX = false;
         boolean reverseY = false;
-        int calcPadX = newX + (reverseX ? -padX : padX);
 
 
         if (direction == HORIZONTAL)
@@ -192,10 +191,10 @@ public class Popover extends JFrame {
 
         LOGGER.debug("full width: {}", x + width + padX);
 
-        switch (this.helpConfiguration.getPopoverPlacement()){
+        switch (this.popoverPlacement){
             case RIGHT:
                 LOGGER.debug("Popover right side");
-                newX = calcPadX;
+                newX = newX + (reverseX ? -padX : padX);
                 break;
             case LEFT:
                 LOGGER.debug("Popover Left side");
@@ -215,13 +214,13 @@ public class Popover extends JFrame {
                 break;
             case BOTTOM:
                 LOGGER.debug("Popover bottom side");
-                newX = calcPadX - width / 2;
+                newX = newX + (reverseX ? -padX : padX) - width / 2;
                 if(newX < 0){
                     newX = x;
                 }
                 break;
             default:
-                newX = calcPadX;
+                newX = newX + (reverseX ? -padX : padX);
         }
 
         if (x + width + padX > widthDisplay){

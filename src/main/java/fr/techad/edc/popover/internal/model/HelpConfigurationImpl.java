@@ -137,7 +137,9 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public void setPopoverPlacement(PopoverPlacement placement) { this.popoverPlacement = placement; }
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        this.popoverPlacement = placement;
+    }
 
     @Override
     public boolean isAutoDisabledInMissingContent() {

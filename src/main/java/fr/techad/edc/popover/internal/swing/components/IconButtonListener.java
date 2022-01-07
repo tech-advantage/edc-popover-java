@@ -3,7 +3,6 @@ package fr.techad.edc.popover.internal.swing.components;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.InvalidUrlException;
-import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
 import fr.techad.edc.popover.model.HelpConfiguration;
@@ -105,6 +104,7 @@ public class IconButtonListener implements HelpListener {
                 JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
                 popover.setContentBackground(bgColor);
+                popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
                 popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 popover.clear();
                 popover.setTitle(jTitleComponent);
