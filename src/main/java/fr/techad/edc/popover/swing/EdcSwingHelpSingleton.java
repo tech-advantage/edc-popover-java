@@ -134,4 +134,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
         edcSwingHelp.setBrowserSize(width, height);
     }
 
+    @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        edcSwingHelp.setRelatedTopicsDisplay(enable);
+    }
+
 }

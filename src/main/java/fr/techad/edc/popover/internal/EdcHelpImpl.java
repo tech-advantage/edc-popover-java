@@ -56,6 +56,11 @@ public class EdcHelpImpl implements EdcHelp {
         helpConfiguration.setShowTitle(enable);
     }
 
+    @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        helpConfiguration.setShowRelatedTopics(enable);
+    }
+
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;
     }

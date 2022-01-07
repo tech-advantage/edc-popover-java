@@ -20,6 +20,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private boolean showRelatedTopics = true;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -144,5 +145,15 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
+    }
+
+    @Override
+    public boolean isShowRelatedTopics() {
+        return showRelatedTopics;
+    }
+
+    @Override
+    public void setShowRelatedTopics(boolean showRelatedTopics) {
+        this.showRelatedTopics = showRelatedTopics;
     }
 }

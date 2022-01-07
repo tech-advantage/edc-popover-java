@@ -68,4 +68,11 @@ public interface EdcHelp {
      * @param enable true to enable the title display.
      */
     void setTitleDisplay(boolean enable);
+
+    /**
+     * Show the related topics if enabled
+     *
+     * @param enable true to enable the related topics display.
+     */
+    void setRelatedTopicsDisplay(boolean enable);
 }

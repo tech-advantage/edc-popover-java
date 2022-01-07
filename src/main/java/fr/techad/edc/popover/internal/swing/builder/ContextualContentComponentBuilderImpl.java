@@ -29,6 +29,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private boolean enableRelatedTopics = true;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -48,6 +49,13 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
         LOGGER.debug("Set background color: {}", this.backgroundColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
+        this.enableRelatedTopics = enable;
+        LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
         return this;
     }
 
@@ -109,7 +117,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 body.add(articlePanel, BorderLayout.NORTH);
             }
             LOGGER.debug("link size: {}", contextItem.linkSize());
-            if (contextItem.linkSize() != 0) {
+            if (this.enableRelatedTopics && contextItem.linkSize() != 0) {
                 JPanel linkPanel = new JPanel();
                 linkPanel.setLayout(new BorderLayout());
                 linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
