@@ -52,7 +52,9 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setArticleDisplay(boolean enable) { helpConfiguration.setShowArticle(enable); }
+    public void setArticleDisplay(boolean enable) {
+        helpConfiguration.setShowArticle(enable);
+    }
 
     @Override
     public void setTitleDisplay(boolean enable) {

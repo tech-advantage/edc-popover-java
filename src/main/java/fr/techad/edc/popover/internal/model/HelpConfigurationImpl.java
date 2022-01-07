@@ -148,7 +148,9 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public boolean isShowArticle() { return showArticle; }
+    public boolean isShowArticle() {
+        return showArticle;
+    }
 
     @Override
     public void setShowArticle(boolean showArticle) {

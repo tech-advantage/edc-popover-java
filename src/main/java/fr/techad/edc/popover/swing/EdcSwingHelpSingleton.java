@@ -135,6 +135,8 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setArticleDisplay(boolean enable) { edcSwingHelp.setArticleDisplay(enable); }
+    public void setArticleDisplay(boolean enable) {
+        edcSwingHelp.setArticleDisplay(enable);
+    }
 
 }

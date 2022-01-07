@@ -55,7 +55,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     @Override
     public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
         this.enableArticle = enable;
-        LOGGER.debug("Set article display");
+        LOGGER.debug("Set article display: {}", this.enableArticle);
         return this;
     }
 
