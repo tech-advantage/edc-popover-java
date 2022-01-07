@@ -23,6 +23,7 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     private String languageCode;
     private String label = null;
     private String iconPath;
+    private boolean enableTooltip = true;
 
     @Inject
     public ContextualComponentBuilderImpl(HelpListenerProvider helpListenerProvider) {
@@ -50,9 +51,18 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     }
 
     @Override
+    public ContextualComponentBuilder<JComponent> enableTooltip(boolean enable) {
+        this.enableTooltip = enable;
+        return this;
+    }
+
+    @Override
     public JComponent build() {
         ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
-        IconButton iconButton = new IconButton(label, imageIcon);
+        IconButton iconButton = new IconButton(imageIcon);
+        if(this.enableTooltip){
+            iconButton.setTooltipLabel(label);
+        }
         HelpListener helpListener = helpListenerProvider.get();
         helpListener.setKeys(mainKey, subKey);
         iconButton.addMouseListener(helpListener);

@@ -29,6 +29,7 @@ public class Popover extends JFrame {
     private int direction;
     private int closablePosition;
     private String iconPath = "popover/close1.png";
+    private boolean isDisplayTooltip;
 
     /**
      * Creates a new popover in the vertical direction (pad the popover on X Axis)
@@ -51,20 +52,17 @@ public class Popover extends JFrame {
         setFocusableWindowState(true);
         getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
         getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.lightGray));
-
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
-
         // Header Panel (Contains the title and the closable icon if it's top position)
         this.headerPanel = new JPanel(new BorderLayout());
         this.headerSeparator = new JSeparator();
         headerSeparator.setForeground(Color.BLACK);
         this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
-
         // Body Panel (contains the brick information)
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(1, 1));
@@ -215,6 +213,15 @@ public class Popover extends JFrame {
         }
     }
 
+    /**
+     * Enable the tooltip label
+     *
+     * @param enable
+     */
+    public void setDisplayTooltip(boolean enable){
+        this.isDisplayTooltip = enable;
+    }
+
     @Override
     public Component add(Component comp) {
         if (comp != mainPanel) {
@@ -231,7 +238,12 @@ public class Popover extends JFrame {
         header.setBackground(contentPanel.getBackground());
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 2, 2));
         ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
-        IconButton closeButton = new IconButton("Close", imageIcon);
+        IconButton closeButton = new IconButton(imageIcon);
+        if(this.isDisplayTooltip){
+            closeButton.setTooltipLabel("Close");
+        } else {
+            closeButton.setTooltipLabel("");
+        }
         closeButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         closeButton.setBorderPainted(false);
         closeButton.setContentAreaFilled(false);

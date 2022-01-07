@@ -63,6 +63,13 @@ public interface EdcHelp {
     void setAutoDisabledMode(boolean state);
 
     /**
+     * Show the tooltip if enabled
+     *
+     * @param enable true to enable the tooltip display.
+     */
+    void setTooltipDisplay(boolean enable);
+
+    /**
      * Show the title if enabled
      *
      * @param enable true to enable the title display.

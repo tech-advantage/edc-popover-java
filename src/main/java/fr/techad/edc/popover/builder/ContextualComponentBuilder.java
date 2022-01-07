@@ -32,6 +32,14 @@ public interface ContextualComponentBuilder<T> {
     ContextualComponentBuilder<T> setIconPath(String iconPath);
 
     /**
+     * Define the visibility of tooltip label
+     *
+     * @param enable
+     * @return true if enabled
+     */
+    ContextualComponentBuilder<T> enableTooltip(boolean enable);
+
+    /**
      * Build the contextual component.
      *
      * @return the contextual component

@@ -34,6 +34,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Icon Path| ``setIconPath`` | icons/icon-32px.png| The help icon displays in the component |
 | Language Code | ``setLanguageCode`` | en | The help language code |
 | Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
+| Tooltip display | ``setTooltipDisplay`` | true | Display the tooltip on the help icon and close icon in popover |
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
 | Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |

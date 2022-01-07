@@ -52,6 +52,11 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setTooltipDisplay(boolean enable) {
+        helpConfiguration.setShowTooltip(enable);
+    }
+
+    @Override
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }

@@ -43,6 +43,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         JComponent component = contextualComponentBuilder.setKeys(mainKey, subKey, languageCode)
                 .setIconPath(iconPath)
                 .setLabel(helpConfiguration.getTooltipLabel())
+                .enableTooltip(helpConfiguration.isShowTooltip())
                 .build();
         if (helpConfiguration.isAutoDisabledInMissingContent()) {
             boolean enabled = false;
