@@ -60,4 +60,18 @@ public interface EdcSwingHelp extends EdcHelp {
      * @param height the browser height
      */
     void setBrowserSize(int width, int height);
+
+    /**
+     * Define the font attributes for the related topics title
+     *
+     * @param fontAttributes
+     */
+    void setTopicsFontAttributes(Font fontAttributes);
+
+    /**
+     * Define the related topics title color
+     *
+     * @param titleColor
+     */
+    void setTopicsTitleColor(Color titleColor);
 }

@@ -20,6 +20,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private Font topicsFontAttributes = new Font("Dialog", Font.BOLD, 12);
+    private Color topicsTitleColor = Color.BLACK;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -144,5 +146,25 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
+    }
+
+    @Override
+    public Font getTopicsFontAttributes() {
+        return topicsFontAttributes;
+    }
+
+    @Override
+    public void setTopicsFontAttributes(Font fontAttributes) {
+        this.topicsFontAttributes = fontAttributes;
+    }
+
+    @Override
+    public Color getTopicsTitleColor() {
+        return topicsTitleColor;
+    }
+
+    @Override
+    public void setTopicsTitleColor(Color titleColor) {
+        this.topicsTitleColor = titleColor;
     }
 }

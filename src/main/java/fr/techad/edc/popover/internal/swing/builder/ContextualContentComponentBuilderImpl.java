@@ -29,6 +29,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private Color topicsTitleColor = Color.BLACK;
+    private Font topicsFontAttributes;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -48,6 +50,20 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
         LOGGER.debug("Set background color: {}", this.backgroundColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setTopicsFontAttributes(Font fontAttributes) {
+        this.topicsFontAttributes = fontAttributes;
+        LOGGER.debug("Set related topics font attributes: {}", this.topicsFontAttributes);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setTopicsTitleColor(Color titleColor) {
+        this.topicsTitleColor = titleColor;
+        LOGGER.debug("Set related topics title color: {}", this.topicsTitleColor);
         return this;
     }
 
@@ -116,7 +132,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.setBackground(this.backgroundColor);
                 JLabel title = new JLabel(getLabel(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 Font f = title.getFont();
-                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                title.setForeground(topicsTitleColor);
+                title.setFont(topicsFontAttributes);
                 linkPanel.add(title, BorderLayout.NORTH);
                 JPanel linkContentPanel = new JPanel();
                 linkContentPanel.setLayout(new BoxLayout(linkContentPanel, BoxLayout.Y_AXIS));

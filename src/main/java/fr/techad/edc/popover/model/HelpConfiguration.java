@@ -1,5 +1,8 @@
 package fr.techad.edc.popover.model;
 
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  * Define the help configuration
  */
@@ -173,4 +176,32 @@ public interface HelpConfiguration {
      * @param state the state to defined
      */
     void setAutoDisabledInMissingContent(boolean state);
+
+    /**
+     * Return the font attributes of the related topics title
+     *
+     * @return the font attributes
+     */
+    Font getTopicsFontAttributes();
+
+    /**
+     * Define the font attributes for the related topics title
+     *
+     * @param fontAttributes
+     */
+    void setTopicsFontAttributes(Font fontAttributes);
+
+    /**
+     * Return the color of the related topics title
+     *
+     * @return the color
+     */
+    Color getTopicsTitleColor();
+
+    /**
+     * Define the related topics title color
+     *
+     * @param titleColor
+     */
+    void setTopicsTitleColor(Color titleColor);
 }
