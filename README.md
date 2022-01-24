@@ -40,6 +40,8 @@ We will be able to configure the url to get the documentation and the widget pro
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
 | Font attributes | ``setArticleFontAttributes`` | "Dialog", Font.BOLD, 12 | Font attributes of the article title |
+| Related topics title color | ``setTopicsTitleColor`` | BLACK | Color of the related topics title in the help dialog |
+| Font attributes topics | ``setTopicsFontAttributes`` | "Dialog", Font.BOLD, 12 | Font attributes of the related topics title |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 | Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |

@@ -138,4 +138,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public void setArticleTitleColor(Color titleColor) { edcSwingHelp.setArticleTitleColor(titleColor); }
 
+    @Override
+    public void setTopicsFontAttributes(Font fontAttributes) { edcSwingHelp.setTopicsFontAttributes(fontAttributes); }
+
+    @Override
+    public void setTopicsTitleColor(Color titleColor) { edcSwingHelp.setTopicsTitleColor(titleColor); }
 }

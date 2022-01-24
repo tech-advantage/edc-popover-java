@@ -133,7 +133,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.setBackground(this.backgroundColor);
                 JLabel title = new JLabel(getLabel(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 Font f = title.getFont();
-                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                title.setForeground(topicsTitleColor);
+                title.setFont(topicsFontAttributes);
                 linkPanel.add(title, BorderLayout.NORTH);
                 JPanel linkContentPanel = new JPanel();
                 linkContentPanel.setLayout(new BoxLayout(linkContentPanel, BoxLayout.Y_AXIS));

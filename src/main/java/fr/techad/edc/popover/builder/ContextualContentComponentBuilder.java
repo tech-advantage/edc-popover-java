@@ -2,7 +2,8 @@ package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  * Builder to configure a contextual component.

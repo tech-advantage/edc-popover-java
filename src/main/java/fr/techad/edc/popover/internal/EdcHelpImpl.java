@@ -5,6 +5,7 @@ import fr.techad.edc.popover.model.HelpConfiguration;
 
 import java.awt.Font;
 import javax.inject.Inject;
+import java.awt.Font;
 
 /**
  * Edc Help Implementation.
