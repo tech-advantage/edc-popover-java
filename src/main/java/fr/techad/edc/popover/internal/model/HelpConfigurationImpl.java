@@ -2,7 +2,8 @@ package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
 
 /**
  * Help Configuration implementation
@@ -20,6 +21,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private Font articleFontAttributes = new Font("Dialog", Font.BOLD, 12);
+    private Color articleTitleColor = Color.BLACK;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -144,5 +147,21 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
+    }
+
+    @Override
+    public Font getArticleFontAttributes() { return articleFontAttributes; }
+
+    @Override
+    public void setArticleFontAttributes(Font fontAttributes) { this.articleFontAttributes = fontAttributes; }
+
+    @Override
+    public Color getArticleTitleColor() {
+        return articleTitleColor;
+    }
+
+    @Override
+    public void setArticleTitleColor(Color articleTitleColor) {
+        this.articleTitleColor = articleTitleColor;
     }
 }

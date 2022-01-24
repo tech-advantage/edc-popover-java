@@ -3,6 +3,7 @@ package fr.techad.edc.popover.internal;
 import fr.techad.edc.popover.EdcHelp;
 import fr.techad.edc.popover.model.HelpConfiguration;
 
+import java.awt.Font;
 import javax.inject.Inject;
 
 /**
@@ -55,6 +56,9 @@ public class EdcHelpImpl implements EdcHelp {
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }
+
+    @Override
+    public void setArticleFontAttributes(Font fontAttributes) { helpConfiguration.setArticleFontAttributes(fontAttributes); }
 
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;

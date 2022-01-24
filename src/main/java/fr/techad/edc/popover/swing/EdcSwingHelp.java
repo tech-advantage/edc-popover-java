@@ -54,10 +54,24 @@ public interface EdcSwingHelp extends EdcHelp {
     void setSeparatorColor(Color separatorColor);
 
     /**
+     * Define the font attributes
+     *
+     * @param fontAttributes
+     */
+    void setArticleFontAttributes(Font fontAttributes);
+
+    /**
      * Define the browser size
      *
      * @param width  the browser width
      * @param height the browser height
      */
     void setBrowserSize(int width, int height);
+
+    /**
+     * Define the article title color
+     *
+     * @param titleColor
+     */
+    void setArticleTitleColor(Color titleColor);
 }

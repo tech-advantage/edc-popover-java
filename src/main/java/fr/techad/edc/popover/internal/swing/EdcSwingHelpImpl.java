@@ -86,4 +86,14 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         helpConfiguration.setWidthBrowser(width);
         helpConfiguration.setHeightBrowser(height);
     }
+
+    @Override
+    public void setArticleTitleColor(Color titleColor) {
+        getHelpConfiguration().setArticleTitleColor(titleColor);
+    }
+
+    @Override
+    public void setArticleFontAttributes(Font fontAttributes) {
+        getHelpConfiguration().setArticleFontAttributes(fontAttributes);
+    }
 }

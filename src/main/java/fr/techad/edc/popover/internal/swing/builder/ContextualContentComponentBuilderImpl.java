@@ -29,6 +29,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private Color articleTitleColor = Color.BLACK;
+    private Font articleFontAttributes;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -48,6 +50,20 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
         LOGGER.debug("Set background color: {}", this.backgroundColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setArticleFontAttributes(Font fontAttributes) {
+        this.articleFontAttributes = fontAttributes;
+        LOGGER.debug("Set article font attributes: {}", this.articleFontAttributes);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setArticleTitleColor(Color titleColor) {
+        this.articleTitleColor = titleColor;
+        LOGGER.debug("Set article title color: {}", this.articleTitleColor);
         return this;
     }
 
@@ -98,7 +114,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 articlePanel.setBorder(BorderFactory.createEmptyBorder(18, 0, 0, 0));
                 JLabel title = new JLabel(getLabel(TranslationConstants.ARTICLES_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 Font f = title.getFont();
-                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                title.setForeground(articleTitleColor);
+                title.setFont(articleFontAttributes);
                 articlePanel.add(title, BorderLayout.NORTH);
                 int i = 0;
                 for (DocumentationItem documentationItem : contextItem.getArticles()) {
