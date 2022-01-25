@@ -35,6 +35,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Language Code | ``setLanguageCode`` | en | The help language code |
 | Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
+| Hover display popover | ``setHoverDisplayPopover`` |false| Display the popover when the mouse is over it |
 | Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |

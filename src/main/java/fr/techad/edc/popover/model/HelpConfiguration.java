@@ -105,6 +105,20 @@ public interface HelpConfiguration {
     void setSummaryDisplay(boolean enabled);
 
     /**
+     * Return the status for the popover display.
+     *
+     * @return the state
+     */
+    boolean isHoverDisplayPopover();
+
+    /**
+     * If true, the popover will be displayed when the mouse is hover it
+     *
+     * @param enabled the new state to set
+     */
+    void setHoverDisplayPopover(boolean enabled);
+
+    /**
      * Return true if the title is shown in the component
      *
      * @return true if visible
