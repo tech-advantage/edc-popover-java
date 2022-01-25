@@ -103,8 +103,8 @@ public class IconButtonListener implements HelpListener {
                 JComponent jBodyComponent = contextualContentComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
-                        .setArticleTitleColor(helpConfiguration.getArticleTitleColor())
-                        .setArticleFontAttributes(helpConfiguration.getArticleFontAttributes())
+                        .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
+                        .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
                         .build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());

@@ -133,14 +133,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setBrowserSize(int width, int height) { edcSwingHelp.setBrowserSize(width, height); }
 
     @Override
-    public void setArticleFontAttributes(Font fontAttributes) { edcSwingHelp.setArticleFontAttributes(fontAttributes); }
+    public void setPopoverSectionTitleFont(Font fontAttr) { edcSwingHelp.setPopoverSectionTitleFont(fontAttr); }
 
     @Override
-    public void setArticleTitleColor(Color titleColor) { edcSwingHelp.setArticleTitleColor(titleColor); }
+    public void setPopoverSectionTitleColor(Color titleColor) { edcSwingHelp.setPopoverSectionTitleColor(titleColor); }
 
-    @Override
-    public void setTopicsFontAttributes(Font fontAttributes) { edcSwingHelp.setTopicsFontAttributes(fontAttributes); }
-
-    @Override
-    public void setTopicsTitleColor(Color titleColor) { edcSwingHelp.setTopicsTitleColor(titleColor); }
 }

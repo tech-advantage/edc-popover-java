@@ -29,8 +29,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
-    private Color articleTitleColor = Color.BLACK;
-    private Font articleFontAttributes;
+    private Color popoverSectionTitleColor = Color.BLACK;
+    private Font popoverSectionTitleFont;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -54,16 +54,16 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     }
 
     @Override
-    public ContextualContentComponentBuilder<JComponent> setArticleFontAttributes(Font fontAttributes) {
-        this.articleFontAttributes = fontAttributes;
-        LOGGER.debug("Set article font attributes: {}", this.articleFontAttributes);
+    public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleFont(Font fontAttr) {
+        this.popoverSectionTitleFont = fontAttr;
+        LOGGER.debug("Set popover section title font attributes: {}", this.popoverSectionTitleFont);
         return this;
     }
 
     @Override
-    public ContextualContentComponentBuilder<JComponent> setArticleTitleColor(Color titleColor) {
-        this.articleTitleColor = titleColor;
-        LOGGER.debug("Set article title color: {}", this.articleTitleColor);
+    public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
+        this.popoverSectionTitleColor = titleColor;
+        LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
         return this;
     }
 
@@ -113,9 +113,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
                 articlePanel.setBorder(BorderFactory.createEmptyBorder(18, 0, 0, 0));
                 JLabel title = new JLabel(getLabel(TranslationConstants.ARTICLES_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
-                Font f = title.getFont();
-                title.setForeground(articleTitleColor);
-                title.setFont(articleFontAttributes);
+                title.setForeground(popoverSectionTitleColor);
+                title.setFont(popoverSectionTitleFont);
                 articlePanel.add(title, BorderLayout.NORTH);
                 int i = 0;
                 for (DocumentationItem documentationItem : contextItem.getArticles()) {
@@ -132,9 +131,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
                 linkPanel.setBackground(this.backgroundColor);
                 JLabel title = new JLabel(getLabel(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
-                Font f = title.getFont();
-                title.setForeground(topicsTitleColor);
-                title.setFont(topicsFontAttributes);
+                title.setForeground(popoverSectionTitleColor);
+                title.setFont(popoverSectionTitleFont);
                 linkPanel.add(title, BorderLayout.NORTH);
                 JPanel linkContentPanel = new JPanel();
                 linkContentPanel.setLayout(new BoxLayout(linkContentPanel, BoxLayout.Y_AXIS));

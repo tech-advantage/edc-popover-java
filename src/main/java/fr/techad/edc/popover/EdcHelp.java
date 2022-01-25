@@ -72,9 +72,9 @@ public interface EdcHelp {
     void setTitleDisplay(boolean enable);
 
     /**
-     * Define the fonts attributes of the article title
+     * Define the fonts attributes of the popover section title
      *
-     * @param fontAttributes
+     * @param fontAttr
      */
-    void setArticleFontAttributes(Font fontAttributes);
+    void setPopoverSectionTitleFont(Font fontAttr);
 }

@@ -178,30 +178,30 @@ public interface HelpConfiguration {
     void setAutoDisabledInMissingContent(boolean state);
 
     /**
-     * Return the font attributes of the article title
+     * Return the font attributes of the popover section title
      *
      * @return the font attributes
      */
-    Font getArticleFontAttributes();
+    Font getPopoverSectionTitleFont();
 
     /**
-     * Define font attributes for the article title
+     * Define font attributes for the popover section title
      *
-     * @param fontAttributes
+     * @param fontAttr
      */
-    void setArticleFontAttributes(Font fontAttributes);
+    void setPopoverSectionTitleFont(Font fontAttr);
 
     /**
-     * Return the article title color
+     * Return the popover section title color
      *
      * @return the color
      */
-    Color getArticleTitleColor();
+    Color getPopoverSectionTitleColor();
 
     /**
-     * Define the article title color
+     * Define the popover section title color
      *
-     * @param articleTitleColor
+     * @param popoverTitleColor
      */
-    void setArticleTitleColor(Color articleTitleColor);
+    void setPopoverSectionTitleColor(Color popoverTitleColor);
 }

@@ -21,8 +21,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
-    private Font articleFontAttributes = new Font("Dialog", Font.BOLD, 12);
-    private Color articleTitleColor = Color.BLACK;
+    private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
+    private Color popoverSectionTitleColor = Color.BLACK;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -150,18 +150,18 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public Font getArticleFontAttributes() { return articleFontAttributes; }
+    public Font getPopoverSectionTitleFont() { return popoverSectionTitleFont; }
 
     @Override
-    public void setArticleFontAttributes(Font fontAttributes) { this.articleFontAttributes = fontAttributes; }
+    public void setPopoverSectionTitleFont(Font fontAttr) { this.popoverSectionTitleFont = fontAttr; }
 
     @Override
-    public Color getArticleTitleColor() {
-        return articleTitleColor;
+    public Color getPopoverSectionTitleColor() {
+        return popoverSectionTitleColor;
     }
 
     @Override
-    public void setArticleTitleColor(Color articleTitleColor) {
-        this.articleTitleColor = articleTitleColor;
+    public void setPopoverSectionTitleColor(Color titleColor) {
+        this.popoverSectionTitleColor = titleColor;
     }
 }

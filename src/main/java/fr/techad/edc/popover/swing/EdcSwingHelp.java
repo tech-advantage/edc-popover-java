@@ -54,11 +54,11 @@ public interface EdcSwingHelp extends EdcHelp {
     void setSeparatorColor(Color separatorColor);
 
     /**
-     * Define the font attributes
+     * Define the font attributes of the popover section
      *
-     * @param fontAttributes
+     * @param fontAttr
      */
-    void setArticleFontAttributes(Font fontAttributes);
+    void setPopoverSectionTitleFont(Font fontAttr);
 
     /**
      * Define the browser size
@@ -69,9 +69,9 @@ public interface EdcSwingHelp extends EdcHelp {
     void setBrowserSize(int width, int height);
 
     /**
-     * Define the article title color
+     * Define the popover section title color
      *
      * @param titleColor
      */
-    void setArticleTitleColor(Color titleColor);
+    void setPopoverSectionTitleColor(Color titleColor);
 }

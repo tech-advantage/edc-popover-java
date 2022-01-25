@@ -59,7 +59,7 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setArticleFontAttributes(Font fontAttributes) { helpConfiguration.setArticleFontAttributes(fontAttributes); }
+    public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
 
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;

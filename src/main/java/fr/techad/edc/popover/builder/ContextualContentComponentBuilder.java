@@ -32,15 +32,15 @@ public interface ContextualContentComponentBuilder<T> {
      * @param titleColor
      * @return title color
      */
-    ContextualContentComponentBuilder<T> setArticleTitleColor(Color titleColor);
+    ContextualContentComponentBuilder<T> setPopoverSectionTitleColor(Color titleColor);
 
     /**
      * Define the font attributes of article title
      *
-     * @param fontAttributes
+     * @param fontAttr
      * @return the builder
      */
-    ContextualContentComponentBuilder<T> setArticleFontAttributes(Font fontAttributes);
+    ContextualContentComponentBuilder<T> setPopoverSectionTitleFont(Font fontAttr);
 
     /**
      * Build the contextual component.
