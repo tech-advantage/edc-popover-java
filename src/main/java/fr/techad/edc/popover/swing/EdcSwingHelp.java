@@ -54,10 +54,24 @@ public interface EdcSwingHelp extends EdcHelp {
     void setSeparatorColor(Color separatorColor);
 
     /**
+     * Define the fonts attributes
+     *
+     * @param fontAttributes
+     */
+    void setHeaderFontAttributes(Font fontAttributes);
+
+    /**
      * Define the browser size
      *
      * @param width  the browser width
      * @param height the browser height
      */
     void setBrowserSize(int width, int height);
+
+    /**
+     * Define the header title color for the component
+     *
+     * @param titleColor
+     */
+    void setHeaderTitleColor(Color titleColor);
 }
