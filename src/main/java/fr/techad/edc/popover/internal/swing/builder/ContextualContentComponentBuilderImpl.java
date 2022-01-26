@@ -30,7 +30,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
     private Color popoverSectionTitleColor = Color.BLACK;
-    private Font popoverSectionTitleFont;
+    private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
