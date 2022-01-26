@@ -101,12 +101,12 @@ public class IconButtonListener implements HelpListener {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
                 JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
-                JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
+                JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).setShowTitle(helpConfiguration.isShowTitle()).build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
                 popover.setContentBackground(bgColor);
                 popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 popover.clear();
-                popover.setDisplayTooltip(helpConfiguration.isShowTooltip());
+                popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
                 popover.setIconPath(helpConfiguration.getCloseIconPath());

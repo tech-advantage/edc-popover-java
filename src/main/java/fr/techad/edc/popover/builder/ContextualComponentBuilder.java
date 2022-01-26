@@ -37,7 +37,7 @@ public interface ContextualComponentBuilder<T> {
      * @param enable
      * @return true if enabled
      */
-    ContextualComponentBuilder<T> enableTooltip(boolean enable);
+    ContextualComponentBuilder<T> showTooltip(boolean enable);
 
     /**
      * Build the contextual component.

@@ -29,7 +29,7 @@ public class Popover extends JFrame {
     private int direction;
     private int closablePosition;
     private String iconPath = "popover/close1.png";
-    private boolean isDisplayTooltip;
+    private boolean showTooltip = true;
 
     /**
      * Creates a new popover in the vertical direction (pad the popover on X Axis)
@@ -218,8 +218,8 @@ public class Popover extends JFrame {
      *
      * @param enable
      */
-    public void setDisplayTooltip(boolean enable){
-        this.isDisplayTooltip = enable;
+    public void setShowTooltip(boolean enable){
+        this.showTooltip = enable;
     }
 
     @Override
@@ -238,12 +238,7 @@ public class Popover extends JFrame {
         header.setBackground(contentPanel.getBackground());
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 2, 2));
         ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
-        IconButton closeButton = new IconButton(imageIcon);
-        if(this.isDisplayTooltip){
-            closeButton.setTooltipLabel("Close");
-        } else {
-            closeButton.setTooltipLabel("");
-        }
+        IconButton closeButton = new IconButton(showTooltip ? "Close" : null, imageIcon);
         closeButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         closeButton.setBorderPainted(false);
         closeButton.setContentAreaFilled(false);

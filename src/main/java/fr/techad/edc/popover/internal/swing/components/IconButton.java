@@ -20,23 +20,15 @@ public class IconButton extends JButton {
      *
      * @param icon  the icon to display
      */
-    public IconButton(Icon icon) {
+    public IconButton(String label, Icon icon) {
         super(icon);
-
+        if (StringUtils.isNotBlank(label))
+            setToolTipText(label);
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusable(false);
     }
 
-    /**
-     * Set the label for tooltip
-     *
-     * @param label
-     */
-    public void setTooltipLabel(String label) {
-        if (StringUtils.isNotBlank(label))
-            setToolTipText(label);
-    }
 
     @Override
     public void setIcon(Icon defaultIcon) {

@@ -36,8 +36,8 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     }
 
     @Override
-    public ContextualTitleComponentBuilder<JComponent> enableTitle(boolean showTitle) {
-        this.showTitle = showTitle;
+    public ContextualTitleComponentBuilder<JComponent> setShowTitle(boolean enable) {
+        this.showTitle = enable;
         return this;
     }
 
