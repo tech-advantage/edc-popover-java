@@ -5,6 +5,7 @@ import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 
 import javax.inject.Inject;
+import java.awt.Font;
 
 /**
  * Edc Help Implementation.
@@ -61,6 +62,9 @@ public class EdcHelpImpl implements EdcHelp {
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }
+
+    @Override
+    public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
 
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;

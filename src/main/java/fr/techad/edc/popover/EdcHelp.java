@@ -1,6 +1,7 @@
 package fr.techad.edc.popover;
 
 import fr.techad.edc.popover.model.HelpViewer;
+import java.awt.Font;
 
 /**
  * Define the base functionality to manage the help display.
@@ -77,4 +78,12 @@ public interface EdcHelp {
      * @param enable true to enable the title display.
      */
     void setTitleDisplay(boolean enable);
+
+
+    /**
+     * Define the font attributes of the header title
+     *
+     * @param fontAttributes
+     */
+    void setHeaderFontAttributes(Font fontAttributes);
 }
