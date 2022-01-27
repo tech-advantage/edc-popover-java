@@ -52,7 +52,8 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
-        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
+        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
+        EdcSwingHelpSingleton.getInstance().setViewerDesktopPath("C:\\Users\\bracq\\Desktop\\EDC help viewer\\EDC help viewer.exe");
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 
         /* Main wndow */
