@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal;
 
 import fr.techad.edc.popover.EdcHelp;
+import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 
 import javax.inject.Inject;
@@ -43,8 +44,13 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setInternalBrowser(boolean state) {
-        helpConfiguration.setInternalBrowser(state);
+    public void setHelpViewer(HelpViewer state) {
+        helpConfiguration.setHelpViewer(state);
+    }
+
+    @Override
+    public void setViewerDesktopPath(String path) {
+        helpConfiguration.setViewerDesktopPath(path);
     }
 
     @Override

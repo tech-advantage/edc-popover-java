@@ -1,5 +1,6 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.HelpViewer;
 import java.awt.Font;
 
 /**
@@ -51,11 +52,18 @@ public interface EdcHelp {
     void setSummaryDisplay(boolean enable);
 
     /**
-     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     * Define the browser to use with Enum Type: DESKTOP_VIEWER, INTERNAL_BROWSER, BROWSER
      *
-     * @param state true to use the internal brower
+     * @param viewer
      */
-    void setInternalBrowser(boolean state);
+    void setHelpViewer(HelpViewer viewer);
+
+    /**
+     * Define the path of the executable location
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
 
     /**
      * Define the behavior : If true, the component will be disabled if the content is missing

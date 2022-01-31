@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.HelpViewer;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -21,6 +22,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private HelpViewer helpViewer;
+    private String desktopViewerPath = "";
     private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
     private Color titleColor = Color.BLACK;
 
@@ -125,9 +128,18 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public void setInternalBrowser(boolean state) {
-        this.internalBrowser = state;
+    public HelpViewer getHelpViewer(){
+        return this.helpViewer;
     }
+
+    @Override
+    public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
+
+    @Override
+    public void setViewerDesktopPath(String desktopViewerPath) { this.desktopViewerPath = desktopViewerPath; }
+
+    @Override
+    public String getViewerDesktopPath() { return this.desktopViewerPath; }
 
     @Override
     public boolean isAutoDisabledInMissingContent() {
