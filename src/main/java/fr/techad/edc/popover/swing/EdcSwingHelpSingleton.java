@@ -106,6 +106,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setHoverDisplayPopover(boolean enable) {
+        edcSwingHelp.setHoverDisplayPopover(enable);
+    }
+
+    @Override
     public void setBackgroundColor(Color backgroundColor) {
         edcSwingHelp.setBackgroundColor(backgroundColor);
     }

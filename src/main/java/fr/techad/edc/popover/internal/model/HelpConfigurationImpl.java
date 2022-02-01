@@ -15,6 +15,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private String languageCode = "en";
     private String tooltipLabel = null;
     private boolean summaryDisplay = false;
+    private boolean popoverDisplay = false;
     private int backgroundColor;
     private boolean internalBrowser = true;
     private boolean autoDisabled = true;
@@ -100,6 +101,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setSummaryDisplay(boolean enabled) {
         this.summaryDisplay = enabled;
+    }
+
+    @Override
+    public boolean isHoverDisplayPopover() {
+        return this.popoverDisplay;
+    }
+
+    @Override
+    public void setHoverDisplayPopover(boolean enabled) {
+        this.popoverDisplay = enabled;
     }
 
     @Override

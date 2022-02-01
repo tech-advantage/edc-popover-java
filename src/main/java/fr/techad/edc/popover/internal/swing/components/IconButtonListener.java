@@ -74,12 +74,14 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if(helpConfiguration.isHoverDisplayPopover()) {
+            openPopover(e.getXOnScreen(), e.getYOnScreen());
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        popover.setVisible(false);
     }
 
     private void openBrowser() {

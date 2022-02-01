@@ -52,6 +52,14 @@ public interface EdcHelp {
     void setSummaryDisplay(boolean enable);
 
     /**
+     * Active or deactivate the popover display when the mouse is over it.
+     *
+     * @param enable
+     */
+    void setHoverDisplayPopover(boolean enable);
+
+    /**
+     * Define the browser to use : true to use the internal brower, false to use the system browser.
      * Define the browser to use with Enum Type: DESKTOP_VIEWER, INTERNAL_BROWSER, BROWSER
      *
      * @param viewer
