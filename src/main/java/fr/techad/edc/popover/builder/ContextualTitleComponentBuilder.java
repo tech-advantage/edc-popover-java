@@ -2,6 +2,9 @@ package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
 
+import java.awt.Font;
+import java.awt.Color;
+
 /**
  * Builder to configure a contextual title component.
  */
@@ -22,6 +25,22 @@ public interface ContextualTitleComponentBuilder<T> {
      * @return the builder
      */
     ContextualTitleComponentBuilder<T> setBackgroundColor(int rgbColor);
+
+    /**
+     * Define the header title color
+     *
+     * @param titleColor
+     * @return the builder
+     */
+    ContextualTitleComponentBuilder<T> setHeaderTitleColor(Color titleColor);
+
+    /**
+     * Define the fonts attributes of the header title
+     *
+     * @param fontAttributes
+     * @return the builder
+     */
+    ContextualTitleComponentBuilder<T> setHeaderFontAttributes(Font fontAttributes);
 
     /**
      * Show the title

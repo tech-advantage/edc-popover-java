@@ -20,6 +20,8 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     private ContextItem contextItem;
     private boolean showTitle = true;
     private Color backgroundColor = Color.WHITE;
+    private Color titleColor = Color.BLACK;
+    private Font headerFontAttributes;
 
     @Override
     public ContextualTitleComponentBuilder<JComponent> setContextItem(ContextItem contextItem) {
@@ -32,6 +34,18 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     public ContextualTitleComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
         LOGGER.debug("Set background color: {}", this.backgroundColor);
+        return this;
+    }
+
+    @Override
+    public ContextualTitleComponentBuilder<JComponent> setHeaderFontAttributes(Font fontAttributes) {
+        this.headerFontAttributes = fontAttributes;
+        return this;
+    }
+
+    @Override
+    public ContextualTitleComponentBuilder<JComponent> setHeaderTitleColor(Color titleColor) {
+        this.titleColor = titleColor;
         return this;
     }
 
@@ -63,10 +77,9 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
             }
         }
         label = new JLabel(title);
-        Font labelFont = label.getFont();
-        Font boldFont = labelFont.deriveFont(labelFont.getStyle() ^ Font.BOLD);
-        Font font = boldFont.deriveFont(labelFont.getSize() + 5.0f);
-        label.setFont(font);
+
+        label.setFont(headerFontAttributes);
+        label.setForeground(titleColor);
         label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         return label;
     }
