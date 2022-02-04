@@ -5,7 +5,9 @@ import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.swing.HelpListener;
 import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
@@ -65,11 +67,15 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (this.helpConfiguration.getSummaryDisplay()) {
-            openPopover(e.getXOnScreen(), e.getYOnScreen());
-        } else {
-            openBrowser();
+
+        if(this.helpConfiguration.getIconState() != IconState.DISABLED){
+            if (this.helpConfiguration.getSummaryDisplay()) {
+                openPopover(e.getXOnScreen(), e.getYOnScreen());
+            } else {
+                openBrowser();
+            }
         }
+
     }
 
     @Override
@@ -99,21 +105,38 @@ public class IconButtonListener implements HelpListener {
     private void openPopover(int x, int y) {
         try {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
-            if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
-                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
-                JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
+
+            if (contextItem != null || helpConfiguration.getErrorBehavior() != ErrorBehavior.NO_POPOVER) {
+                JComponent jBodyComponent = contextualContentComponentBuilder
+                        .setContextItem(contextItem)
+                        .setBackgroundColor(helpConfiguration.getBackgroundColor())
+                        .setErrorBehavior(helpConfiguration.getErrorBehavior())
+                        .setLanguageCode(helpConfiguration.getLanguageCode())
+                        .build();
+                JComponent jTitleComponent = contextualTitleComponentBuilder
+                        .setContextItem(contextItem)
+                        .setBackgroundColor(helpConfiguration.getBackgroundColor())
+                        .enableTitle(helpConfiguration.isShowTitle())
+                        .setLanguageCode(helpConfiguration.getLanguageCode())
+                        .build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
+
                 popover.setContentBackground(bgColor);
                 popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 popover.clear();
+                popover.addHeaderPanel();
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
+
                 popover.setIconPath(helpConfiguration.getCloseIconPath());
                 popover.pack();
                 popover.setVisible(true);
                 popover.setLocation(x, y);
                 LOGGER.debug("Popover size: {}", popover.getSize());
                 LOGGER.debug("component size: {}", jBodyComponent.getSize());
+            }
+            if(contextItem == null && helpConfiguration.getErrorBehavior() == ErrorBehavior.FRIENDLY_MSG){
+                popover.removeHeaderPanel();
             }
         } catch (InvalidUrlException | IOException e) {
             LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, this.helpConfiguration.getLanguageCode());

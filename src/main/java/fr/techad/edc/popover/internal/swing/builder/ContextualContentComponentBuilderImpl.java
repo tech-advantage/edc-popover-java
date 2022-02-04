@@ -1,12 +1,15 @@
 package fr.techad.edc.popover.internal.swing.builder;
 
+import com.google.common.collect.Sets;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.internal.TranslationConstants;
+import fr.techad.edc.client.internal.io.HttpReaderImpl;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.DocumentationItem;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.internal.swing.components.Popover;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.*;
 
 /**
  * TECH ADVANTAGE
@@ -29,12 +33,19 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private ErrorBehavior errorBehavior;
+    private JLabel friendlyMessage = new JLabel("Contextual help is coming soon.");
+    private JLabel errorMessage = new JLabel("<html>An error occurred when fetching data ! <br/> Check the brick keys provided to the EdcHelp component.</html>");
+    private HttpReaderImpl httpReader;
+    private String languageCode = "en";
+
 
     @Inject
-    public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
+    public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover, HttpReaderImpl httpReader) {
         this.edcClient = edcClient;
         this.openUrlAction = openUrlAction;
         this.popover = popover;
+        this.httpReader = httpReader;
     }
 
     @Override
@@ -52,6 +63,18 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     }
 
     @Override
+    public ContextualContentComponentBuilder<JComponent> setErrorBehavior(ErrorBehavior errorBehavior) {
+        this.errorBehavior = errorBehavior;
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+        return this;
+    }
+
+    @Override
     public JComponent build() {
         LOGGER.debug("Build the context item: {}", contextItem != null ? contextItem.getLabel() : "null");
 
@@ -63,23 +86,22 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
             container.add(getBody(), BorderLayout.CENTER);
         } catch (InvalidUrlException | IOException e) {
             LOGGER.error("Error during the body creation", e);
-            container.add(getFailure(), BorderLayout.CENTER);
+            try{
+                container.add(getFailure(), BorderLayout.CENTER);
+            } catch(InvalidUrlException | IOException err) {
+                LOGGER.error("Error during the get failure method creation", err);
+            }
         }
 
         return container;
     }
 
     private JComponent getHeader() {
-        JLabel label;
+        JLabel label = new JLabel();
         if (contextItem != null) {
-            label = new JLabel(contextItem.getDescription());
+            label.setText(contextItem.getDescription());
             Font f = label.getFont();
             label.setFont(f.deriveFont((float) (f.getSize() + 1)));
-            label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
-        } else {
-            label = new JLabel("Warning");
-            Font f = label.getFont();
-            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD ^ f.getSize() + 1));
             label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         }
         return label;
@@ -89,6 +111,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         JPanel body = new JPanel();
         body.setLayout(new BorderLayout());
         body.setBackground(this.backgroundColor);
+
         if (contextItem != null) {
             LOGGER.debug("article size: {}", contextItem.articleSize());
             if (contextItem.articleSize() != 0) {
@@ -135,8 +158,40 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         return body;
     }
 
-    private JComponent getFailure() {
-        return new JLabel("Error to get information about this component");
+    public String addChar(String str, String character, int position) {
+        return str.substring(0, ++position) + character + str.substring(position);
+    }
+
+    private JComponent getFailure() throws InvalidUrlException, IOException {
+
+        Set<String> languagesLists = Sets.newHashSet(languageCode);
+        Map<String, Map<String, String>> labelsFromLanguage = httpReader.readLabels(languagesLists);
+        Map<String, Map<String, String>> labelsErrorFromLanguage = httpReader.readErrorsLabel(languagesLists);
+
+        JLabel jLabelError = new JLabel();
+
+        if (errorBehavior == ErrorBehavior.ERROR_SHOWN) {
+            String errMessageByKey = labelsErrorFromLanguage.get(languageCode).get("failedData");
+            if(errMessageByKey != null){
+                errorMessage.setText("<html>" + addChar(errMessageByKey, "<br/>", errMessageByKey.indexOf("!")) + "</html>");
+            }
+            jLabelError = errorMessage;
+        }
+
+        if (errorBehavior == ErrorBehavior.FRIENDLY_MSG) {
+            String friendlyMessageByKey = labelsFromLanguage.get(languageCode).get("comingSoon");
+            if(friendlyMessageByKey != null){
+                friendlyMessage.setText(friendlyMessageByKey);
+            }
+            jLabelError = friendlyMessage;
+        }
+
+        jLabelError.setHorizontalAlignment(SwingConstants.CENTER);
+        Font f = jLabelError.getFont();
+        jLabelError.setFont(f.deriveFont(f.getStyle() ^ Font.PLAIN));
+        jLabelError.setBorder(BorderFactory.createEmptyBorder(6, 10, 0, 10));
+
+        return jLabelError;
     }
 
     private void openUrl(String url) {

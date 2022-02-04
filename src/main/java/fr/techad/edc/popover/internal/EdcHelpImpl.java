@@ -1,7 +1,9 @@
 package fr.techad.edc.popover.internal;
 
 import fr.techad.edc.popover.EdcHelp;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 
 import javax.inject.Inject;
 
@@ -47,14 +49,20 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setAutoDisabledMode(boolean state) {
-        helpConfiguration.setAutoDisabledInMissingContent(state);
-    }
-
-    @Override
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }
+
+    @Override
+    public void setErrorBehavior(ErrorBehavior errorBehavior) {
+        helpConfiguration.setErrorBehavior(errorBehavior);
+    }
+
+    @Override
+    public void setIconState(IconState iconState) {
+        helpConfiguration.setIconState(iconState);
+    }
+
 
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;

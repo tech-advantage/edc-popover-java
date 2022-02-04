@@ -5,7 +5,9 @@ import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.EdcHelpImpl;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.HelpListener;
 import org.slf4j.Logger;
@@ -26,6 +28,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     private final EdcClient edcClient;
     private final ContextualComponentBuilder<JComponent> contextualComponentBuilder;
     private final HelpListenerProvider helpListenerProvider;
+    private boolean enableMainKey = false;
 
     @Inject
     public EdcSwingHelpImpl(EdcClient edcClient, ContextualComponentBuilder<JComponent> contextualComponentBuilder, HelpConfiguration helpConfiguration, HelpListenerProvider helpListenerProvider) {
@@ -40,11 +43,21 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         String languageCode = helpConfiguration.getLanguageCode();
 
+        try {
+            enableMainKey = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
+        } catch (InvalidUrlException | IOException e) {
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
+        }
+
         JComponent component = contextualComponentBuilder.setKeys(mainKey, subKey, languageCode)
-                .setIconPath(iconPath)
+                .setIconPath(
+                        helpConfiguration.getErrorBehavior() == ErrorBehavior.NO_POPOVER && !enableMainKey || helpConfiguration.getIconState() == IconState.HIDDEN && !enableMainKey ? "" :
+                        helpConfiguration.getIconState() == IconState.ERROR && !enableMainKey ? "icons/icon_exclamation-32px.png" : iconPath
+                )
                 .setLabel(helpConfiguration.getTooltipLabel())
                 .build();
-        if (helpConfiguration.isAutoDisabledInMissingContent()) {
+
+        if (helpConfiguration.getIconState() == IconState.DISABLED) {
             boolean enabled = false;
             try {
                 enabled = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
@@ -53,6 +66,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
             }
             component.setEnabled(enabled);
         }
+
         return component;
     }
 

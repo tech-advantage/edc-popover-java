@@ -1,6 +1,8 @@
 package fr.techad.edc.popover.internal.model;
 
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 
 import java.awt.*;
 
@@ -15,11 +17,12 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean summaryDisplay = false;
     private int backgroundColor;
     private boolean internalBrowser = true;
-    private boolean autoDisabled = true;
     private int widthBrowser = 1024;
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;
+    private IconState iconState = IconState.SHOWN;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -127,16 +130,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public boolean isAutoDisabledInMissingContent() {
-        return autoDisabled;
-    }
-
-    @Override
-    public void setAutoDisabledInMissingContent(boolean state) {
-        this.autoDisabled = state;
-    }
-
-    @Override
     public boolean isShowTitle() {
         return showTitle;
     }
@@ -145,4 +138,18 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
     }
+
+    @Override
+    public ErrorBehavior getErrorBehavior() {
+        return this.errorBehavior;
+    }
+
+    @Override
+    public void setErrorBehavior(ErrorBehavior errorBehavior) { this.errorBehavior = errorBehavior; }
+
+    @Override
+    public IconState getIconState() { return this.iconState; }
+
+    @Override
+    public void setIconState(IconState iconState) { this.iconState = iconState; }
 }

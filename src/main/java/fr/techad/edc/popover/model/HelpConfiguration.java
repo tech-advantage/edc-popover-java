@@ -161,16 +161,30 @@ public interface HelpConfiguration {
     void setInternalBrowser(boolean state);
 
     /**
-     * Return the mode
+     * Return the error behavior
      *
-     * @return true if the auto disabled mode is active
+     * @return error behavior
      */
-    boolean isAutoDisabledInMissingContent();
+    ErrorBehavior getErrorBehavior();
 
     /**
-     * Define the behavior to auto disabled the component if the content doesn't exist.
+     * Define the error behavior
      *
-     * @param state the state to defined
+     * @param errorBehavior
      */
-    void setAutoDisabledInMissingContent(boolean state);
+    void setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Return the icon state
+     *
+     * @return state
+     */
+    IconState getIconState();
+
+    /**
+     * Define the icon state
+     *
+     * @param state
+     */
+    void setIconState(IconState state);
 }

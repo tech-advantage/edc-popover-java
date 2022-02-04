@@ -5,6 +5,8 @@ import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,9 +92,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setLanguageCode(String languageCode) {
-        edcSwingHelp.setLanguageCode(languageCode);
-    }
+    public void setLanguageCode(String languageCode) { edcSwingHelp.setLanguageCode(languageCode); }
 
     @Override
     public void setTooltipLabel(String label) {
@@ -120,11 +120,6 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setAutoDisabledMode(boolean state) {
-        edcSwingHelp.setAutoDisabledMode(state);
-    }
-
-    @Override
     public void setTitleDisplay(boolean enable) {
         edcSwingHelp.setTitleDisplay(enable);
     }
@@ -132,6 +127,16 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public void setBrowserSize(int width, int height) {
         edcSwingHelp.setBrowserSize(width, height);
+    }
+
+    @Override
+    public void setErrorBehavior(ErrorBehavior errorBehavior) {
+        edcSwingHelp.setErrorBehavior(errorBehavior);
+    }
+
+    @Override
+    public void setIconState(IconState iconState) {
+        edcSwingHelp.setIconState(iconState);
     }
 
 }

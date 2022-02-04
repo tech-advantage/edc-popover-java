@@ -1,6 +1,10 @@
 package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
+import fr.techad.edc.client.model.InvalidUrlException;
+import fr.techad.edc.popover.model.ErrorBehavior;
+
+import java.io.IOException;
 
 /**
  * Builder to configure a contextual title component.
@@ -31,9 +35,25 @@ public interface ContextualTitleComponentBuilder<T> {
     ContextualTitleComponentBuilder<T> enableTitle(boolean showTitle);
 
     /**
+     * Define the error behavior
+     *
+     * @param errorBehavior
+     * @return the builder
+     */
+    ContextualTitleComponentBuilder<T> setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Define the language code
+     *
+     * @param languageCode
+     * @return the builder
+     */
+    ContextualTitleComponentBuilder<T> setLanguageCode(String languageCode);
+
+    /**
      * Build the contextual title component.
      *
      * @return the contextual component
      */
-    T build();
+    T build() throws InvalidUrlException, IOException;
 }

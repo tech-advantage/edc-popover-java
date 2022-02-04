@@ -1,5 +1,8 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
+
 /**
  * Define the base functionality to manage the help display.
  */
@@ -56,16 +59,23 @@ public interface EdcHelp {
     void setInternalBrowser(boolean state);
 
     /**
-     * Define the behavior : If true, the component will be disabled if the content is missing
-     *
-     * @param state the state to set
-     */
-    void setAutoDisabledMode(boolean state);
-
-    /**
      * Show the title if enabled
      *
      * @param enable true to enable the title display.
      */
     void setTitleDisplay(boolean enable);
+
+    /**
+     * Define the error behavior of popover use with Enum Type: ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER
+     *
+     * @param errorBehavior
+     */
+    void setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Define the icon state of popover use with Enum Type: ERROR, SHOWN, HIDDEN, DISABLED
+     *
+     * @param iconState
+     */
+    void setIconState(IconState iconState);
 }

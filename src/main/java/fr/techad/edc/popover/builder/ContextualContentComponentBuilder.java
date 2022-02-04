@@ -1,6 +1,8 @@
 package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
 
 /**
  * Builder to configure a contextual component.
@@ -22,6 +24,22 @@ public interface ContextualContentComponentBuilder<T> {
      * @return the builder
      */
     ContextualContentComponentBuilder<T> setBackgroundColor(int rgbColor);
+
+    /**
+     * Define the error behavior
+     *
+     * @param errorBehavior
+     * @return
+     */
+    ContextualContentComponentBuilder<T> setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Define the language code
+     *
+     * @param languageCode
+     * @return
+     */
+    ContextualContentComponentBuilder<T> setLanguageCode(String languageCode);
 
     /**
      * Build the contextual component.
