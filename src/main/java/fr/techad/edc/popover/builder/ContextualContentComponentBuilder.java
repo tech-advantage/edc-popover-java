@@ -1,7 +1,6 @@
 package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
-
 import java.awt.Color;
 import java.awt.Font;
 

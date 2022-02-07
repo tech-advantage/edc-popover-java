@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal;
 
 import fr.techad.edc.popover.EdcHelp;
+import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 
 import java.awt.Font;
@@ -39,13 +40,19 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setSummaryDisplay(boolean enable) {
-        helpConfiguration.setSummaryDisplay(enable);
+    public void setSummaryDisplay(boolean enable) { helpConfiguration.setSummaryDisplay(enable); }
+
+    @Override
+    public void setHoverDisplayPopover(boolean enable) { helpConfiguration.setHoverDisplayPopover(enable); }
+
+    @Override
+    public void setHelpViewer(HelpViewer state) {
+        helpConfiguration.setHelpViewer(state);
     }
 
     @Override
-    public void setInternalBrowser(boolean state) {
-        helpConfiguration.setInternalBrowser(state);
+    public void setViewerDesktopPath(String path) {
+        helpConfiguration.setViewerDesktopPath(path);
     }
 
     @Override
@@ -60,6 +67,9 @@ public class EdcHelpImpl implements EdcHelp {
 
     @Override
     public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
+
+    @Override
+    public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
 
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;

@@ -35,13 +35,15 @@ We will be able to configure the url to get the documentation and the widget pro
 | Language Code | ``setLanguageCode`` | en | The help language code |
 | Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
+| Hover display popover | ``setHoverDisplayPopover`` |false| Display the popover when the mouse is over it |
 | Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
+| Header title color | ``setHeaderTitleColor`` | BLACK | Color of the title in the header of the help dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
 | Font attributes | ``setPopoverSectionTitleFont`` | "Dialog", Font.BOLD, 12 | Font attributes of the popover section title |
 | Title color | ``setPopoverSectionTitleColor`` | BLACK | Color of the popover section title in the help dialog |
+| Font attributes | ``setFontAttributes`` | "Dialog", Font.BOLD, 20 | Font attributes of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
-| Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 | Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
 
 ### with Injection
@@ -74,7 +76,7 @@ public class Example {
     help.setSummaryDisplay(true);
     help.setBackgroundColor(Color.BLUE);
     help.setCloseIconPath("popover/close2.png");
-    help.setInternalBrowser(false);
+    help.setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
     help.setBrowserSize(1600, 900);
   }
 }
@@ -99,6 +101,14 @@ EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
 EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
 EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
+```
+
+#### Config desktop viewer path
+
+If you want to use the desktop viewer, you should define the path
+```
+EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
+EdcSwingHelpSingleton.getInstance().setViewerDesktopPath("Define the path here");
 ```
 
 ## Add the contextual button
@@ -204,8 +214,10 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
-        EdcSwingHelpSingleton.getInstance().setInternalBrowser(true);
+        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
+        EdcSwingHelpSingleton.getInstance().setFontAttributes(new Font("Dialog", Font.BOLD, 20));
+        EdcSwingHelpSingleton.getInstance().setHeaderTitleColor(Color.BLUE);
         
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
