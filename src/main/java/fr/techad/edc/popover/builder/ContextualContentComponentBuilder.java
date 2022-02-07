@@ -4,6 +4,7 @@ import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
 
+
 /**
  * Builder to configure a contextual component.
  */

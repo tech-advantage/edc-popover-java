@@ -80,12 +80,14 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if(helpConfiguration.isHoverDisplayPopover()) {
+            openPopover(e.getXOnScreen(), e.getYOnScreen());
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        popover.setVisible(false);
     }
 
     private void openBrowser() {
@@ -113,11 +115,15 @@ public class IconButtonListener implements HelpListener {
                         .setErrorBehavior(helpConfiguration.getErrorBehavior())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .build();
+            if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
+                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .enableTitle(helpConfiguration.isShowTitle())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
+                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
+                        .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
                         .build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
 

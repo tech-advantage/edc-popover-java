@@ -2,6 +2,9 @@ package fr.techad.edc.popover;
 
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
+import fr.techad.edc.popover.model.HelpViewer;
+import java.awt.Font;
+
 
 /**
  * Define the base functionality to manage the help display.
@@ -52,11 +55,26 @@ public interface EdcHelp {
     void setSummaryDisplay(boolean enable);
 
     /**
-     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     * Active or deactivate the popover display when the mouse is over it.
      *
-     * @param state true to use the internal brower
+     * @param enable
      */
-    void setInternalBrowser(boolean state);
+    void setHoverDisplayPopover(boolean enable);
+
+    /**
+     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     * Define the browser to use with Enum Type: DESKTOP_VIEWER, INTERNAL_BROWSER, BROWSER
+     *
+     * @param viewer
+     */
+    void setHelpViewer(HelpViewer viewer);
+
+    /**
+     * Define the path of the executable location
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
 
     /**
      * Show the title if enabled
@@ -78,4 +96,15 @@ public interface EdcHelp {
      * @param iconState
      */
     void setIconState(IconState iconState);
+
+  
+    void setTitleDisplay(boolean enable);
+
+
+    /**
+     * Define the font attributes of the header title
+     *
+     * @param fontAttributes
+     */
+    void setHeaderFontAttributes(Font fontAttributes);
 }
