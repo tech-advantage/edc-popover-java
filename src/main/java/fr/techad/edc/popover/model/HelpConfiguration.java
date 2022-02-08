@@ -1,5 +1,8 @@
 package fr.techad.edc.popover.model;
 
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  * Define the help configuration
  */
@@ -105,6 +108,20 @@ public interface HelpConfiguration {
     void setSummaryDisplay(boolean enabled);
 
     /**
+     * Return the status for the popover display.
+     *
+     * @return the state
+     */
+    boolean isHoverDisplayPopover();
+
+    /**
+     * If true, the popover will be displayed when the mouse is hover it
+     *
+     * @param enabled the new state to set
+     */
+    void setHoverDisplayPopover(boolean enabled);
+
+    /**
      * Return true if the title is shown in the component
      *
      * @return true if visible
@@ -168,11 +185,33 @@ public interface HelpConfiguration {
     boolean isInternalBrowser();
 
     /**
-     * Define the browser to use : true to use the internal browser, false to use the system browser.
+     * Return the selected viewer type between : SYSTEM_BROWSER, EDC_DESKTOP_VIEWER and EMBEDDED_VIEWER
      *
-     * @param state true to use the internal browser
+     * @return Enum for the viewer selected
      */
-    void setInternalBrowser(boolean state);
+    HelpViewer getHelpViewer();
+
+    /**
+     * Define the selected viewer type to display documentation
+     *
+     * @param viewer the viewer type to set
+     */
+    void setHelpViewer(HelpViewer viewer);
+
+
+    /**
+     * Define the path to the location of the application executable
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
+
+    /**
+     * Return the path of the executable
+     *
+     * @return the path
+     */
+    String getViewerDesktopPath();
 
     /**
      * Return the mode
@@ -187,4 +226,32 @@ public interface HelpConfiguration {
      * @param state the state to defined
      */
     void setAutoDisabledInMissingContent(boolean state);
+
+    /**
+     * Return the font attributes of the header title
+     *
+     * @return the fonts attributes
+     */
+    Font getHeaderFontAttributes();
+
+    /**
+     * Define the fonts attributes for the header title
+     *
+     * @param fontAttributes
+     */
+    void setHeaderFontAttributes(Font fontAttributes);
+
+    /**
+     * Return the header title color
+     *
+     * @return the header title color
+     */
+    Color getHeaderTitleColor();
+
+    /**
+     * Define the foreground color for the header title
+     *
+     * @param titleColor
+     */
+    void setHeaderTitleColor(Color titleColor);
 }

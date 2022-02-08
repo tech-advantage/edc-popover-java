@@ -2,6 +2,7 @@ package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
 
+
 /**
  * Builder to configure a contextual component.
  */
