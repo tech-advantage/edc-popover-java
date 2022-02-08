@@ -2,8 +2,10 @@ package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.model.PopoverPlacement;
+import fr.techad.edc.popover.model.HelpViewer;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
 
 /**
  * Help Configuration implementation
@@ -14,6 +16,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private String languageCode = "en";
     private String tooltipLabel = null;
     private boolean summaryDisplay = false;
+    private boolean popoverDisplay = false;
     private int backgroundColor;
     private boolean internalBrowser = true;
     private boolean autoDisabled = true;
@@ -22,6 +25,10 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int underlineColor;
     private boolean showTitle = true;
     private PopoverPlacement popoverPlacement;
+    private HelpViewer helpViewer;
+    private String desktopViewerPath = "";
+    private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
+    private Color titleColor = Color.BLACK;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -99,6 +106,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
+    public boolean isHoverDisplayPopover() {
+        return this.popoverDisplay;
+    }
+
+    @Override
+    public void setHoverDisplayPopover(boolean enabled) {
+        this.popoverDisplay = enabled;
+    }
+
+    @Override
     public int getBackgroundColor() {
         return this.backgroundColor;
     }
@@ -124,8 +141,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public void setInternalBrowser(boolean state) {
-        this.internalBrowser = state;
+    public HelpViewer getHelpViewer(){
+        return this.helpViewer;
     }
 
     @Override
@@ -140,6 +157,15 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setPopoverPlacement(PopoverPlacement placement) {
         this.popoverPlacement = placement;
     }
+    
+    @Override
+    public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
+
+    @Override
+    public void setViewerDesktopPath(String desktopViewerPath) { this.desktopViewerPath = desktopViewerPath; }
+
+    @Override
+    public String getViewerDesktopPath() { return this.desktopViewerPath; }
 
     @Override
     public boolean isAutoDisabledInMissingContent() {
@@ -160,4 +186,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
     }
+
+    @Override
+    public Font getHeaderFontAttributes() { return headerFontAttributes; }
+
+    @Override
+    public void setHeaderFontAttributes(Font fontAttributes) { this.headerFontAttributes = fontAttributes; }
+
+    @Override
+    public Color getHeaderTitleColor() { return titleColor; }
+
+    @Override
+    public void setHeaderTitleColor(Color titleColor) { this.titleColor = titleColor; }
 }
