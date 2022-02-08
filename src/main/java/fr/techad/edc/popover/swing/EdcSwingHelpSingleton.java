@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
+import fr.techad.edc.popover.model.HelpViewer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -105,6 +106,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setHoverDisplayPopover(boolean enable) {
+        edcSwingHelp.setHoverDisplayPopover(enable);
+    }
+
+    @Override
     public void setBackgroundColor(Color backgroundColor) {
         edcSwingHelp.setBackgroundColor(backgroundColor);
     }
@@ -115,9 +121,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setInternalBrowser(boolean state) {
-        edcSwingHelp.setInternalBrowser(state);
+    public void setHelpViewer(HelpViewer viewer) {
+        edcSwingHelp.setHelpViewer(viewer);
     }
+
+    @Override
+    public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
     public void setAutoDisabledMode(boolean state) {
@@ -130,6 +139,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setHeaderFontAttributes(Font fontAttributes) { edcSwingHelp.setHeaderFontAttributes(fontAttributes); }
+
+    @Override
+    public void setHeaderTitleColor(Color titleColor) { edcSwingHelp.setHeaderTitleColor(titleColor); }
+
+    @Override
     public void setBrowserSize(int width, int height) {
         edcSwingHelp.setBrowserSize(width, height);
     }
@@ -138,5 +153,4 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setTooltipDisplay(boolean enable) {
         edcSwingHelp.setTooltipDisplay(enable);
     }
-
 }

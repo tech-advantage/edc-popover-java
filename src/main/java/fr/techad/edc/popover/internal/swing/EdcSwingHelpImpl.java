@@ -82,9 +82,20 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
+    public void setHeaderFontAttributes(Font fontAttributes) {
+        getHelpConfiguration().setHeaderFontAttributes(fontAttributes);
+    }
+
+
+    @Override
     public void setBrowserSize(int width, int height) {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         helpConfiguration.setWidthBrowser(width);
         helpConfiguration.setHeightBrowser(height);
+    }
+
+    @Override
+    public void setHeaderTitleColor(Color titleColor) {
+        getHelpConfiguration().setHeaderTitleColor(titleColor);
     }
 }
