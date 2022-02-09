@@ -5,6 +5,7 @@ import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.model.PopoverPlacement;
 
+import java.awt.Font;
 import javax.inject.Inject;
 import java.awt.Font;
 
@@ -82,6 +83,15 @@ public class EdcHelpImpl implements EdcHelp {
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }
+
+    @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        helpConfiguration.setShowRelatedTopics(enable);
+    }
+    
+    @Override
+    public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
+
 
     @Override
     public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }

@@ -136,6 +136,19 @@ public interface HelpConfiguration {
     void setShowTitle(boolean showTitle);
 
     /**
+     * Return true if the related topics are shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowRelatedTopics();
+
+    /**
+     * Set the visibility of the related topics
+     *
+     * @param showRelatedTopics the visibility status to set
+     */
+    void setShowRelatedTopics(boolean showRelatedTopics);
+  
      * Return true if the article is shown in the component
      *
      * @return true if visible
@@ -270,6 +283,33 @@ public interface HelpConfiguration {
     void setAutoDisabledInMissingContent(boolean state);
 
     /**
+     * Return the font attributes of the popover section title
+     *
+     * @return the font attributes
+     */
+    Font getPopoverSectionTitleFont();
+
+    /**
+     * Define font attributes for the popover section title
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
+    /**
+     * Return the popover section title color
+     *
+     * @return the color
+     */
+    Color getPopoverSectionTitleColor();
+
+    /**
+     * Define the popover section title color
+     *
+     * @param popoverTitleColor
+     */
+    void setPopoverSectionTitleColor(Color popoverTitleColor);
+
      * Return the font attributes of the header title
      *
      * @return the fonts attributes
