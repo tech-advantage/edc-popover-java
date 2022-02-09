@@ -26,6 +26,13 @@ public interface ContextualContentComponentBuilder<T> {
     ContextualContentComponentBuilder<T> setBackgroundColor(int rgbColor);
 
     /**
+     * Enable the related topics display
+     *
+     * @param enable
+     * @return true if is related topics enabled
+     */
+    ContextualContentComponentBuilder<T> enableRelatedTopics(boolean enable);
+
      * Define the article title color
      *
      * @param titleColor

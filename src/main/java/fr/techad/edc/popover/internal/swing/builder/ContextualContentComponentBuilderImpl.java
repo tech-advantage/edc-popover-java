@@ -29,6 +29,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private boolean enableRelatedTopics = true;
     private Color popoverSectionTitleColor = Color.BLACK;
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
     private boolean enableArticle = true;
@@ -54,6 +55,12 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         return this;
     }
 
+    @Override
+    public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
+        this.enableRelatedTopics = enable;
+        LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
+    }
+  
     @Override
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleFont(Font fontAttr) {
         this.popoverSectionTitleFont = fontAttr;
@@ -132,7 +139,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 body.add(articlePanel, BorderLayout.NORTH);
             }
             LOGGER.debug("link size: {}", contextItem.linkSize());
-            if (contextItem.linkSize() != 0) {
+            if (this.enableRelatedTopics && contextItem.linkSize() != 0) {
                 JPanel linkPanel = new JPanel();
                 linkPanel.setLayout(new BorderLayout());
                 linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));

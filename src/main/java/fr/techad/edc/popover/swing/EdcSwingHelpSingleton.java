@@ -168,6 +168,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        edcSwingHelp.setRelatedTopicsDisplay(enable);
+    }
+  
+    @Override
     public void setArticleDisplay(boolean enable) {
         edcSwingHelp.setArticleDisplay(enable);
     }

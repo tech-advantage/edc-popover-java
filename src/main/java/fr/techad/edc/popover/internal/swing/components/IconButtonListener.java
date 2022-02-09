@@ -102,6 +102,7 @@ public class IconButtonListener implements HelpListener {
         try {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
+                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableRelatedTopics(helpConfiguration.isShowRelatedTopics()).build();
                 JComponent jBodyComponent = contextualContentComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())

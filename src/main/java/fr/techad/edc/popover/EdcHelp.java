@@ -103,6 +103,12 @@ public interface EdcHelp {
     void setTitleDisplay(boolean enable);
 
     /**
+     * Show the related topics if enabled
+     *
+     * @param enable true to enable the related topics display.
+     */
+    void setRelatedTopicsDisplay(boolean enable);
+
      * Define the fonts attributes of the popover section title
      *
      * @param fontAttr

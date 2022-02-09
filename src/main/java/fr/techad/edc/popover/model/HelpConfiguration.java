@@ -136,6 +136,19 @@ public interface HelpConfiguration {
     void setShowTitle(boolean showTitle);
 
     /**
+     * Return true if the related topics are shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowRelatedTopics();
+
+    /**
+     * Set the visibility of the related topics
+     *
+     * @param showRelatedTopics the visibility status to set
+     */
+    void setShowRelatedTopics(boolean showRelatedTopics);
+  
      * Return true if the article is shown in the component
      *
      * @return true if visible

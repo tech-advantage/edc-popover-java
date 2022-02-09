@@ -81,7 +81,13 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        helpConfiguration.setShowRelatedTopics(enable);
+    }
+    
+    @Override
     public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
+
 
     @Override
     public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
