@@ -30,6 +30,9 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
     private boolean enableRelatedTopics = true;
+    private Color popoverSectionTitleColor = Color.BLACK;
+    private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
+    private boolean enableArticle = true;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -56,6 +59,25 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
         this.enableRelatedTopics = enable;
         LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
+    }
+  
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleFont(Font fontAttr) {
+        this.popoverSectionTitleFont = fontAttr;
+        LOGGER.debug("Set popover section title font attributes: {}", this.popoverSectionTitleFont);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
+        this.popoverSectionTitleColor = titleColor;
+        LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
+    }
+  
+    @Override
+    public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
+        this.enableArticle = enable;
+        LOGGER.debug("Set article display: {}", this.enableArticle);
         return this;
     }
 
@@ -99,14 +121,14 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         body.setBackground(this.backgroundColor);
         if (contextItem != null) {
             LOGGER.debug("article size: {}", contextItem.articleSize());
-            if (contextItem.articleSize() != 0) {
+            if (this.enableArticle && contextItem.articleSize() != 0) {
                 JPanel articlePanel = new JPanel();
                 articlePanel.setBackground(this.backgroundColor);
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
                 articlePanel.setBorder(BorderFactory.createEmptyBorder(18, 0, 0, 0));
                 JLabel title = new JLabel(getLabel(TranslationConstants.ARTICLES_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
-                Font f = title.getFont();
-                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                title.setForeground(popoverSectionTitleColor);
+                title.setFont(popoverSectionTitleFont);
                 articlePanel.add(title, BorderLayout.NORTH);
                 int i = 0;
                 for (DocumentationItem documentationItem : contextItem.getArticles()) {
@@ -123,8 +145,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
                 linkPanel.setBackground(this.backgroundColor);
                 JLabel title = new JLabel(getLabel(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
-                Font f = title.getFont();
-                title.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+                title.setForeground(popoverSectionTitleColor);
+                title.setFont(popoverSectionTitleFont);
                 linkPanel.add(title, BorderLayout.NORTH);
                 JPanel linkContentPanel = new JPanel();
                 linkContentPanel.setLayout(new BoxLayout(linkContentPanel, BoxLayout.Y_AXIS));

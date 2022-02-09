@@ -148,6 +148,19 @@ public interface HelpConfiguration {
      * @param showRelatedTopics the visibility status to set
      */
     void setShowRelatedTopics(boolean showRelatedTopics);
+  
+     * Return true if the article is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowArticle();
+
+    /**
+     * Set the visibility of the article
+     *
+     * @param showArticle the visibility status to set
+     */
+    void setShowArticle(boolean showArticle);
 
     /**
      * Return the background color
@@ -162,6 +175,20 @@ public interface HelpConfiguration {
      * @param backgroundColor the color to set
      */
     void setBackgroundColor(int backgroundColor);
+
+    /**
+     * Return true if the separator is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowSeparator();
+
+    /**
+     * Set the visibility of the separator
+     *
+     * @param showSeparator the visibility status to set
+     */
+    void setShowSeparator(boolean showSeparator);
 
     /**
      * Return the underline color
@@ -214,6 +241,20 @@ public interface HelpConfiguration {
     String getViewerDesktopPath();
 
     /**
+     * Return the enum placement
+     *
+     * @return Enum
+     */
+    PopoverPlacement getPopoverPlacement();
+
+    /**
+     * Define the placement of popover
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
+
+    /**
      * Return the mode
      *
      * @return true if the auto disabled mode is active
@@ -228,6 +269,33 @@ public interface HelpConfiguration {
     void setAutoDisabledInMissingContent(boolean state);
 
     /**
+     * Return the font attributes of the popover section title
+     *
+     * @return the font attributes
+     */
+    Font getPopoverSectionTitleFont();
+
+    /**
+     * Define font attributes for the popover section title
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
+    /**
+     * Return the popover section title color
+     *
+     * @return the color
+     */
+    Color getPopoverSectionTitleColor();
+
+    /**
+     * Define the popover section title color
+     *
+     * @param popoverTitleColor
+     */
+    void setPopoverSectionTitleColor(Color popoverTitleColor);
+
      * Return the font attributes of the header title
      *
      * @return the fonts attributes

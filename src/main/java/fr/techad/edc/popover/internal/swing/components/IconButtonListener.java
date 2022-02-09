@@ -103,6 +103,13 @@ public class IconButtonListener implements HelpListener {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
                 JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableRelatedTopics(helpConfiguration.isShowRelatedTopics()).build();
+                JComponent jBodyComponent = contextualContentComponentBuilder
+                        .setContextItem(contextItem)
+                        .setBackgroundColor(helpConfiguration.getBackgroundColor())
+                        .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
+                        .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
+                        .build();
+                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableArticle(helpConfiguration.isShowArticle()).build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
                 JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder
@@ -114,7 +121,12 @@ public class IconButtonListener implements HelpListener {
                         .build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
                 popover.setContentBackground(bgColor);
+                popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
                 popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
+                if(helpConfiguration.isShowSeparator()) {
+                    popover.addSeparator();
+                    popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
+                }
                 popover.clear();
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);

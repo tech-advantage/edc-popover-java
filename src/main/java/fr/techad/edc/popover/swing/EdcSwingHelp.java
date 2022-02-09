@@ -54,6 +54,12 @@ public interface EdcSwingHelp extends EdcHelp {
     void setSeparatorColor(Color separatorColor);
 
     /**
+     * Define the font attributes of the popover section
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
      * Define the fonts attributes
      *
      * @param fontAttributes
@@ -69,6 +75,12 @@ public interface EdcSwingHelp extends EdcHelp {
     void setBrowserSize(int width, int height);
 
     /**
+     * Define the popover section title color
+     *
+     * @param titleColor
+     */
+    void setPopoverSectionTitleColor(Color titleColor);
+
      * Define the header title color for the component
      *
      * @param titleColor
