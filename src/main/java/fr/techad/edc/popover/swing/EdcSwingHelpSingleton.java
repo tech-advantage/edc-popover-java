@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
 import javax.swing.*;
@@ -125,6 +126,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
         edcSwingHelp.setHelpViewer(viewer);
     }
 
+    @Override
+    public void setPopoverPlacement(PopoverPlacement popoverPlacement) { edcSwingHelp.setPopoverPlacement(popoverPlacement); }
+    
     @Override
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 

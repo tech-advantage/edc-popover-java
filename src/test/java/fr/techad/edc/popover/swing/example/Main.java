@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;

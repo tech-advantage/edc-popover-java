@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
 import java.awt.Font;
@@ -23,6 +24,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private PopoverPlacement popoverPlacement;
     private boolean showSeparator = true;
     private HelpViewer helpViewer;
     private String desktopViewerPath = "";
@@ -144,6 +146,19 @@ public class HelpConfigurationImpl implements HelpConfiguration {
         return this.helpViewer;
     }
 
+    @Override
+    public PopoverPlacement getPopoverPlacement() {
+        if(this.popoverPlacement == null) {
+            this.popoverPlacement = popoverPlacement.BOTTOM;
+        }
+        return this.popoverPlacement;
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        this.popoverPlacement = placement;
+    }
+    
     @Override
     public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
 

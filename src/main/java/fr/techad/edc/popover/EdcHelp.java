@@ -1,5 +1,6 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import java.awt.Font;
 
@@ -72,6 +73,13 @@ public interface EdcHelp {
      * @param path to executable
      */
     void setViewerDesktopPath(String path);
+
+    /**
+     * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
 
     /**
      * Define the behavior : If true, the component will be disabled if the content is missing

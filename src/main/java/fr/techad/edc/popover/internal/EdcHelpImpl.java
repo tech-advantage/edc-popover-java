@@ -3,6 +3,7 @@ package fr.techad.edc.popover.internal;
 import fr.techad.edc.popover.EdcHelp;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.PopoverPlacement;
 
 import javax.inject.Inject;
 import java.awt.Font;
@@ -52,6 +53,11 @@ public class EdcHelpImpl implements EdcHelp {
     @Override
     public void setViewerDesktopPath(String path) {
         helpConfiguration.setViewerDesktopPath(path);
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        helpConfiguration.setPopoverPlacement(placement);
     }
 
     @Override
