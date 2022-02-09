@@ -25,6 +25,14 @@ public interface ContextualContentComponentBuilder<T> {
     ContextualContentComponentBuilder<T> setBackgroundColor(int rgbColor);
 
     /**
+     * Enable the article display
+     *
+     * @param enable
+     * @return true if is article enabled
+     */
+    ContextualContentComponentBuilder<T> enableArticle(boolean enable);
+
+    /**
      * Build the contextual component.
      *
      * @return the contextual component

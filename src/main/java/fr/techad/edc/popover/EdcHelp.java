@@ -1,5 +1,6 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import java.awt.Font;
 
@@ -74,6 +75,13 @@ public interface EdcHelp {
     void setViewerDesktopPath(String path);
 
     /**
+     * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
+
+    /**
      * Define the behavior : If true, the component will be disabled if the content is missing
      *
      * @param state the state to set
@@ -87,6 +95,12 @@ public interface EdcHelp {
      */
     void setTooltipDisplay(boolean enable);
 
+     * Show the separator if enabled
+     *
+     * @param enable true to enable the separator display.
+     */
+    void setSeparatorDisplay(boolean enable);
+
     /**
      * Show the title if enabled
      *
@@ -94,6 +108,12 @@ public interface EdcHelp {
      */
     void setTitleDisplay(boolean enable);
 
+    /**
+     * Show the article if enabled
+     *
+     * @param enable true to enable the article display.
+     */
+    void setArticleDisplay(boolean enable);
 
     /**
      * Define the font attributes of the header title

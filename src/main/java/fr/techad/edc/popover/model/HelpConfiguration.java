@@ -136,6 +136,20 @@ public interface HelpConfiguration {
     void setShowTitle(boolean showTitle);
 
     /**
+     * Return true if the article is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowArticle();
+
+    /**
+     * Set the visibility of the article
+     *
+     * @param showArticle the visibility status to set
+     */
+    void setShowArticle(boolean showArticle);
+
+    /**
      * Return the background color
      *
      * @return the background color
@@ -148,6 +162,20 @@ public interface HelpConfiguration {
      * @param backgroundColor the color to set
      */
     void setBackgroundColor(int backgroundColor);
+
+    /**
+     * Return true if the separator is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowSeparator();
+
+    /**
+     * Set the visibility of the separator
+     *
+     * @param showSeparator the visibility status to set
+     */
+    void setShowSeparator(boolean showSeparator);
 
     /**
      * Return the underline color
@@ -198,6 +226,20 @@ public interface HelpConfiguration {
      * @return the path
      */
     String getViewerDesktopPath();
+
+    /**
+     * Return the enum placement
+     *
+     * @return Enum
+     */
+    PopoverPlacement getPopoverPlacement();
+
+    /**
+     * Define the placement of popover
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
 
     /**
      * Return the mode
