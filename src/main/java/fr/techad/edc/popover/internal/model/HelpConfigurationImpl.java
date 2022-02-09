@@ -24,6 +24,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
+    private Color popoverSectionTitleColor = Color.BLACK;
     private boolean showArticle = true;
     private PopoverPlacement popoverPlacement;
     private boolean showSeparator = true;
@@ -196,6 +198,22 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
+    public Font getPopoverSectionTitleFont() { return popoverSectionTitleFont; }
+
+    @Override
+    public void setPopoverSectionTitleFont(Font fontAttr) { this.popoverSectionTitleFont = fontAttr; }
+
+    @Override
+    public Color getPopoverSectionTitleColor() {
+        return popoverSectionTitleColor;
+    }
+
+    @Override
+    public void setPopoverSectionTitleColor(Color titleColor) {
+        this.popoverSectionTitleColor = titleColor;
+    }
+
+    @Override
     public boolean isShowArticle() {
         return showArticle;
     }
@@ -205,6 +223,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
         this.showArticle = showArticle;
     }
 
+    @Override
     public Font getHeaderFontAttributes() { return headerFontAttributes; }
 
     @Override

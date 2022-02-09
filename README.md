@@ -41,6 +41,8 @@ We will be able to configure the url to get the documentation and the widget pro
 | Header title color | ``setHeaderTitleColor`` | BLACK | Color of the title in the header of the help dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
+| Font attributes | ``setPopoverSectionTitleFont`` | "Dialog", Font.BOLD, 12 | Font attributes of the popover section title |
+| Title color | ``setPopoverSectionTitleColor`` | BLACK | Color of the popover section title in the help dialog |
 | Font attributes | ``setFontAttributes`` | "Dialog", Font.BOLD, 20 | Font attributes of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Popover placement | ``setPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |

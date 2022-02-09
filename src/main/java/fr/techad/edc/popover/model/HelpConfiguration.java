@@ -256,6 +256,33 @@ public interface HelpConfiguration {
     void setAutoDisabledInMissingContent(boolean state);
 
     /**
+     * Return the font attributes of the popover section title
+     *
+     * @return the font attributes
+     */
+    Font getPopoverSectionTitleFont();
+
+    /**
+     * Define font attributes for the popover section title
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
+    /**
+     * Return the popover section title color
+     *
+     * @return the color
+     */
+    Color getPopoverSectionTitleColor();
+
+    /**
+     * Define the popover section title color
+     *
+     * @param popoverTitleColor
+     */
+    void setPopoverSectionTitleColor(Color popoverTitleColor);
+
      * Return the font attributes of the header title
      *
      * @return the fonts attributes
