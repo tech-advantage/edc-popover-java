@@ -114,6 +114,10 @@ public class IconButtonListener implements HelpListener {
                 popover.setContentBackground(bgColor);
                 popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
                 popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
+                if(helpConfiguration.isShowSeparator()) {
+                    popover.addSeparator();
+                    popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
+                }
                 popover.clear();
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);

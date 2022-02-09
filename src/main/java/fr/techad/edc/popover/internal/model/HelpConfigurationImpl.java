@@ -25,6 +25,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int underlineColor;
     private boolean showTitle = true;
     private PopoverPlacement popoverPlacement;
+    private boolean showSeparator = true;
     private HelpViewer helpViewer;
     private String desktopViewerPath = "";
     private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
@@ -178,11 +179,17 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public boolean isShowTitle() {
-        return showTitle;
-    }
+    public boolean isShowSeparator() { return showSeparator; }
 
     @Override
+    public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
+
+    @Override
+    public boolean isShowTitle() { return showTitle; }
+
+    @Override
+    public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
+  
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
     }

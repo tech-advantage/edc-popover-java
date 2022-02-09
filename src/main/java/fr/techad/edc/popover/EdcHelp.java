@@ -89,6 +89,13 @@ public interface EdcHelp {
     void setAutoDisabledMode(boolean state);
 
     /**
+     * Show the separator if enabled
+     *
+     * @param enable true to enable the separator display.
+     */
+    void setSeparatorDisplay(boolean enable);
+
+    /**
      * Show the title if enabled
      *
      * @param enable true to enable the title display.
