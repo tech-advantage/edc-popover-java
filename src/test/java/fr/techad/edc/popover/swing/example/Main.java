@@ -54,7 +54,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
-
+        EdcSwingHelpSingleton.getInstance().setSeparatorDisplay(true);
         /* Main wndow */
         JFrame f = new JFrame();
         f.setLayout(new BorderLayout());

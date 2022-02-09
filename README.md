@@ -37,6 +37,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Summary Help | ``setSummaryDisplay`` |false| Display the help summary dialog |
 | Hover display popover | ``setHoverDisplayPopover`` |false| Display the popover when the mouse is over it |
 | Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
+| Separator | ``setSeparatorDisplay`` | true | Display the separator in the help header |
 | Header title color | ``setHeaderTitleColor`` | BLACK | Color of the title in the header of the help dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
