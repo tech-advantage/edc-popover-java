@@ -2,6 +2,7 @@ package fr.techad.edc.popover;
 
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import java.awt.Font;
 
@@ -78,6 +79,14 @@ public interface EdcHelp {
 
     /**
      * Show the title if enabled
+     * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
+
+    /**
+     * Define the behavior : If true, the component will be disabled if the content is missing
      *
      * @param enable true to enable the title display.
      */
@@ -85,6 +94,14 @@ public interface EdcHelp {
 
     /**
      * Define the error behavior of popover use with Enum Type: ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER
+     * Show the separator if enabled
+     *
+     * @param enable true to enable the separator display.
+     */
+    void setSeparatorDisplay(boolean enable);
+
+    /**
+     * Show the title if enabled
      *
      * @param errorBehavior
      */
@@ -100,6 +117,24 @@ public interface EdcHelp {
   
     void setTitleDisplay(boolean enable);
 
+    /**
+     * Show the related topics if enabled
+     *
+     * @param enable true to enable the related topics display.
+     */
+    void setRelatedTopicsDisplay(boolean enable);
+
+     * Define the fonts attributes of the popover section title
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
+     * Show the article if enabled
+     *
+     * @param enable true to enable the article display.
+     */
+    void setArticleDisplay(boolean enable);
 
     /**
      * Define the font attributes of the header title

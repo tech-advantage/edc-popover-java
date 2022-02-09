@@ -7,6 +7,7 @@ import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
 import javax.swing.*;
@@ -126,6 +127,9 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setPopoverPlacement(PopoverPlacement popoverPlacement) { edcSwingHelp.setPopoverPlacement(popoverPlacement); }
+    
+    @Override
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
@@ -134,10 +138,24 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setSeparatorDisplay(boolean state) {
+        edcSwingHelp.setSeparatorDisplay(state);
+    }
+
+    @Override
     public void setTitleDisplay(boolean enable) {
         edcSwingHelp.setTitleDisplay(enable);
     }
 
+    @Override
+    public void setBrowserSize(int width, int height) { edcSwingHelp.setBrowserSize(width, height); }
+
+    @Override
+    public void setPopoverSectionTitleFont(Font fontAttr) { edcSwingHelp.setPopoverSectionTitleFont(fontAttr); }
+
+    @Override
+    public void setPopoverSectionTitleColor(Color titleColor) { edcSwingHelp.setPopoverSectionTitleColor(titleColor); }
+    
     @Override
     public void setHeaderFontAttributes(Font fontAttributes) { edcSwingHelp.setHeaderFontAttributes(fontAttributes); }
 
@@ -157,5 +175,15 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public void setIconState(IconState iconState) {
         edcSwingHelp.setIconState(iconState);
+    }
+  
+    @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        edcSwingHelp.setRelatedTopicsDisplay(enable);
+    }
+  
+    @Override
+    public void setArticleDisplay(boolean enable) {
+        edcSwingHelp.setArticleDisplay(enable);
     }
 }

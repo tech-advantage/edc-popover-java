@@ -3,6 +3,7 @@ package fr.techad.edc.popover.internal.model;
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.model.IconState;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
 
@@ -27,6 +28,12 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean showTitle = true;
     private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;
     private IconState iconState = IconState.SHOWN;
+    private boolean showRelatedTopics = true;
+    private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
+    private Color popoverSectionTitleColor = Color.BLACK;
+    private boolean showArticle = true;
+    private PopoverPlacement popoverPlacement;
+    private boolean showSeparator = true;
     private HelpViewer helpViewer;
     private String desktopViewerPath = "";
     private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
@@ -152,6 +159,20 @@ public class HelpConfigurationImpl implements HelpConfiguration {
         return showTitle;
     }
   
+    @Override
+    public PopoverPlacement getPopoverPlacement() {
+        if(this.popoverPlacement == null) {
+            this.popoverPlacement = popoverPlacement.BOTTOM;
+        }
+        return this.popoverPlacement;
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        this.popoverPlacement = placement;
+    }
+    
+    @Override
     public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
 
     @Override
@@ -184,8 +205,57 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setIconState(IconState iconState) { this.iconState = iconState; }
 
+    @Override
+    public boolean isShowSeparator() { return showSeparator; }
+
+    @Override
+    public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
+
+    @Override
+    public boolean isShowTitle() { return showTitle; }
+
+    @Override
+    public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
+  
+    @Override
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
+    }
+
+    @Override
+    public boolean isShowRelatedTopics() {
+        return showRelatedTopics;
+    }
+
+    @Override
+    public void setShowRelatedTopics(boolean showRelatedTopics) {
+        this.showRelatedTopics = showRelatedTopics;
+    }
+    
+    @Override
+    public Font getPopoverSectionTitleFont() { return popoverSectionTitleFont; }
+
+    @Override
+    public void setPopoverSectionTitleFont(Font fontAttr) { this.popoverSectionTitleFont = fontAttr; }
+
+    @Override
+    public Color getPopoverSectionTitleColor() {
+        return popoverSectionTitleColor;
+    }
+
+    @Override
+    public void setPopoverSectionTitleColor(Color titleColor) {
+        this.popoverSectionTitleColor = titleColor;
+    }
+
+    @Override
+    public boolean isShowArticle() {
+        return showArticle;
+    }
+
+    @Override
+    public void setShowArticle(boolean showArticle) {
+        this.showArticle = showArticle;
     }
 
     @Override

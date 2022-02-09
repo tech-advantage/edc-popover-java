@@ -1,8 +1,10 @@
 package fr.techad.edc.popover.internal.swing.components;
 
 import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -29,12 +31,20 @@ public class Popover extends JFrame {
     private int direction;
     private int closablePosition;
     private String iconPath = "popover/close1.png";
+    private PopoverPlacement popoverPlacement;
 
     /**
      * Creates a new popover in the vertical direction (pad the popover on X Axis)
      */
+    @Inject
     public Popover() {
         this(VERTICAL);
+    }
+
+    public void addSeparator(){
+        this.headerSeparator = new JSeparator();
+        headerSeparator.setForeground(Color.BLACK);
+        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
     }
 
     /**
@@ -62,6 +72,7 @@ public class Popover extends JFrame {
         headerSeparator = new JSeparator();
         this.headerPanel = new JPanel(new BorderLayout());
         this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
+
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
 
         // Body Panel (contains the brick information)
@@ -168,6 +179,15 @@ public class Popover extends JFrame {
         this.closablePosition = closePosition;
     }
 
+    /**
+     * Set popover placement
+     *
+     * @param placement
+     */
+    public void setPopoverPlacement(PopoverPlacement placement){
+        this.popoverPlacement = placement;
+    }
+
     @Override
     public void setLocation(int x, int y) {
         LOGGER.debug("actual location: {}", getLocation());
@@ -189,25 +209,54 @@ public class Popover extends JFrame {
         boolean reverseX = false;
         boolean reverseY = false;
 
+
         if (direction == HORIZONTAL)
             padY = 5;
         else
             padX = 5;
 
         LOGGER.debug("full width: {}", x + width + padX);
-        if (x + width + padX > widthDisplay) {
-            newX = x - width;
-            reverseX = true;
-            LOGGER.debug("Reverse width, newX: {}", newX);
+
+        switch (this.popoverPlacement){
+            case RIGHT:
+                LOGGER.debug("Popover right side");
+                newX = newX + (reverseX ? -padX : padX);
+                break;
+            case LEFT:
+                LOGGER.debug("Popover Left side");
+                newX = x - width;
+                if(newX < 0){
+                    newX = newX + width;
+                    reverseX = false;
+                }
+                break;
+            case TOP:
+                LOGGER.debug("Popover top side");
+                newY = y - height;
+                newX = newX - width / 2;
+                if(newY < 0){
+                    newY = y;
+                }
+                break;
+            case BOTTOM:
+                LOGGER.debug("Popover bottom side");
+                newX = newX + (reverseX ? -padX : padX) - width / 2;
+                if(newX < 0){
+                    newX = x;
+                }
+                break;
+            default:
+                newX = newX + (reverseX ? -padX : padX);
         }
+
+        if (x + width + padX > widthDisplay){
+            newX = x - width;
+        }
+
         if (y + height + padY > heightDisplay) {
             newY = y - height;
-            reverseY = true;
         }
-        if (direction == HORIZONTAL)
-            newY = newY + (reverseY ? -padY : padX);
-        else
-            newX = newX + (reverseX ? -padX : padX);
+
         LOGGER.debug("New computed location: ({}, {})", newX, newY);
 
         super.setLocation(newX, newY);
