@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.internal.model;
 
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
 import java.awt.Font;
@@ -24,6 +25,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int underlineColor;
     private boolean showTitle = true;
     private boolean showArticle = true;
+    private PopoverPlacement popoverPlacement;
+    private boolean showSeparator = true;
     private HelpViewer helpViewer;
     private String desktopViewerPath = "";
     private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
@@ -145,6 +148,19 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
+    public PopoverPlacement getPopoverPlacement() {
+        if(this.popoverPlacement == null) {
+            this.popoverPlacement = popoverPlacement.BOTTOM;
+        }
+        return this.popoverPlacement;
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        this.popoverPlacement = placement;
+    }
+    
+    @Override
     public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
 
     @Override
@@ -164,11 +180,17 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public boolean isShowTitle() {
-        return showTitle;
-    }
+    public boolean isShowSeparator() { return showSeparator; }
 
     @Override
+    public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
+
+    @Override
+    public boolean isShowTitle() { return showTitle; }
+
+    @Override
+    public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
+  
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
     }

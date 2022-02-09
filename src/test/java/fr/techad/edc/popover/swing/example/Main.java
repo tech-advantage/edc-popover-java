@@ -1,6 +1,7 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
@@ -54,8 +55,6 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
-
-
         /* Main wndow */
         JFrame f = new JFrame();
         f.setLayout(new BorderLayout());
