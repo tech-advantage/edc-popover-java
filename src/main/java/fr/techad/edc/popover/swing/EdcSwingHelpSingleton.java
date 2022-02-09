@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
 import javax.swing.*;
@@ -126,11 +127,19 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setPopoverPlacement(PopoverPlacement popoverPlacement) { edcSwingHelp.setPopoverPlacement(popoverPlacement); }
+    
+    @Override
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
     public void setAutoDisabledMode(boolean state) {
         edcSwingHelp.setAutoDisabledMode(state);
+    }
+
+    @Override
+    public void setSeparatorDisplay(boolean state) {
+        edcSwingHelp.setSeparatorDisplay(state);
     }
 
     @Override
@@ -156,5 +165,10 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     @Override
     public void setBrowserSize(int width, int height) {
         edcSwingHelp.setBrowserSize(width, height);
+    }
+
+    @Override
+    public void setArticleDisplay(boolean enable) {
+        edcSwingHelp.setArticleDisplay(enable);
     }
 }

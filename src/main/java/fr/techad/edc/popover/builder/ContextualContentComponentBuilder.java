@@ -41,6 +41,13 @@ public interface ContextualContentComponentBuilder<T> {
      */
     ContextualContentComponentBuilder<T> setPopoverSectionTitleFont(Font fontAttr);
 
+     * Enable the article display
+     *
+     * @param enable
+     * @return true if is article enabled
+     */
+    ContextualContentComponentBuilder<T> enableArticle(boolean enable);
+
     /**
      * Build the contextual component.
      *

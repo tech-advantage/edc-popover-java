@@ -31,6 +31,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private Color backgroundColor = Color.WHITE;
     private Color popoverSectionTitleColor = Color.BLACK;
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
+    private boolean enableArticle = true;
 
     @Inject
     public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
@@ -64,6 +65,12 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
         this.popoverSectionTitleColor = titleColor;
         LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
+    }
+  
+    @Override
+    public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
+        this.enableArticle = enable;
+        LOGGER.debug("Set article display: {}", this.enableArticle);
         return this;
     }
 
@@ -107,7 +114,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         body.setBackground(this.backgroundColor);
         if (contextItem != null) {
             LOGGER.debug("article size: {}", contextItem.articleSize());
-            if (contextItem.articleSize() != 0) {
+            if (this.enableArticle && contextItem.articleSize() != 0) {
                 JPanel articlePanel = new JPanel();
                 articlePanel.setBackground(this.backgroundColor);
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
