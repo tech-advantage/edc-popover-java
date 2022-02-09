@@ -24,6 +24,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private boolean showArticle = true;
     private PopoverPlacement popoverPlacement;
     private boolean showSeparator = true;
     private HelpViewer helpViewer;
@@ -195,6 +196,15 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
+    public boolean isShowArticle() {
+        return showArticle;
+    }
+
+    @Override
+    public void setShowArticle(boolean showArticle) {
+        this.showArticle = showArticle;
+    }
+
     public Font getHeaderFontAttributes() { return headerFontAttributes; }
 
     @Override

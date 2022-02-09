@@ -136,6 +136,20 @@ public interface HelpConfiguration {
     void setShowTitle(boolean showTitle);
 
     /**
+     * Return true if the article is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowArticle();
+
+    /**
+     * Set the visibility of the article
+     *
+     * @param showArticle the visibility status to set
+     */
+    void setShowArticle(boolean showArticle);
+
+    /**
      * Return the background color
      *
      * @return the background color

@@ -158,5 +158,8 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
         edcSwingHelp.setBrowserSize(width, height);
     }
 
-
+    @Override
+    public void setArticleDisplay(boolean enable) {
+        edcSwingHelp.setArticleDisplay(enable);
+    }
 }

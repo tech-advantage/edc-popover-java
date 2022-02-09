@@ -46,6 +46,7 @@ We will be able to configure the url to get the documentation and the widget pro
 | Popover placement | ``setPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |
 | Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 | Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
+| Article display | ``setArticleDisplay`` | Enable the article |
 
 ### with Injection
 

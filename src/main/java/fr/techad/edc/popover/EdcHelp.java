@@ -102,6 +102,12 @@ public interface EdcHelp {
      */
     void setTitleDisplay(boolean enable);
 
+    /**
+     * Show the article if enabled
+     *
+     * @param enable true to enable the article display.
+     */
+    void setArticleDisplay(boolean enable);
 
     /**
      * Define the font attributes of the header title
