@@ -217,46 +217,19 @@ public class Popover extends JFrame {
 
         LOGGER.debug("full width: {}", x + width + padX);
 
-        switch (this.popoverPlacement){
-            case RIGHT:
-                LOGGER.debug("Popover right side");
-                newX = newX + (reverseX ? -padX : padX);
-                break;
-            case LEFT:
-                LOGGER.debug("Popover Left side");
-                newX = x - width;
-                if(newX < 0){
-                    newX = newX + width;
-                    reverseX = false;
-                }
-                break;
-            case TOP:
-                LOGGER.debug("Popover top side");
-                newY = y - height;
-                newX = newX - width / 2;
-                if(newY < 0){
-                    newY = y;
-                }
-                break;
-            case BOTTOM:
-                LOGGER.debug("Popover bottom side");
-                newX = newX + (reverseX ? -padX : padX) - width / 2;
-                if(newX < 0){
-                    newX = x;
-                }
-                break;
-            default:
-                newX = newX + (reverseX ? -padX : padX);
-        }
-
-        if (x + width + padX > widthDisplay){
+        if (x + width + padX > widthDisplay) {
             newX = x - width;
+            reverseX = true;
+            LOGGER.debug("Reverse width, newX: {}", newX);
         }
-
         if (y + height + padY > heightDisplay) {
             newY = y - height;
+            reverseY = true;
         }
-
+        if (direction == HORIZONTAL)
+            newY = newY + (reverseY ? -padY : padX);
+        else
+            newX = newX + (reverseX ? -padX : padX);
         LOGGER.debug("New computed location: ({}, {})", newX, newY);
 
         super.setLocation(newX, newY);

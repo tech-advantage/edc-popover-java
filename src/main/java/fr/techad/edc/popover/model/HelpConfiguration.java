@@ -149,7 +149,7 @@ public interface HelpConfiguration {
      */
     void setShowRelatedTopics(boolean showRelatedTopics);
   
-     * Return true if the article is shown in the component
+    /** Return true if the article is shown in the component
      *
      * @return true if visible
      */
@@ -282,8 +282,6 @@ public interface HelpConfiguration {
      */
     void setIconState(IconState state);
 
-    void setAutoDisabledInMissingContent(boolean state);
-
     /**
      * Return the font attributes of the popover section title
      *
@@ -312,7 +310,7 @@ public interface HelpConfiguration {
      */
     void setPopoverSectionTitleColor(Color popoverTitleColor);
 
-     * Return the font attributes of the header title
+    /** Return the font attributes of the header title
      *
      * @return the fonts attributes
      */

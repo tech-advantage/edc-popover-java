@@ -115,7 +115,8 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     @Override
     public void setPopoverSectionTitleFont(Font fontAttr) {
         getHelpConfiguration().setPopoverSectionTitleFont(fontAttr);
-    
+    }
+
     @Override
     public void setHeaderTitleColor(Color titleColor) {
         getHelpConfiguration().setHeaderTitleColor(titleColor);

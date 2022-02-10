@@ -44,14 +44,14 @@ public interface ContextualContentComponentBuilder<T> {
      */
     ContextualContentComponentBuilder<T> setLanguageCode(String languageCode);
   
-     * Enable the related topics display
+    /** Enable the related topics display
      *
      * @param enable
      * @return true if is related topics enabled
      */
     ContextualContentComponentBuilder<T> enableRelatedTopics(boolean enable);
 
-     * Define the article title color
+    /** Define the article title color
      *
      * @param titleColor
      * @return title color
@@ -66,7 +66,7 @@ public interface ContextualContentComponentBuilder<T> {
      */
     ContextualContentComponentBuilder<T> setPopoverSectionTitleFont(Font fontAttr);
 
-     * Enable the article display
+    /** Enable the article display
      *
      * @param enable
      * @return true if is article enabled

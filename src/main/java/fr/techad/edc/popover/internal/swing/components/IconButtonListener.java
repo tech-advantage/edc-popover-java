@@ -87,7 +87,7 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        popover.setVisible(false);
+
     }
 
     private void openBrowser() {
@@ -114,18 +114,11 @@ public class IconButtonListener implements HelpListener {
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .setErrorBehavior(helpConfiguration.getErrorBehavior())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
-                        .build();
-            if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
-                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableRelatedTopics(helpConfiguration.isShowRelatedTopics()).build();
-                JComponent jBodyComponent = contextualContentComponentBuilder
-                        .setContextItem(contextItem)
-                        .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
                         .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
+                        .enableArticle(helpConfiguration.isShowArticle())
+                        .enableRelatedTopics(helpConfiguration.isShowRelatedTopics())
                         .build();
-                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableArticle(helpConfiguration.isShowArticle()).build();
-                JComponent jTitleComponent = contextualTitleComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).enableTitle(helpConfiguration.isShowTitle()).build();
-                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())

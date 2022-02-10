@@ -182,16 +182,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public String getViewerDesktopPath() { return this.desktopViewerPath; }
 
     @Override
-    public boolean isAutoDisabledInMissingContent() {
-        return autoDisabled;
-    }
-
-    @Override
-    public void setShowTitle(boolean showTitle) {
-        this.showTitle = showTitle;
-    }
-
-    @Override
     public ErrorBehavior getErrorBehavior() {
         return this.errorBehavior;
     }
@@ -212,15 +202,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
 
     @Override
-    public boolean isShowTitle() { return showTitle; }
-
-    @Override
     public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
-  
-    @Override
-    public void setShowTitle(boolean showTitle) {
-        this.showTitle = showTitle;
-    }
 
     @Override
     public boolean isShowRelatedTopics() {

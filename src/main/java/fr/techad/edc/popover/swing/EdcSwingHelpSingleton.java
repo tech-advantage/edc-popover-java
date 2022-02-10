@@ -133,11 +133,6 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
-    public void setAutoDisabledMode(boolean state) {
-        edcSwingHelp.setAutoDisabledMode(state);
-    }
-
-    @Override
     public void setSeparatorDisplay(boolean state) {
         edcSwingHelp.setSeparatorDisplay(state);
     }
@@ -161,11 +156,6 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
 
     @Override
     public void setHeaderTitleColor(Color titleColor) { edcSwingHelp.setHeaderTitleColor(titleColor); }
-
-    @Override
-    public void setBrowserSize(int width, int height) {
-        edcSwingHelp.setBrowserSize(width, height);
-    }
 
     @Override
     public void setErrorBehavior(ErrorBehavior errorBehavior) {

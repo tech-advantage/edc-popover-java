@@ -114,9 +114,6 @@ public interface EdcHelp {
      */
     void setIconState(IconState iconState);
 
-  
-    void setTitleDisplay(boolean enable);
-
     /**
      * Show the related topics if enabled
      *
@@ -124,13 +121,13 @@ public interface EdcHelp {
      */
     void setRelatedTopicsDisplay(boolean enable);
 
-     * Define the fonts attributes of the popover section title
+    /** Define the fonts attributes of the popover section title
      *
      * @param fontAttr
      */
     void setPopoverSectionTitleFont(Font fontAttr);
 
-     * Show the article if enabled
+    /** Show the article if enabled
      *
      * @param enable true to enable the article display.
      */

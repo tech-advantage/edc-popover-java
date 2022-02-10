@@ -68,12 +68,14 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     @Override
     public ContextualContentComponentBuilder<JComponent> setErrorBehavior(ErrorBehavior errorBehavior) {
         this.errorBehavior = errorBehavior;
+        return this;
     }
   
     @Override
     public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
         this.enableRelatedTopics = enable;
         LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
+        return this;
     }
   
     @Override
@@ -86,12 +88,15 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     @Override
     public ContextualContentComponentBuilder<JComponent> setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
+        LOGGER.debug("Set language code: {}", this.languageCode);
+        return this;
     }
   
     @Override
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
         this.popoverSectionTitleColor = titleColor;
         LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
+        return this;
     }
   
     @Override
@@ -193,7 +198,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
 
         Set<String> languagesLists = Sets.newHashSet(languageCode);
         Map<String, Map<String, String>> labelsFromLanguage = httpReader.readLabels(languagesLists);
-        Map<String, Map<String, String>> labelsErrorFromLanguage = httpReader.readErrorsLabel(languagesLists);
+        //Map<String, Map<String, String>> labelsErrorFromLanguage = httpReader.readErrorsLabel(languagesLists);
 
         JLabel jLabelError = new JLabel();
 

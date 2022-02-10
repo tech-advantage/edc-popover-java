@@ -78,22 +78,13 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setAutoDisabledMode(boolean state) {
-        helpConfiguration.setAutoDisabledInMissingContent(state);
-    }
-
-    @Override
     public void setArticleDisplay(boolean enable) {
         helpConfiguration.setShowArticle(enable);
-      
+    }
+
     @Override
     public void setSeparatorDisplay(boolean enable) {
         helpConfiguration.setShowSeparator(enable);
-    }
-
-    @Override
-    public void setTitleDisplay(boolean enable) {
-        helpConfiguration.setShowTitle(enable);
     }
 
     @Override
