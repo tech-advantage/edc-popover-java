@@ -40,7 +40,9 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     @Override
     public ContextualTitleComponentBuilder<JComponent> setShowTitle(boolean enable) {
         this.showTitle = enable;
-    
+        return this;
+    }
+
     @Override
     public ContextualTitleComponentBuilder<JComponent> setHeaderFontAttributes(Font fontAttributes) {
         this.headerFontAttributes = fontAttributes;
@@ -50,12 +52,6 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     @Override
     public ContextualTitleComponentBuilder<JComponent> setHeaderTitleColor(Color titleColor) {
         this.titleColor = titleColor;
-        return this;
-    }
-
-    @Override
-    public ContextualTitleComponentBuilder<JComponent> enableTitle(boolean showTitle) {
-        this.showTitle = showTitle;
         return this;
     }
 

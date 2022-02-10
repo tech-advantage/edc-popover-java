@@ -190,9 +190,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
 
     @Override
-    public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
-
-    @Override
     public boolean isShowTooltip() { return showTooltip; }
 
     @Override
@@ -203,11 +200,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
 
     @Override
     public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }
-  
-    @Override
-    public void setShowTitle(boolean showTitle) {
-        this.showTitle = showTitle;
-    }
 
     @Override
     public boolean isShowRelatedTopics() {

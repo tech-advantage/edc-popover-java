@@ -95,7 +95,7 @@ public interface EdcHelp {
      */
     void setTooltipDisplay(boolean enable);
 
-     * Show the separator if enabled
+     /** Show the separator if enabled
      *
      * @param enable true to enable the separator display.
      */
@@ -115,13 +115,13 @@ public interface EdcHelp {
      */
     void setRelatedTopicsDisplay(boolean enable);
 
-     * Define the fonts attributes of the popover section title
+     /** Define the fonts attributes of the popover section title
      *
      * @param fontAttr
      */
     void setPopoverSectionTitleFont(Font fontAttr);
 
-     * Show the article if enabled
+     /** Show the article if enabled
      *
      * @param enable true to enable the article display.
      */

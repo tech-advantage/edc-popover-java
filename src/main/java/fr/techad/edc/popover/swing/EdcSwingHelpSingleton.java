@@ -117,9 +117,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setSeparatorColor(Color separatorColor) {
-        edcSwingHelp.setSeparatorColor(separatorColor);
-    }
+    public void setSeparatorColor(Color separatorColor) { edcSwingHelp.setSeparatorColor(separatorColor); }
 
     @Override
     public void setHelpViewer(HelpViewer viewer) {
@@ -161,11 +159,6 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
 
     @Override
     public void setHeaderTitleColor(Color titleColor) { edcSwingHelp.setHeaderTitleColor(titleColor); }
-
-    @Override
-    public void setBrowserSize(int width, int height) {
-        edcSwingHelp.setBrowserSize(width, height);
-    }
 
     @Override
     public void setTooltipDisplay(boolean enable) {

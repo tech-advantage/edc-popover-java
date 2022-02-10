@@ -59,6 +59,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
         this.enableRelatedTopics = enable;
         LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
+        return this;
     }
   
     @Override
@@ -72,6 +73,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
         this.popoverSectionTitleColor = titleColor;
         LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
+        return this;
     }
   
     @Override

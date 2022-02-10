@@ -60,7 +60,7 @@ public interface EdcSwingHelp extends EdcHelp {
      */
     void setPopoverSectionTitleFont(Font fontAttr);
 
-     * Define the fonts attributes
+     /** Define the fonts attributes
      *
      * @param fontAttributes
      */
@@ -81,7 +81,7 @@ public interface EdcSwingHelp extends EdcHelp {
      */
     void setPopoverSectionTitleColor(Color titleColor);
 
-     * Define the header title color for the component
+     /** Define the header title color for the component
      *
      * @param titleColor
      */
