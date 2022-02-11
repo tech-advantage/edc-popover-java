@@ -94,6 +94,11 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setErrorIconPath(String iconPath) {
+        edcSwingHelp.setErrorIconPath(iconPath);
+    }
+
+    @Override
     public void setLanguageCode(String languageCode) { edcSwingHelp.setLanguageCode(languageCode); }
 
     @Override

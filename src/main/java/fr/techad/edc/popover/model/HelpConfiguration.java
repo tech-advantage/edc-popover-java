@@ -65,6 +65,20 @@ public interface HelpConfiguration {
     void setCloseIconPath(String iconPath);
 
     /**
+     * Return the error icon path
+     *
+     * @return the error icon path
+     */
+    String getErrorIconPath();
+
+    /**
+     * Set the error icon path
+     *
+     * @param iconPath the error icon path to set
+     */
+    void setErrorIconPath(String iconPath);
+
+    /**
      * Get the language code
      *
      * @return the language code

@@ -27,6 +27,12 @@ public interface EdcHelp {
      */
     void setCloseIconPath(String iconPath);
 
+    /**
+     * Define the path for the error icon to use.
+     *
+     * @param iconPath the icon path to set
+     */
+    void setErrorIconPath(String iconPath);
 
     /**
      * Define the language code which will be used to display the documentation and the popover labels.

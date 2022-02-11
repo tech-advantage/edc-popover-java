@@ -23,6 +23,7 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     private String languageCode;
     private String label = null;
     private String iconPath;
+    private String errorIconPath;
 
     @Inject
     public ContextualComponentBuilderImpl(HelpListenerProvider helpListenerProvider) {
@@ -40,6 +41,12 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     @Override
     public ContextualComponentBuilder<JComponent> setIconPath(String iconPath) {
         this.iconPath = iconPath;
+        return this;
+    }
+
+    @Override
+    public ContextualComponentBuilder<JComponent> setErrorIconPath(String iconPath) {
+        this.errorIconPath = iconPath;
         return this;
     }
 

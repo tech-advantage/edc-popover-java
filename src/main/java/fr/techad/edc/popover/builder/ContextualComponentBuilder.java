@@ -32,6 +32,14 @@ public interface ContextualComponentBuilder<T> {
     ContextualComponentBuilder<T> setIconPath(String iconPath);
 
     /**
+     * Define the error iconpath
+     *
+     * @param iconPath the error icon path to set
+     * @return the builder
+     */
+    ContextualComponentBuilder<T> setErrorIconPath(String iconPath);
+
+    /**
      * Build the contextual component.
      *
      * @return the contextual component

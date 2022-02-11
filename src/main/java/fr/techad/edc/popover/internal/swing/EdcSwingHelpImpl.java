@@ -49,11 +49,11 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
             LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
         }
 
-        JComponent component = contextualComponentBuilder.setKeys(mainKey, subKey, languageCode)
-                .setIconPath(
-                        helpConfiguration.getErrorBehavior() == ErrorBehavior.NO_POPOVER && !enableMainKey || helpConfiguration.getIconState() == IconState.HIDDEN && !enableMainKey ? "" :
-                        helpConfiguration.getIconState() == IconState.ERROR && !enableMainKey ? "icons/icon_exclamation-32px.png" : iconPath
-                )
+        JComponent component = contextualComponentBuilder
+                .setKeys(mainKey, subKey, languageCode)
+                .setIconPath(helpConfiguration.getErrorBehavior() == ErrorBehavior.NO_POPOVER && !enableMainKey || helpConfiguration.getIconState() == IconState.HIDDEN && !enableMainKey ? "" :
+                        helpConfiguration.getIconState() == IconState.ERROR && !enableMainKey ? helpConfiguration.getErrorIconPath() : iconPath)
+                .setErrorIconPath(helpConfiguration.getErrorIconPath())
                 .setLabel(helpConfiguration.getTooltipLabel())
                 .build();
 

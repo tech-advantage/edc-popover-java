@@ -34,8 +34,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
     private ErrorBehavior errorBehavior;
-    private JLabel friendlyMessage = new JLabel("Contextual help is coming soon.");
-    private JLabel errorMessage = new JLabel("<html>An error occurred when fetching data ! <br/> Check the brick keys provided to the EdcHelp component.</html>");
+    private final JLabel friendlyMessage = new JLabel("Contextual help is coming soon.");
+    private final JLabel errorMessage = new JLabel("<html>An error occurred when fetching data ! <br/> Check the brick keys provided to the EdcHelp component.</html>");
     private HttpReaderImpl httpReader;
     private String languageCode = "en";
     private boolean enableRelatedTopics = true;

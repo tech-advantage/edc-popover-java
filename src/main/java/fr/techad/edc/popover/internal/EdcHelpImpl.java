@@ -33,6 +33,11 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setErrorIconPath(String iconPath) {
+        helpConfiguration.setErrorIconPath(iconPath);
+    }
+
+    @Override
     public void setLanguageCode(String languageCode) {
         helpConfiguration.setLanguageCode(languageCode);
     }

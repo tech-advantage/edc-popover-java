@@ -16,6 +16,7 @@ import java.awt.Color;
 public class HelpConfigurationImpl implements HelpConfiguration {
     private String iconPath = "icons/icon-32px.png";
     private String closeIconPath = "popover/close1.png";
+    private String errorIconPath = "icons/icon_exclamation-32px.png";
     private String languageCode = "en";
     private String tooltipLabel = null;
     private boolean summaryDisplay = false;
@@ -82,6 +83,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setCloseIconPath(String iconPath) {
         this.closeIconPath = iconPath;
+    }
+
+    @Override
+    public String getErrorIconPath() {
+        return errorIconPath;
+    }
+
+    @Override
+    public void setErrorIconPath(String iconPath) {
+        this.errorIconPath = iconPath;
     }
 
     @Override
