@@ -203,11 +203,11 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         JLabel jLabelError = new JLabel();
 
         if (errorBehavior == ErrorBehavior.ERROR_SHOWN) {
-            String errMessageByKey = labelsErrorFromLanguage.get(languageCode).get("failedData");
+            /*String errMessageByKey = labelsErrorFromLanguage.get(languageCode).get("failedData");
             if(errMessageByKey != null){
                 errorMessage.setText("<html>" + addChar(errMessageByKey, "<br/>", errMessageByKey.indexOf("!")) + "</html>");
             }
-            jLabelError = errorMessage;
+            jLabelError = errorMessage;*/
         }
 
         if (errorBehavior == ErrorBehavior.FRIENDLY_MSG) {

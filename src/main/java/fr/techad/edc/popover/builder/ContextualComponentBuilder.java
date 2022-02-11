@@ -1,5 +1,8 @@
 package fr.techad.edc.popover.builder;
 
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
+
 /**
  * Builder to configure a contextual component.
  */
@@ -38,6 +41,30 @@ public interface ContextualComponentBuilder<T> {
      * @return the builder
      */
     ContextualComponentBuilder<T> setErrorIconPath(String iconPath);
+
+    /**
+     * Define the error behavior
+     *
+     * @param errorBehavior the error behavior to set
+     * @return the builder
+     */
+    ContextualComponentBuilder<T> setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Define the icon state
+     *
+     * @param iconState the icon state to set
+     * @return the builder
+     */
+    ContextualComponentBuilder<T> setIconState(IconState iconState);
+
+    /**
+     * Enable the context item
+     *
+     * @param enable
+     * @return the builder
+     */
+    ContextualComponentBuilder<T> setEnableContextItem(boolean enable);
 
     /**
      * Build the contextual component.

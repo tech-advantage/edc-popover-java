@@ -74,7 +74,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public JComponent createComponent(String mainKey, String subKey, String iconPath) {
+    public JComponent createComponent(String mainKey, String subKey, String iconPath){
         return edcSwingHelp.createComponent(mainKey, subKey, iconPath);
     }
 

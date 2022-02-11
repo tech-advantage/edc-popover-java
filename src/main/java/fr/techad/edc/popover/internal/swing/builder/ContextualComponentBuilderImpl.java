@@ -4,6 +4,8 @@ import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.swing.components.IconButton;
 import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.swing.HelpListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,9 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     private String label = null;
     private String iconPath;
     private String errorIconPath;
+    private ErrorBehavior errorBehavior;
+    private IconState iconState;
+    private boolean enableMainKey;
 
     @Inject
     public ContextualComponentBuilderImpl(HelpListenerProvider helpListenerProvider) {
@@ -45,8 +50,26 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     }
 
     @Override
+    public ContextualComponentBuilder<JComponent> setEnableContextItem(boolean enable) {
+        this.enableMainKey = enable;
+        return this;
+    }
+
+    @Override
     public ContextualComponentBuilder<JComponent> setErrorIconPath(String iconPath) {
         this.errorIconPath = iconPath;
+        return this;
+    }
+
+    @Override
+    public ContextualComponentBuilder<JComponent> setErrorBehavior(ErrorBehavior errorBehavior) {
+        this.errorBehavior = errorBehavior;
+        return this;
+    }
+
+    @Override
+    public ContextualComponentBuilder<JComponent> setIconState(IconState iconState) {
+        this.iconState = iconState;
         return this;
     }
 
@@ -57,8 +80,13 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     }
 
     @Override
-    public JComponent build() {
-        ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
+    public JComponent build(){
+        ImageIcon imageIcon = ImageIconCreator.
+                createImageIcon(errorBehavior == ErrorBehavior.NO_POPOVER && !enableMainKey ||
+                                iconState == IconState.HIDDEN && !enableMainKey ?
+                                "" : iconState == IconState.ERROR && !enableMainKey ?
+                                errorIconPath : iconPath
+                );
         IconButton iconButton = new IconButton(label, imageIcon);
         HelpListener helpListener = helpListenerProvider.get();
         helpListener.setKeys(mainKey, subKey);
