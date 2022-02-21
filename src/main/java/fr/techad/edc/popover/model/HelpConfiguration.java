@@ -149,7 +149,7 @@ public interface HelpConfiguration {
      */
     void setShowRelatedTopics(boolean showRelatedTopics);
   
-     * Return true if the article is shown in the component
+    /** Return true if the article is shown in the component
      *
      * @return true if visible
      */
@@ -262,6 +262,20 @@ public interface HelpConfiguration {
     boolean isAutoDisabledInMissingContent();
 
     /**
+     * Return true if the tooltip is shown when mouse is hover the component
+     *
+     * @return true if visible
+     */
+    boolean isShowTooltip();
+
+    /**
+     * Set the visibility of the tooltip
+     *
+     * @param showTooltip the visibility status to set
+     */
+    void setShowTooltip(boolean showTooltip);
+
+    /**
      * Define the behavior to auto disabled the component if the content doesn't exist.
      *
      * @param state the state to defined
@@ -296,7 +310,7 @@ public interface HelpConfiguration {
      */
     void setPopoverSectionTitleColor(Color popoverTitleColor);
 
-     * Return the font attributes of the header title
+    /** Return the font attributes of the header title
      *
      * @return the fonts attributes
      */

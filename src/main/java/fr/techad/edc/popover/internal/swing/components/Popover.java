@@ -31,6 +31,7 @@ public class Popover extends JFrame {
     private int direction;
     private int closablePosition;
     private String iconPath = "popover/close1.png";
+    private boolean showTooltip = true;
     private PopoverPlacement popoverPlacement;
 
     /**
@@ -61,18 +62,15 @@ public class Popover extends JFrame {
         setFocusableWindowState(true);
         getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
         getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.lightGray));
-
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
-
         // Header Panel (Contains the title and the closable icon if it's top position)
         this.headerPanel = new JPanel(new BorderLayout());
 
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
-
         // Body Panel (contains the brick information)
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(1, 1));
@@ -119,6 +117,7 @@ public class Popover extends JFrame {
      * @param c the color to set
      */
     public void setSeparatorColor(Color c) {
+
         LOGGER.debug("Define new content separator color: {}", c);
         if (c != null) {
             this.headerSeparator.setForeground(c);
@@ -187,54 +186,25 @@ public class Popover extends JFrame {
         boolean reverseX = false;
         boolean reverseY = false;
 
-
         if (direction == HORIZONTAL)
             padY = 5;
         else
             padX = 5;
 
         LOGGER.debug("full width: {}", x + width + padX);
-
-        switch (this.popoverPlacement){
-            case RIGHT:
-                LOGGER.debug("Popover right side");
-                newX = newX + (reverseX ? -padX : padX);
-                break;
-            case LEFT:
-                LOGGER.debug("Popover Left side");
-                newX = x - width;
-                if(newX < 0){
-                    newX = newX + width;
-                    reverseX = false;
-                }
-                break;
-            case TOP:
-                LOGGER.debug("Popover top side");
-                newY = y - height;
-                newX = newX - width / 2;
-                if(newY < 0){
-                    newY = y;
-                }
-                break;
-            case BOTTOM:
-                LOGGER.debug("Popover bottom side");
-                newX = newX + (reverseX ? -padX : padX) - width / 2;
-                if(newX < 0){
-                    newX = x;
-                }
-                break;
-            default:
-                newX = newX + (reverseX ? -padX : padX);
-        }
-
-        if (x + width + padX > widthDisplay){
+        if (x + width + padX > widthDisplay) {
             newX = x - width;
+            reverseX = true;
+            LOGGER.debug("Reverse width, newX: {}", newX);
         }
-
         if (y + height + padY > heightDisplay) {
             newY = y - height;
+            reverseY = true;
         }
-
+        if (direction == HORIZONTAL)
+            newY = newY + (reverseY ? -padY : padX);
+        else
+            newX = newX + (reverseX ? -padX : padX);
         LOGGER.debug("New computed location: ({}, {})", newX, newY);
 
         super.setLocation(newX, newY);
@@ -261,6 +231,15 @@ public class Popover extends JFrame {
         }
     }
 
+    /**
+     * Enable the tooltip label
+     *
+     * @param enable
+     */
+    public void setShowTooltip(boolean enable){
+        this.showTooltip = enable;
+    }
+
     @Override
     public Component add(Component comp) {
         if (comp != mainPanel) {
@@ -277,7 +256,7 @@ public class Popover extends JFrame {
         header.setBackground(contentPanel.getBackground());
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 2, 2));
         ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
-        IconButton closeButton = new IconButton("Close", imageIcon);
+        IconButton closeButton = new IconButton(showTooltip ? "Close" : null, imageIcon);
         closeButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         closeButton.setBorderPainted(false);
         closeButton.setContentAreaFilled(false);
