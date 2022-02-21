@@ -1,6 +1,6 @@
 package fr.techad.edc.popover.internal.swing.builder;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.internal.TranslationConstants;
 import fr.techad.edc.client.internal.io.HttpReaderImpl;
@@ -196,22 +196,24 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
 
     private JComponent getFailure() throws InvalidUrlException, IOException {
 
-        Set<String> languagesLists = Sets.newHashSet(languageCode);
-        Map<String, Map<String, String>> labelsFromLanguage = httpReader.readLabels(languagesLists);
-        //Map<String, Map<String, String>> labelsErrorFromLanguage = httpReader.readErrorsLabel(languagesLists);
+        Table<String, String, String> labelsFromLanguage = httpReader.readi18nContent("en", "labels");
+        Table<String, String, String> ErrorsFromLanguage = httpReader.readi18nContent("en", "errors");
+
+        String failedData = ErrorsFromLanguage.get("failedData", null);
+        String commingSoon = labelsFromLanguage.get("comingSoon", null);
 
         JLabel jLabelError = new JLabel();
 
         if (errorBehavior == ErrorBehavior.ERROR_SHOWN) {
-            /*String errMessageByKey = labelsErrorFromLanguage.get(languageCode).get("failedData");
+            String errMessageByKey = failedData;
             if(errMessageByKey != null){
                 errorMessage.setText("<html>" + addChar(errMessageByKey, "<br/>", errMessageByKey.indexOf("!")) + "</html>");
             }
-            jLabelError = errorMessage;*/
+            jLabelError = errorMessage;
         }
 
         if (errorBehavior == ErrorBehavior.FRIENDLY_MSG) {
-            String friendlyMessageByKey = labelsFromLanguage.get(languageCode).get("comingSoon");
+            String friendlyMessageByKey = commingSoon;
             if(friendlyMessageByKey != null){
                 friendlyMessage.setText(friendlyMessageByKey);
             }
