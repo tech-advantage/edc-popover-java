@@ -1,6 +1,6 @@
 package fr.techad.edc.popover.internal.swing.builder;
 
-import com.google.common.collect.Table;
+import com.google.common.collect.Sets;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.internal.TranslationConstants;
 import fr.techad.edc.client.internal.io.HttpReaderImpl;
@@ -195,12 +195,13 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     }
 
     private JComponent getFailure() throws InvalidUrlException, IOException {
+        Set<String> languagesLists = Sets.newHashSet(languageCode);
 
-        Table<String, String, String> labelsFromLanguage = httpReader.readi18nContent("en", "labels");
-        Table<String, String, String> ErrorsFromLanguage = httpReader.readi18nContent("en", "errors");
+        Map<String, Map<String, String>> labelsFromLanguage = httpReader.readLabels(languagesLists, "labels");
+        Map<String, Map<String, String>> errorsFromLanguage = httpReader.readLabels(languagesLists, "errors");
 
-        String failedData = ErrorsFromLanguage.get("failedData", null);
-        String commingSoon = labelsFromLanguage.get("comingSoon", null);
+        String comingSoon = labelsFromLanguage.get(languageCode).get("comingSoon");
+        String failedData = errorsFromLanguage.get(languageCode).get("failedData");
 
         JLabel jLabelError = new JLabel();
 
@@ -213,7 +214,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         }
 
         if (errorBehavior == ErrorBehavior.FRIENDLY_MSG) {
-            String friendlyMessageByKey = commingSoon;
+            String friendlyMessageByKey = comingSoon;
             if(friendlyMessageByKey != null){
                 friendlyMessage.setText(friendlyMessageByKey);
             }
