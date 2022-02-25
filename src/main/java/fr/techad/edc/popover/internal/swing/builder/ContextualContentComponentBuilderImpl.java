@@ -6,6 +6,7 @@ import fr.techad.edc.client.internal.TranslationConstants;
 import fr.techad.edc.client.internal.io.HttpReaderImpl;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.DocumentationItem;
+import fr.techad.edc.client.model.I18NContent;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.internal.swing.components.Popover;
@@ -196,12 +197,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
 
     private JComponent getFailure() throws InvalidUrlException, IOException {
         Set<String> languagesLists = Sets.newHashSet(languageCode);
-
-        Map<String, Map<String, String>> labelsFromLanguage = httpReader.readLabels(languagesLists, "labels");
-        Map<String, Map<String, String>> errorsFromLanguage = httpReader.readLabels(languagesLists, "errors");
-
-        String comingSoon = labelsFromLanguage.get(languageCode).get("comingSoon");
-        String failedData = errorsFromLanguage.get(languageCode).get("failedData");
+        String comingSoon = httpReader.readLabel(languagesLists).getLabel(languageCode, "comingSoon");
+        String failedData = httpReader.readLabel(languagesLists).getError(languageCode, "failedData");
 
         JLabel jLabelError = new JLabel();
 
