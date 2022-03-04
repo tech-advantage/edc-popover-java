@@ -196,9 +196,11 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     }
 
     private JComponent getFailure() throws InvalidUrlException, IOException {
-        Set<String> languagesLists = Sets.newHashSet(languageCode);
-        String comingSoon = httpReader.readLabel(languagesLists).getLabel(languageCode, "comingSoon");
-        String failedData = httpReader.readLabel(languagesLists).getError(languageCode, "failedData");
+        Set<String> languagesCodes = Sets.newHashSet();
+        languagesCodes.add(languageCode);
+
+        String comingSoon = httpReader.readLabel(languagesCodes).getLabel(languageCode, "comingSoon");
+        String failedData = httpReader.readLabel(languagesCodes).getError(languageCode, "failedData");
 
         JLabel jLabelError = new JLabel();
 

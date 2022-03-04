@@ -3,6 +3,7 @@ package fr.techad.edc.popover.internal.swing.builder;
 import com.google.common.collect.Sets;
 import fr.techad.edc.client.internal.io.HttpReaderImpl;
 import fr.techad.edc.client.model.ContextItem;
+import fr.techad.edc.client.model.I18NContent;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
 import fr.techad.edc.popover.model.ErrorBehavior;
@@ -100,11 +101,13 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     }
 
     private JComponent getBody() throws InvalidUrlException, IOException {
-        Set<String> languagesLists = Sets.newHashSet(languageCode);
-        String errorTitleFromLanguage = httpReader.readLabel(languagesLists).getLabel(languageCode, "errorTitle");
+        Set<String> languagesCodes = Sets.newHashSet();
+        languagesCodes.add(languageCode);
+
+        String errorTitleFromLanguage = httpReader.readLabel(languagesCodes).getLabel(languageCode, "errorTitle");
+
         JLabel label;
         String title = StringUtils.EMPTY;
-
         if (this.showTitle || errorBehavior == ErrorBehavior.ERROR_SHOWN) {
             String errorTitleByKey = errorTitleFromLanguage;
             if(errorTitleByKey != null){
