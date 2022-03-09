@@ -98,14 +98,14 @@ public interface HelpConfiguration {
      *
      * @return the state
      */
-    boolean getSummaryDisplay();
+    boolean getPopoverDisplay();
 
     /**
      * If false, the help will be displayed in the help component else a component will display it partially (ie popover for example)
      *
      * @param enabled the new state to set
      */
-    void setSummaryDisplay(boolean enabled);
+    void setPopoverDisplay(boolean enabled);
 
     /**
      * Return the status for the popover display.
