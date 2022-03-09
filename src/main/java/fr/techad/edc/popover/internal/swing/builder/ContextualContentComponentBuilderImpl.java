@@ -71,14 +71,14 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         this.errorBehavior = errorBehavior;
         return this;
     }
-  
+
     @Override
     public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
         this.enableRelatedTopics = enable;
         LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
         return this;
     }
-  
+
     @Override
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleFont(Font fontAttr) {
         this.popoverSectionTitleFont = fontAttr;
@@ -92,14 +92,14 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         LOGGER.debug("Set language code: {}", this.languageCode);
         return this;
     }
-  
+
     @Override
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
         this.popoverSectionTitleColor = titleColor;
         LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
         return this;
     }
-  
+
     @Override
     public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
         this.enableArticle = enable;
@@ -199,23 +199,22 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         Set<String> languagesCodes = Sets.newHashSet();
         languagesCodes.add(languageCode);
 
-        String comingSoon = httpReader.readLabel(languagesCodes).getLabel(languageCode, "comingSoon");
-        String failedData = httpReader.readLabel(languagesCodes).getError(languageCode, "failedData");
+        String comingSoon = getLabel(TranslationConstants.COMING_SOON_KEY, languageCode, null);
+        String failedData = getError(TranslationConstants.ERRORS_KEY, languageCode, null);
 
         JLabel jLabelError = new JLabel();
 
         if (errorBehavior == ErrorBehavior.ERROR_SHOWN) {
-            String errMessageByKey = failedData;
-            if(errMessageByKey != null){
-                errorMessage.setText("<html>" + addChar(errMessageByKey, "<br/>", errMessageByKey.indexOf("!")) + "</html>");
+
+            if(!failedData.isEmpty()){
+                errorMessage.setText("<html>" + addChar(failedData, "<br/>", failedData.indexOf("!")) + "</html>");
             }
             jLabelError = errorMessage;
         }
 
         if (errorBehavior == ErrorBehavior.FRIENDLY_MSG) {
-            String friendlyMessageByKey = comingSoon;
-            if(friendlyMessageByKey != null){
-                friendlyMessage.setText(friendlyMessageByKey);
+            if(!comingSoon.isEmpty()){
+                friendlyMessage.setText(comingSoon);
             }
             jLabelError = friendlyMessage;
         }
@@ -268,5 +267,10 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private String getLabel(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
         LOGGER.debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
         return this.edcClient.getLabel(key ,languageCode, publicationId);
+    }
+
+    private String getError(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
+        LOGGER.debug("Getting error translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
+        return this.edcClient.getError(key, languageCode, null);
     }
 }
