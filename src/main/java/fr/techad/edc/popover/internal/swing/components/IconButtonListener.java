@@ -81,7 +81,6 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        popover.setVisible(false);
     }
 
     private void openBrowser() {

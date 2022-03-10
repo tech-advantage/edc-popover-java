@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
@@ -96,6 +98,38 @@ public class Popover extends JFrame {
                     Popover.this.setVisible(false);
                     gained = false;
                 }
+            }
+        });
+
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Component popover = e.getComponent();
+                Rectangle bound = popover.getBounds();
+
+                boolean contain = bound.contains(e.getXOnScreen(), e.getYOnScreen());
+
+                Popover.this.setVisible(contain);
             }
         });
     }
