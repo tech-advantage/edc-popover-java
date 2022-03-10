@@ -29,6 +29,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean showTitle = true;
     private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;
     private IconState iconState = IconState.SHOWN;
+    private boolean showTooltip = true;
     private boolean showRelatedTopics = true;
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
     private Color popoverSectionTitleColor = Color.BLACK;
@@ -211,6 +212,15 @@ public class HelpConfigurationImpl implements HelpConfiguration {
 
     @Override
     public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
+    
+    @Override
+    public boolean isShowTooltip() { return showTooltip; }
+
+    @Override
+    public void setShowTooltip(boolean showTooltip) { this.showTooltip = showTooltip; }
+    
+    @Override
+    public boolean isShowTitle() { return showTitle; }
 
     @Override
     public void setShowTitle(boolean showTitle) { this.showTitle = showTitle; }

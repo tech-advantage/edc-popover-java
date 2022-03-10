@@ -99,10 +99,17 @@ public interface EdcHelp {
     void setTitleDisplay(boolean enable);
 
     /**
-     * Define the error behavior of popover use with Enum Type: ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER
-     * Show the separator if enabled
+     * Show the tooltip if enabled
      *
-     * @param enable true to enable the separator display.
+     * @param enable true to enable the tooltip display.
+     */
+    void setTooltipDisplay(boolean enable);
+
+     /** 
+      * Define the error behavior of popover use with Enum Type: ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER
+      * Show the separator if enabled
+      *
+      * @param enable true to enable the separator display.
      */
     void setSeparatorDisplay(boolean enable);
 
@@ -127,13 +134,13 @@ public interface EdcHelp {
      */
     void setRelatedTopicsDisplay(boolean enable);
 
-    /** Define the fonts attributes of the popover section title
+     /** Define the fonts attributes of the popover section title
      *
      * @param fontAttr
      */
     void setPopoverSectionTitleFont(Font fontAttr);
 
-    /** Show the article if enabled
+     /** Show the article if enabled
      *
      * @param enable true to enable the article display.
      */

@@ -290,6 +290,20 @@ public interface HelpConfiguration {
     IconState getIconState();
 
     /**
+     * Return true if the tooltip is shown when mouse is hover the component
+     *
+     * @return true if visible
+     */
+    boolean isShowTooltip();
+
+    /**
+     * Set the visibility of the tooltip
+     *
+     * @param showTooltip the visibility status to set
+     */
+    void setShowTooltip(boolean showTooltip);
+
+    /**
      * Define the icon state
      *
      * @param state

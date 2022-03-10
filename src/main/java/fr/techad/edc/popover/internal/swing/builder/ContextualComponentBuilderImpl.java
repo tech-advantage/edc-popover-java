@@ -29,6 +29,7 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     private ErrorBehavior errorBehavior;
     private IconState iconState;
     private boolean enableMainKey;
+    private boolean showTooltip = true;
 
     @Inject
     public ContextualComponentBuilderImpl(HelpListenerProvider helpListenerProvider) {
@@ -88,11 +89,21 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
                                 errorIconPath : iconPath
                 );
         IconButton iconButton = new IconButton(label, imageIcon);
+    }
+  
+    @Override
+    public ContextualComponentBuilder<JComponent> showTooltip(boolean enable) {
+        this.showTooltip = enable;
+        return this;
+    }
+
+    @Override
+    public JComponent build() {
+        ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
+        IconButton iconButton = new IconButton(showTooltip ? label : null, imageIcon);
         HelpListener helpListener = helpListenerProvider.get();
         helpListener.setKeys(mainKey, subKey);
         iconButton.addMouseListener(helpListener);
         return iconButton;
     }
-
-
 }

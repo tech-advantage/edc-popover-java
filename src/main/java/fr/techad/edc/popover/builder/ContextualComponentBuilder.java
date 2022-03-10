@@ -65,6 +65,14 @@ public interface ContextualComponentBuilder<T> {
      * @return the builder
      */
     ContextualComponentBuilder<T> setEnableContextItem(boolean enable);
+    
+    /**
+     * Define the visibility of tooltip label
+     *
+     * @param enable
+     * @return true if enabled
+     */
+    ContextualComponentBuilder<T> showTooltip(boolean enable);
 
     /**
      * Build the contextual component.

@@ -48,10 +48,10 @@ public interface ContextualTitleComponentBuilder<T> {
 
     /**
      * Show the title
-     * @param showTitle true to show the component
+     * @param enable true to show the component
      * @return the builder
      */
-    ContextualTitleComponentBuilder<T> enableTitle(boolean showTitle);
+    ContextualTitleComponentBuilder<T> setShowTitle(boolean enable);
 
     /**
      * Define the error behavior

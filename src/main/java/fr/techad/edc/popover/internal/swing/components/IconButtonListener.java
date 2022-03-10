@@ -107,7 +107,6 @@ public class IconButtonListener implements HelpListener {
     private void openPopover(int x, int y) {
         try {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
-
             if (contextItem != null || helpConfiguration.getErrorBehavior() != ErrorBehavior.NO_POPOVER) {
                 JComponent jBodyComponent = contextualContentComponentBuilder
                         .setContextItem(contextItem)
@@ -125,19 +124,20 @@ public class IconButtonListener implements HelpListener {
                         .enableTitle(helpConfiguration.isShowTitle())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
+                        .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
                         .build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
 
                 popover.setContentBackground(bgColor);
                 popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
-                popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 if(helpConfiguration.isShowSeparator()) {
                     popover.addSeparator();
                     popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 }
                 popover.clear();
                 popover.addHeaderPanel();
+                popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
 

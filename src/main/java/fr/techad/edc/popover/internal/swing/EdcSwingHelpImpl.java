@@ -56,6 +56,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
                 .setIconPath(iconPath)
                 .setErrorIconPath(helpConfiguration.getErrorIconPath())
                 .setLabel(helpConfiguration.getTooltipLabel())
+                .showTooltip(helpConfiguration.isShowTooltip())
                 .build();
 
         if (helpConfiguration.getIconState() == IconState.DISABLED) {

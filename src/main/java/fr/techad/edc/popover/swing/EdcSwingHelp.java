@@ -60,7 +60,9 @@ public interface EdcSwingHelp extends EdcHelp {
      */
     void setPopoverSectionTitleFont(Font fontAttr);
 
-    /** Define the fonts attributes
+
+
+     /** Define the fonts attributes
      *
      * @param fontAttributes
      */

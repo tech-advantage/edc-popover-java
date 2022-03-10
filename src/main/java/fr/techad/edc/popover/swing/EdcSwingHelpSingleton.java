@@ -122,9 +122,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setSeparatorColor(Color separatorColor) {
-        edcSwingHelp.setSeparatorColor(separatorColor);
-    }
+    public void setSeparatorColor(Color separatorColor) { edcSwingHelp.setSeparatorColor(separatorColor); }
 
     @Override
     public void setHelpViewer(HelpViewer viewer) {
@@ -166,7 +164,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setErrorBehavior(ErrorBehavior errorBehavior) {
         edcSwingHelp.setErrorBehavior(errorBehavior);
     }
-
+  
+    @Override
+    public void setTooltipDisplay(boolean enable) {
+        edcSwingHelp.setTooltipDisplay(enable);
+    }
+  
     @Override
     public void setIconState(IconState iconState) {
         edcSwingHelp.setIconState(iconState);
