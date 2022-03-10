@@ -1,5 +1,6 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import java.awt.Font;
 
@@ -64,6 +65,35 @@ public interface EdcHelp {
      * @param path to executable
      */
     void setViewerDesktopPath(String path);
+  
+    /**
+     * Active or deactivate the popover display when the mouse is over it.
+     *
+     * @param enable
+     */
+    void setHoverDisplayPopover(boolean enable);
+
+    /**
+     * Define the browser to use : true to use the internal brower, false to use the system browser.
+     * Define the browser to use with Enum Type: DESKTOP_VIEWER, INTERNAL_BROWSER, BROWSER
+     *
+     * @param viewer
+     */
+    void setHelpViewer(HelpViewer viewer);
+
+    /**
+     * Define the path of the executable location
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
+
+    /**
+     * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
 
     /**
      * Define the behavior : If true, the component will be disabled if the content is missing
@@ -73,12 +103,43 @@ public interface EdcHelp {
     void setAutoDisabledMode(boolean state);
 
     /**
+     * Show the tooltip if enabled
+     *
+     * @param enable true to enable the tooltip display.
+     */
+    void setTooltipDisplay(boolean enable);
+
+     /** Show the separator if enabled
+     *
+     * @param enable true to enable the separator display.
+     */
+    void setSeparatorDisplay(boolean enable);
+
+    /**
      * Show the title if enabled
      *
      * @param enable true to enable the title display.
      */
     void setTitleDisplay(boolean enable);
 
+    /**
+     * Show the related topics if enabled
+     *
+     * @param enable true to enable the related topics display.
+     */
+    void setRelatedTopicsDisplay(boolean enable);
+
+     /** Define the fonts attributes of the popover section title
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
+     /** Show the article if enabled
+     *
+     * @param enable true to enable the article display.
+     */
+    void setArticleDisplay(boolean enable);
 
     /**
      * Define the font attributes of the header title

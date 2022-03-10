@@ -74,12 +74,14 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if(helpConfiguration.isHoverDisplayPopover()) {
+            openPopover(e.getXOnScreen(), e.getYOnScreen());
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        popover.setVisible(false);
     }
 
     private void openBrowser() {
@@ -100,18 +102,30 @@ public class IconButtonListener implements HelpListener {
         try {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
             if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
-                JComponent jBodyComponent = contextualContentComponentBuilder.setContextItem(contextItem).setBackgroundColor(helpConfiguration.getBackgroundColor()).build();
+                JComponent jBodyComponent = contextualContentComponentBuilder
+                        .setContextItem(contextItem)
+                        .setBackgroundColor(helpConfiguration.getBackgroundColor())
+                        .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
+                        .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
+                        .enableArticle(helpConfiguration.isShowArticle())
+                        .enableRelatedTopics(helpConfiguration.isShowRelatedTopics())
+                        .build();
                 JComponent jTitleComponent = contextualTitleComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
-                        .enableTitle(helpConfiguration.isShowTitle())
-                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
+                        .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
+                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
                         .build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
                 popover.setContentBackground(bgColor);
-                popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
+                popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
+                if(helpConfiguration.isShowSeparator()) {
+                    popover.addSeparator();
+                    popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
+                }
                 popover.clear();
+                popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
                 popover.setIconPath(helpConfiguration.getCloseIconPath());

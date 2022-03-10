@@ -108,6 +108,20 @@ public interface HelpConfiguration {
     void setSummaryDisplay(boolean enabled);
 
     /**
+     * Return the status for the popover display.
+     *
+     * @return the state
+     */
+    boolean isHoverDisplayPopover();
+
+    /**
+     * If true, the popover will be displayed when the mouse is hover it
+     *
+     * @param enabled the new state to set
+     */
+    void setHoverDisplayPopover(boolean enabled);
+
+    /**
      * Return true if the title is shown in the component
      *
      * @return true if visible
@@ -122,6 +136,33 @@ public interface HelpConfiguration {
     void setShowTitle(boolean showTitle);
 
     /**
+     * Return true if the related topics are shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowRelatedTopics();
+
+    /**
+     * Set the visibility of the related topics
+     *
+     * @param showRelatedTopics the visibility status to set
+     */
+    void setShowRelatedTopics(boolean showRelatedTopics);
+  
+    /** Return true if the article is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowArticle();
+
+    /**
+     * Set the visibility of the article
+     *
+     * @param showArticle the visibility status to set
+     */
+    void setShowArticle(boolean showArticle);
+
+    /**
      * Return the background color
      *
      * @return the background color
@@ -134,6 +175,20 @@ public interface HelpConfiguration {
      * @param backgroundColor the color to set
      */
     void setBackgroundColor(int backgroundColor);
+
+    /**
+     * Return true if the separator is shown in the component
+     *
+     * @return true if visible
+     */
+    boolean isShowSeparator();
+
+    /**
+     * Set the visibility of the separator
+     *
+     * @param showSeparator the visibility status to set
+     */
+    void setShowSeparator(boolean showSeparator);
 
     /**
      * Return the underline color
@@ -184,6 +239,49 @@ public interface HelpConfiguration {
      * @return the path
      */
     String getViewerDesktopPath();
+  
+    /**
+     * Return the selected viewer type between : SYSTEM_BROWSER, EDC_DESKTOP_VIEWER and EMBEDDED_VIEWER
+     *
+     * @return Enum for the viewer selected
+     */
+    HelpViewer getHelpViewer();
+
+    /**
+     * Define the selected viewer type to display documentation
+     *
+     * @param viewer the viewer type to set
+     */
+    void setHelpViewer(HelpViewer viewer);
+
+
+    /**
+     * Define the path to the location of the application executable
+     *
+     * @param path to executable
+     */
+    void setViewerDesktopPath(String path);
+
+    /**
+     * Return the path of the executable
+     *
+     * @return the path
+     */
+    String getViewerDesktopPath();
+
+    /**
+     * Return the enum placement
+     *
+     * @return Enum
+     */
+    PopoverPlacement getPopoverPlacement();
+
+    /**
+     * Define the placement of popover
+     *
+     * @param popoverPlacement
+     */
+    void setPopoverPlacement(PopoverPlacement popoverPlacement);
 
     /**
      * Return the mode
@@ -193,6 +291,20 @@ public interface HelpConfiguration {
     boolean isAutoDisabledInMissingContent();
 
     /**
+     * Return true if the tooltip is shown when mouse is hover the component
+     *
+     * @return true if visible
+     */
+    boolean isShowTooltip();
+
+    /**
+     * Set the visibility of the tooltip
+     *
+     * @param showTooltip the visibility status to set
+     */
+    void setShowTooltip(boolean showTooltip);
+
+    /**
      * Define the behavior to auto disabled the component if the content doesn't exist.
      *
      * @param state the state to defined
@@ -200,7 +312,34 @@ public interface HelpConfiguration {
     void setAutoDisabledInMissingContent(boolean state);
 
     /**
-     * Return the font attributes of the header title
+     * Return the font attributes of the popover section title
+     *
+     * @return the font attributes
+     */
+    Font getPopoverSectionTitleFont();
+
+    /**
+     * Define font attributes for the popover section title
+     *
+     * @param fontAttr
+     */
+    void setPopoverSectionTitleFont(Font fontAttr);
+
+    /**
+     * Return the popover section title color
+     *
+     * @return the color
+     */
+    Color getPopoverSectionTitleColor();
+
+    /**
+     * Define the popover section title color
+     *
+     * @param popoverTitleColor
+     */
+    void setPopoverSectionTitleColor(Color popoverTitleColor);
+
+    /** Return the font attributes of the header title
      *
      * @return the fonts attributes
      */

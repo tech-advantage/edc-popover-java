@@ -1,7 +1,8 @@
 package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
-
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  * Builder to configure a contextual component.
@@ -23,6 +24,36 @@ public interface ContextualContentComponentBuilder<T> {
      * @return the builder
      */
     ContextualContentComponentBuilder<T> setBackgroundColor(int rgbColor);
+
+    /**
+     * Enable the related topics display
+     *
+     * @param enable
+     * @return true if is related topics enabled
+     */
+    ContextualContentComponentBuilder<T> enableRelatedTopics(boolean enable);
+
+     /** Define the article title color
+     *
+     * @param titleColor
+     * @return title color
+     */
+    ContextualContentComponentBuilder<T> setPopoverSectionTitleColor(Color titleColor);
+
+    /**
+     * Define the font attributes of article title
+     *
+     * @param fontAttr
+     * @return the builder
+     */
+    ContextualContentComponentBuilder<T> setPopoverSectionTitleFont(Font fontAttr);
+
+     /** Enable the article display
+     *
+     * @param enable
+     * @return true if is article enabled
+     */
+    ContextualContentComponentBuilder<T> enableArticle(boolean enable);
 
     /**
      * Build the contextual component.

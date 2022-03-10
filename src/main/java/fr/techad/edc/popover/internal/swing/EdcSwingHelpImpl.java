@@ -43,6 +43,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         JComponent component = contextualComponentBuilder.setKeys(mainKey, subKey, languageCode)
                 .setIconPath(iconPath)
                 .setLabel(helpConfiguration.getTooltipLabel())
+                .showTooltip(helpConfiguration.isShowTooltip())
                 .build();
         if (helpConfiguration.isAutoDisabledInMissingContent()) {
             boolean enabled = false;
@@ -91,6 +92,16 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         helpConfiguration.setWidthBrowser(width);
         helpConfiguration.setHeightBrowser(height);
+    }
+
+    @Override
+    public void setPopoverSectionTitleColor(Color titleColor) {
+        getHelpConfiguration().setPopoverSectionTitleColor(titleColor);
+    }
+
+    @Override
+    public void setPopoverSectionTitleFont(Font fontAttr) {
+        getHelpConfiguration().setPopoverSectionTitleFont(fontAttr);
     }
 
     @Override

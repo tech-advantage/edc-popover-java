@@ -3,7 +3,9 @@ package fr.techad.edc.popover.internal;
 import fr.techad.edc.popover.EdcHelp;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.PopoverPlacement;
 
+import java.awt.Font;
 import javax.inject.Inject;
 import java.awt.Font;
 
@@ -39,8 +41,14 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setSummaryDisplay(boolean enable) {
-        helpConfiguration.setSummaryDisplay(enable);
+    public void setSummaryDisplay(boolean enable) { helpConfiguration.setSummaryDisplay(enable); }
+
+    @Override
+    public void setHoverDisplayPopover(boolean enable) { helpConfiguration.setHoverDisplayPopover(enable); }
+
+    @Override
+    public void setHelpViewer(HelpViewer state) {
+        helpConfiguration.setHelpViewer(state);
     }
 
     @Override
@@ -52,6 +60,16 @@ public class EdcHelpImpl implements EdcHelp {
     public void setViewerDesktopPath(String path) {
         helpConfiguration.setViewerDesktopPath(path);
     }
+  
+    @Override
+    public void setViewerDesktopPath(String path) {
+        helpConfiguration.setViewerDesktopPath(path);
+    }
+
+    @Override
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        helpConfiguration.setPopoverPlacement(placement);
+    }
 
     @Override
     public void setAutoDisabledMode(boolean state) {
@@ -59,9 +77,33 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setTooltipDisplay(boolean enable) {
+        helpConfiguration.setShowTooltip(enable);
+    }
+
+    @Override
+    public void setArticleDisplay(boolean enable) {
+        helpConfiguration.setShowArticle(enable);
+    }
+
+    @Override
+    public void setSeparatorDisplay(boolean enable) {
+        helpConfiguration.setShowSeparator(enable);
+    }
+
+    @Override
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }
+
+    @Override
+    public void setRelatedTopicsDisplay(boolean enable) {
+        helpConfiguration.setShowRelatedTopics(enable);
+    }
+    
+    @Override
+    public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
+
 
     @Override
     public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
