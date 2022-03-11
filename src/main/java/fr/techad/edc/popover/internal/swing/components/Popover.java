@@ -97,7 +97,9 @@ public class Popover extends JFrame {
                 }
             }
         });
+    }
 
+    public void hidePopover(){
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
