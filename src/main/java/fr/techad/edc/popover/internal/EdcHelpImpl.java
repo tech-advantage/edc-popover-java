@@ -9,7 +9,6 @@ import fr.techad.edc.popover.model.PopoverPlacement;
 
 import java.awt.Font;
 import javax.inject.Inject;
-import java.awt.Font;
 
 /**
  * Edc Help Implementation.
@@ -98,11 +97,6 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setSeparatorDisplay(boolean enable) {
-        helpConfiguration.setShowSeparator(enable);
-    }
-
-    @Override
     public void setRelatedTopicsDisplay(boolean enable) {
         helpConfiguration.setShowRelatedTopics(enable);
     }
@@ -110,10 +104,8 @@ public class EdcHelpImpl implements EdcHelp {
     @Override
     public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
 
-
     @Override
     public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
-
 
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;

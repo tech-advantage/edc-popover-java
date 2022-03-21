@@ -60,13 +60,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
                 .build();
 
         if (helpConfiguration.getIconState() == IconState.DISABLED) {
-            boolean enabled = false;
-            try {
-                enabled = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
-            } catch (InvalidUrlException | IOException e) {
-                LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
-            }
-            component.setEnabled(enabled);
+            component.setEnabled(enableContextItem);
         }
 
         return component;

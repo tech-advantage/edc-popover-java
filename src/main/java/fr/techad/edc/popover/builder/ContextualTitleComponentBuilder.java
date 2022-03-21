@@ -1,10 +1,7 @@
 package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
-import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.model.ErrorBehavior;
-
-import java.io.IOException;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -74,5 +71,5 @@ public interface ContextualTitleComponentBuilder<T> {
      *
      * @return the contextual component
      */
-    T build() throws InvalidUrlException, IOException;
+    T build();
 }

@@ -31,6 +31,7 @@ public class IconButtonListener implements HelpListener {
     private final ContextualTitleComponentBuilder<JComponent> contextualTitleComponentBuilder;
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
+    private ContextItem contextItem = null;
 
     private String mainKey;
     private String subKey;
@@ -58,6 +59,7 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
     }
 
     @Override
@@ -68,14 +70,23 @@ public class IconButtonListener implements HelpListener {
     @Override
     public void mouseReleased(MouseEvent e) {
 
-        if(this.helpConfiguration.getIconState() != IconState.DISABLED){
-            if (this.helpConfiguration.getSummaryDisplay()) {
+        try {
+            contextItem = edcClient.getContextItem(mainKey, subKey, helpConfiguration.getLanguageCode());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (InvalidUrlException ex) {
+            ex.printStackTrace();
+        }
+
+        if(contextItem == null && helpConfiguration.getIconState() == IconState.DISABLED){
+            return;
+        } else {
+            if (helpConfiguration.getSummaryDisplay()) {
                 openPopover(e.getXOnScreen(), e.getYOnScreen());
             } else {
                 openBrowser();
             }
         }
-
     }
 
     @Override
@@ -121,7 +132,6 @@ public class IconButtonListener implements HelpListener {
                 JComponent jTitleComponent = contextualTitleComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
-                        .enableTitle(helpConfiguration.isShowTitle())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
                         .setShowTitle(helpConfiguration.isShowTitle())

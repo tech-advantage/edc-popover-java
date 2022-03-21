@@ -41,65 +41,67 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
         this.mainKey = mainKey;
         this.subKey = subKey;
         this.languageCode=languageCode;
+        LOGGER.debug("Set Keys: {}, {}, {}", mainKey, subKey, languageCode);
         return this;
     }
 
     @Override
     public ContextualComponentBuilder<JComponent> setIconPath(String iconPath) {
         this.iconPath = iconPath;
+        LOGGER.debug("Set Icon Path: {}", iconPath);
         return this;
     }
 
     @Override
     public ContextualComponentBuilder<JComponent> setEnableContextItem(boolean enable) {
         this.enableMainKey = enable;
+        LOGGER.debug("Enable Main Key: {}", enableMainKey);
         return this;
     }
 
     @Override
     public ContextualComponentBuilder<JComponent> setErrorIconPath(String iconPath) {
         this.errorIconPath = iconPath;
+        LOGGER.debug("Set Error Icon Path: {}", errorIconPath);
         return this;
     }
 
     @Override
     public ContextualComponentBuilder<JComponent> setErrorBehavior(ErrorBehavior errorBehavior) {
         this.errorBehavior = errorBehavior;
+        LOGGER.debug("Set Error Behavior: {}", errorBehavior);
         return this;
     }
 
     @Override
     public ContextualComponentBuilder<JComponent> setIconState(IconState iconState) {
         this.iconState = iconState;
+        LOGGER.debug("Set Icon State: {}", iconState);
         return this;
     }
 
     @Override
     public ContextualComponentBuilder<JComponent> setLabel(String label) {
         this.label = label;
+        LOGGER.debug("Set Label: {}", label);
         return this;
     }
 
     @Override
-    public JComponent build(){
-        ImageIcon imageIcon = ImageIconCreator.
-                createImageIcon(errorBehavior == ErrorBehavior.NO_POPOVER && !enableMainKey ||
-                                iconState == IconState.HIDDEN && !enableMainKey ?
-                                "" : iconState == IconState.ERROR && !enableMainKey ?
-                                errorIconPath : iconPath
-                );
-        IconButton iconButton = new IconButton(label, imageIcon);
-    }
-  
-    @Override
     public ContextualComponentBuilder<JComponent> showTooltip(boolean enable) {
         this.showTooltip = enable;
+        LOGGER.debug("Show Tooltip: {}", showTooltip);
         return this;
     }
 
     @Override
     public JComponent build() {
-        ImageIcon imageIcon = ImageIconCreator.createImageIcon(iconPath);
+        ImageIcon imageIcon = ImageIconCreator.createImageIcon(
+                errorBehavior == ErrorBehavior.NO_POPOVER && !enableMainKey ||
+                        iconState == IconState.HIDDEN && !enableMainKey ?
+                        "" : iconState == IconState.ERROR && !enableMainKey ?
+                        errorIconPath : iconPath
+        );
         IconButton iconButton = new IconButton(showTooltip ? label : null, imageIcon);
         HelpListener helpListener = helpListenerProvider.get();
         helpListener.setKeys(mainKey, subKey);

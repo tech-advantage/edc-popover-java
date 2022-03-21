@@ -6,7 +6,6 @@ import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
-
 import java.awt.Font;
 import java.awt.Color;
 
@@ -164,11 +163,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public HelpViewer getHelpViewer(){
         return this.helpViewer;
-    }
-
-    @Override
-    public boolean isShowTitle() {
-        return showTitle;
     }
   
     @Override
