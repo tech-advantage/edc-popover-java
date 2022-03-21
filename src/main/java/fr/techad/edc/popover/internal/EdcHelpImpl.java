@@ -47,7 +47,7 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setSummaryDisplay(boolean enable) { helpConfiguration.setSummaryDisplay(enable); }
+    public void setPopoverDisplay(boolean enable) { helpConfiguration.setPopoverDisplay(enable); }
 
     @Override
     public void setHoverDisplayPopover(boolean enable) { helpConfiguration.setHoverDisplayPopover(enable); }

@@ -18,8 +18,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private String errorIconPath = "icons/icon_exclamation-32px.png";
     private String languageCode = "en";
     private String tooltipLabel = null;
-    private boolean summaryDisplay = false;
     private boolean popoverDisplay = false;
+    private boolean hoverPopoverDisplay = false;
     private int backgroundColor;
     private boolean internalBrowser = true;
     private int widthBrowser = 1024;
@@ -116,23 +116,19 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public boolean getSummaryDisplay() {
-        return this.summaryDisplay;
-    }
+    public boolean getPopoverDisplay() { return this.popoverDisplay; }
 
     @Override
-    public void setSummaryDisplay(boolean enabled) {
-        this.summaryDisplay = enabled;
-    }
+    public void setPopoverDisplay(boolean enabled) { this.popoverDisplay = enabled; }
 
     @Override
     public boolean isHoverDisplayPopover() {
-        return this.popoverDisplay;
+        return this.hoverPopoverDisplay;
     }
 
     @Override
     public void setHoverDisplayPopover(boolean enabled) {
-        this.popoverDisplay = enabled;
+        this.hoverPopoverDisplay = enabled;
     }
 
     @Override

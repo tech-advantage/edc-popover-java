@@ -107,8 +107,8 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setSummaryDisplay(boolean enable) {
-        edcSwingHelp.setSummaryDisplay(enable);
+    public void setPopoverDisplay(boolean enable) {
+        edcSwingHelp.setPopoverDisplay(enable);
     }
 
     @Override

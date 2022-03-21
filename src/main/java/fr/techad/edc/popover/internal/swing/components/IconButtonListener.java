@@ -81,19 +81,17 @@ public class IconButtonListener implements HelpListener {
         if(contextItem == null && helpConfiguration.getIconState() == IconState.DISABLED){
             return;
         } else {
-            if (helpConfiguration.getSummaryDisplay()) {
-                openPopover(e.getXOnScreen(), e.getYOnScreen());
+            if (this.helpConfiguration.getPopoverDisplay()) {
+               openPopover(e.getXOnScreen(), e.getYOnScreen());
             } else {
-                openBrowser();
+               openBrowser();
             }
         }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if(helpConfiguration.isHoverDisplayPopover()) {
-            openPopover(e.getXOnScreen(), e.getYOnScreen());
-        }
+        
     }
 
     @Override

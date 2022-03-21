@@ -56,10 +56,9 @@ public interface EdcHelp {
 
     /**
      * Active or deactivate the summary display. A summary is displayed on click on the component help else the help is opened.
-     *
      * @param enable the new status
      */
-    void setSummaryDisplay(boolean enable);
+    void setPopoverDisplay(boolean enable);
 
     /**
      * Active or deactivate the popover display when the mouse is over it.
