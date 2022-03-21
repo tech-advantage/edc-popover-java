@@ -17,6 +17,9 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static fr.techad.edc.client.model.I18nTranslation.ARTICLES_KEY;
+import static fr.techad.edc.client.model.I18nTranslation.LINKS_KEY;
+
 /**
  * TECH ADVANTAGE
  * All right reserved

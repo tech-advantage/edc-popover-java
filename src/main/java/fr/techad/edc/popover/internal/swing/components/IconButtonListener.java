@@ -74,7 +74,9 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+        if (this.helpConfiguration.getPopoverDisplay()) {
+            openPopover(e.getXOnScreen(), e.getYOnScreen());
+        }
     }
 
     @Override
@@ -130,7 +132,7 @@ public class IconButtonListener implements HelpListener {
                 popover.setVisible(true);
                 popover.setLocation(x, y);
                 if(helpConfiguration.isHoverDisplayPopover()){
-                    popover.hidePopover();
+                    popover.hideOnHover();
                 }
                 LOGGER.debug("Popover size: {}", popover.getSize());
                 LOGGER.debug("component size: {}", jBodyComponent.getSize());

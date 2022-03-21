@@ -99,16 +99,18 @@ public class Popover extends JFrame {
         });
     }
 
-    public void hidePopover(){
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                Rectangle popoverBounds = e.getComponent().getBounds();
-                boolean contain = popoverBounds.contains(e.getXOnScreen(), e.getYOnScreen());
+    public void hideOnHover(){
+        if(this.getMouseListeners().length == 0){
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    Rectangle popoverBounds = e.getComponent().getBounds();
+                    boolean contain = popoverBounds.contains(e.getXOnScreen(), e.getYOnScreen());
 
-                Popover.this.setVisible(contain);
-            }
-        });
+                    Popover.this.setVisible(contain);
+                }
+            });
+        }
     }
 
     /**
