@@ -72,10 +72,8 @@ public class IconButtonListener implements HelpListener {
 
         try {
             contextItem = edcClient.getContextItem(mainKey, subKey, helpConfiguration.getLanguageCode());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (InvalidUrlException ex) {
-            ex.printStackTrace();
+        } catch (IOException | InvalidUrlException exception) {
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, helpConfiguration.getLanguageCode());
         }
 
         if(contextItem == null && helpConfiguration.getIconState() == IconState.DISABLED){

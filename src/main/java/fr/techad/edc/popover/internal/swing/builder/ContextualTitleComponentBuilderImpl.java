@@ -101,10 +101,8 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
 
         try {
             container.add(getBody(), BorderLayout.CENTER);
-        } catch (InvalidUrlException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (InvalidUrlException | IOException e) {
+            LOGGER.error("Error during the body creation", e);
         }
 
         return container;
