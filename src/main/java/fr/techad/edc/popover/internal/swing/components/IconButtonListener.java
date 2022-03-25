@@ -132,7 +132,7 @@ public class IconButtonListener implements HelpListener {
                 popover.setVisible(true);
                 popover.setLocation(x, y);
                 if(helpConfiguration.isHoverDisplayPopover()){
-                    popover.hideOnHover();
+                    popover.enableCloseOnLostFocus();
                 }
                 LOGGER.debug("Popover size: {}", popover.getSize());
                 LOGGER.debug("component size: {}", jBodyComponent.getSize());

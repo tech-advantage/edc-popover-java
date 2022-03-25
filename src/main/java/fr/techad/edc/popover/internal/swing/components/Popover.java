@@ -99,7 +99,7 @@ public class Popover extends JFrame {
         });
     }
 
-    public void hideOnHover(){
+    public void enableCloseOnLostFocus(){
         if(this.getMouseListeners().length == 0){
             this.addMouseListener(new MouseAdapter() {
                 @Override
