@@ -46,9 +46,12 @@ We will be able to configure the url to get the documentation and the widget pro
 | Title color | ``setPopoverSectionTitleColor`` | BLACK | Color of the popover section title in the help dialog |
 | Font attributes | ``setFontAttributes`` | "Dialog", Font.BOLD, 20 | Font attributes of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
+| Error Icon | ``setErrorIconPath`` | icons/icon_exclamation-32px.png | The error icon displays in the component |
 | Popover placement | ``setPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |
 | Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
 | Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
+| Error behavior | ``setErrorBehavior`` | ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER | Set the error behavior of popover |
+| Icon state | ``setIconState`` | ERROR, SHOWN, HIDDEN, DISABLED | Set the icon behavior of popover |
 | Related topics display | ``setRelatedTopicsDisplay`` | Enable the related topics |
 | Article display | ``setArticleDisplay`` | Enable the article |
 

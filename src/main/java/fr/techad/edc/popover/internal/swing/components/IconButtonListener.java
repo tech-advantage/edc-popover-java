@@ -5,7 +5,9 @@ import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.swing.HelpListener;
 import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
@@ -29,6 +31,7 @@ public class IconButtonListener implements HelpListener {
     private final ContextualTitleComponentBuilder<JComponent> contextualTitleComponentBuilder;
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
+    private ContextItem contextItem = null;
 
     private String mainKey;
     private String subKey;
@@ -56,6 +59,7 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
     }
 
     @Override
@@ -65,10 +69,21 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (this.helpConfiguration.getPopoverDisplay()) {
-            openPopover(e.getXOnScreen(), e.getYOnScreen());
+
+        try {
+            contextItem = edcClient.getContextItem(mainKey, subKey, helpConfiguration.getLanguageCode());
+        } catch (IOException | InvalidUrlException exception) {
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, helpConfiguration.getLanguageCode());
+        }
+
+        if(contextItem == null && helpConfiguration.getIconState() == IconState.DISABLED){
+            return;
         } else {
-            openBrowser();
+            if (this.helpConfiguration.getPopoverDisplay()) {
+               openPopover(e.getXOnScreen(), e.getYOnScreen());
+            } else {
+               openBrowser();
+            }
         }
     }
 
@@ -99,10 +114,12 @@ public class IconButtonListener implements HelpListener {
     private void openPopover(int x, int y) {
         try {
             ContextItem contextItem = edcClient.getContextItem(mainKey, subKey, this.helpConfiguration.getLanguageCode());
-            if (contextItem != null || !helpConfiguration.isAutoDisabledInMissingContent()) {
+            if (contextItem != null || helpConfiguration.getErrorBehavior() != ErrorBehavior.NO_POPOVER) {
                 JComponent jBodyComponent = contextualContentComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
+                        .setErrorBehavior(helpConfiguration.getErrorBehavior())
+                        .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
                         .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
                         .enableArticle(helpConfiguration.isShowArticle())
@@ -111,11 +128,13 @@ public class IconButtonListener implements HelpListener {
                 JComponent jTitleComponent = contextualTitleComponentBuilder
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
+                        .setLanguageCode(helpConfiguration.getLanguageCode())
+                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
                         .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
-                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
                         .build();
                 Color bgColor = new Color(helpConfiguration.getBackgroundColor());
+
                 popover.setContentBackground(bgColor);
                 popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
                 if(helpConfiguration.isShowSeparator()) {
@@ -123,15 +142,20 @@ public class IconButtonListener implements HelpListener {
                     popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
                 }
                 popover.clear();
+                popover.addHeaderPanel();
                 popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
+
                 popover.setIconPath(helpConfiguration.getCloseIconPath());
                 popover.pack();
                 popover.setVisible(true);
                 popover.setLocation(x, y);
                 LOGGER.debug("Popover size: {}", popover.getSize());
                 LOGGER.debug("component size: {}", jBodyComponent.getSize());
+            }
+            if(contextItem == null && helpConfiguration.getErrorBehavior() == ErrorBehavior.FRIENDLY_MSG){
+                popover.removeHeaderPanel();
             }
         } catch (InvalidUrlException | IOException e) {
             LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, this.helpConfiguration.getLanguageCode());

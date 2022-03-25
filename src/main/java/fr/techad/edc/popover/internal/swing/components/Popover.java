@@ -61,14 +61,16 @@ public class Popover extends JFrame {
         setAlwaysOnTop(true);
         setFocusableWindowState(true);
         getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
-        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.lightGray));
+        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(60, 141, 188)));
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
         // Header Panel (Contains the title and the closable icon if it's top position)
+        headerSeparator = new JSeparator();
         this.headerPanel = new JPanel(new BorderLayout());
+        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
 
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
         // Body Panel (contains the brick information)
@@ -98,6 +100,27 @@ public class Popover extends JFrame {
                 }
             }
         });
+    }
+
+    public void addHeaderPanel(){
+        if(headerSeparator == null){
+            headerSeparator = new JSeparator();
+        }
+
+        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
+        mainPanel.add(this.headerPanel, BorderLayout.NORTH);
+    }
+
+    public void removeHeaderPanel(){
+        if(this.headerSeparator != null){
+            this.headerPanel.remove(headerSeparator);
+        }
+        if(this.headerPanel != null){
+            mainPanel.remove(this.headerPanel);
+        }
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 
     /**
@@ -145,7 +168,6 @@ public class Popover extends JFrame {
     public final void setClosePosition(int closePosition) {
         if (this.closableComponent != null)
             mainPanel.remove(this.closableComponent);
-        String borderLayout = BorderLayout.NORTH;
         if (closePosition == TOP) {
             this.closableComponent = getHeader();
             this.headerPanel.add(this.closableComponent, BorderLayout.EAST);
@@ -192,6 +214,7 @@ public class Popover extends JFrame {
             padX = 5;
 
         LOGGER.debug("full width: {}", x + width + padX);
+
         if (x + width + padX > widthDisplay) {
             newX = x - width;
             reverseX = true;
