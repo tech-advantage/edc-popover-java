@@ -1,6 +1,8 @@
 package fr.techad.edc.popover.builder;
 
 import fr.techad.edc.client.model.ContextItem;
+import fr.techad.edc.popover.model.ErrorBehavior;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -26,7 +28,22 @@ public interface ContextualContentComponentBuilder<T> {
     ContextualContentComponentBuilder<T> setBackgroundColor(int rgbColor);
 
     /**
-     * Enable the related topics display
+     * Define the error behavior
+     *
+     * @param errorBehavior
+     * @return
+     */
+    ContextualContentComponentBuilder<T> setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Define the language code
+     *
+     * @param languageCode
+     * @return
+     */
+    ContextualContentComponentBuilder<T> setLanguageCode(String languageCode);
+  
+    /** Enable the related topics display
      *
      * @param enable
      * @return true if is related topics enabled

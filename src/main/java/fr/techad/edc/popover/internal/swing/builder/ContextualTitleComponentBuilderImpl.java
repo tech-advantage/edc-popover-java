@@ -1,13 +1,23 @@
 package fr.techad.edc.popover.internal.swing.builder;
 
+import com.google.common.collect.Sets;
+import fr.techad.edc.client.EdcClient;
+
 import fr.techad.edc.client.model.ContextItem;
+import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
-import org.apache.commons.lang3.StringUtils;
+import static fr.techad.edc.client.model.I18nTranslation.ERROR_TITLE_KEY;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.Set;
+
+
 
 /**
  * TECH ADVANTAGE
@@ -17,11 +27,20 @@ import java.awt.*;
 public class ContextualTitleComponentBuilderImpl implements ContextualTitleComponentBuilder<JComponent> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContextualTitleComponentBuilderImpl.class);
+    private final EdcClient edcClient;
     private ContextItem contextItem;
     private boolean showTitle = true;
     private Color backgroundColor = Color.WHITE;
+    private ErrorBehavior errorBehavior;
+    private String languageCode = "en";
+    private final JLabel errorTitle = new JLabel("Error");
     private Color titleColor = Color.BLACK;
     private Font headerFontAttributes;
+
+    @Inject
+    public ContextualTitleComponentBuilderImpl(EdcClient edcClient) {
+        this.edcClient = edcClient;
+    }
 
     @Override
     public ContextualTitleComponentBuilder<JComponent> setContextItem(ContextItem contextItem) {
@@ -33,25 +52,42 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     @Override
     public ContextualTitleComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
-        LOGGER.debug("Set background color: {}", this.backgroundColor);
+        LOGGER.debug("Set Background Color: {}", backgroundColor);
         return this;
     }
 
     @Override
     public ContextualTitleComponentBuilder<JComponent> setShowTitle(boolean enable) {
         this.showTitle = enable;
+        LOGGER.debug("Set Show Title: {}", showTitle);
         return this;
     }
 
     @Override
     public ContextualTitleComponentBuilder<JComponent> setHeaderFontAttributes(Font fontAttributes) {
         this.headerFontAttributes = fontAttributes;
+        LOGGER.debug("Set Header Font Attributes: {}", headerFontAttributes);
         return this;
     }
 
     @Override
     public ContextualTitleComponentBuilder<JComponent> setHeaderTitleColor(Color titleColor) {
         this.titleColor = titleColor;
+        LOGGER.debug("Set Header Title Color: {}", titleColor);
+        return this;
+    }
+
+    @Override
+    public ContextualTitleComponentBuilder<JComponent> setErrorBehavior(ErrorBehavior errorBehavior) {
+        this.errorBehavior = errorBehavior;
+        LOGGER.debug("Set Error Behavior: {}", errorBehavior);
+        return this;
+    }
+
+    @Override
+    public ContextualTitleComponentBuilder<JComponent> setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+        LOGGER.debug("Set Language Code: {}", languageCode);
         return this;
     }
 
@@ -62,25 +98,57 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
         JPanel container = new JPanel();
         container.setBackground(backgroundColor);
         container.setLayout(new BorderLayout());
-        container.add(getBody(), BorderLayout.CENTER);
+
+        try {
+            container.add(getBody(), BorderLayout.CENTER);
+        } catch (InvalidUrlException | IOException e) {
+            LOGGER.error("Error during the body creation", e);
+        }
+
         return container;
     }
 
-    private JComponent getBody() {
-        JLabel label;
-        String title = StringUtils.EMPTY;
-        if (this.showTitle) {
+    private JComponent getBody() throws InvalidUrlException, IOException {
+        Set<String> languagesCodes = Sets.newHashSet();
+        languagesCodes.add(languageCode);
+
+        String errorTitleFromLanguage = getLabel(ERROR_TITLE_KEY.getValue(), languageCode, null);
+        JLabel jLabelError = new JLabel();
+
+        if (this.showTitle || errorBehavior == ErrorBehavior.ERROR_SHOWN) {
+            if(!errorTitleFromLanguage.isEmpty()){
+                errorTitle.setText(errorTitleFromLanguage);
+            }
+            jLabelError = errorTitle;
+        }
+
+        if (this.showTitle || errorBehavior != ErrorBehavior.FRIENDLY_MSG) {
             if (contextItem != null) {
-                title = contextItem.getLabel();
-            } else {
-                title = "No title";
+                jLabelError.setText(contextItem.getLabel());
             }
         }
-        label = new JLabel(title);
 
-        label.setFont(headerFontAttributes);
-        label.setForeground(titleColor);
-        label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
-        return label;
+        jLabelError.setFont(headerFontAttributes);
+        jLabelError.setForeground(titleColor);
+        jLabelError.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
+        return jLabelError;
+    }
+
+    /**
+     * Return the translated label for the given key
+     * (Need more..., Related topics..)
+     *
+     * If there's no exported content in the requested language,
+     * or the labels translation file was not found,
+     * publication default language will be used instead
+     *
+     * @param key the translation key
+     * @param languageCode the language code
+     * @param publicationId the publication identifier, for the default language
+     * @return the translated label corresponding to the key, in the requested or default language
+     */
+    private String getLabel(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
+        LOGGER.debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
+        return this.edcClient.getLabel(key ,languageCode, publicationId);
     }
 }

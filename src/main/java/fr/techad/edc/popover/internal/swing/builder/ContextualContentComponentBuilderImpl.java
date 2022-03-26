@@ -1,12 +1,15 @@
 package fr.techad.edc.popover.internal.swing.builder;
 
+import com.google.common.collect.Sets;
 import fr.techad.edc.client.EdcClient;
-import fr.techad.edc.client.internal.TranslationConstants;
+import fr.techad.edc.client.internal.io.HttpReaderImpl;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.DocumentationItem;
+import static fr.techad.edc.client.model.I18nTranslation.*;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.internal.swing.components.Popover;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.*;
 
 import static fr.techad.edc.client.model.I18nTranslation.ARTICLES_KEY;
 import static fr.techad.edc.client.model.I18nTranslation.LINKS_KEY;
@@ -32,6 +36,12 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private final Popover popover;
     private ContextItem contextItem;
     private Color backgroundColor = Color.WHITE;
+    private ErrorBehavior errorBehavior;
+    private JLabel jLabelError = new JLabel("Error");
+    private final JLabel friendlyMessage = new JLabel("Contextual help is coming soon.");
+    private final JLabel errorMessage = new JLabel("<html>An error occurred when fetching data ! <br/> Check the brick keys provided to the EdcHelp component.</html>");
+    private HttpReaderImpl httpReader;
+    private String languageCode = "en";
     private boolean enableRelatedTopics = true;
     private Color popoverSectionTitleColor = Color.BLACK;
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
@@ -54,35 +64,49 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     @Override
     public ContextualContentComponentBuilder<JComponent> setBackgroundColor(int rgbColor) {
         this.backgroundColor = new Color(rgbColor);
-        LOGGER.debug("Set background color: {}", this.backgroundColor);
+        LOGGER.debug("Set Background Color: {}", backgroundColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setErrorBehavior(ErrorBehavior errorBehavior) {
+        this.errorBehavior = errorBehavior;
+        LOGGER.debug("Set Error Behavior: {}", errorBehavior);
         return this;
     }
 
     @Override
     public ContextualContentComponentBuilder<JComponent> enableRelatedTopics(boolean enable) {
         this.enableRelatedTopics = enable;
-        LOGGER.debug("Set related topics display: {}", this.enableRelatedTopics);
+        LOGGER.debug("Enable Related Topics: {}", enableRelatedTopics);
         return this;
     }
-  
+
     @Override
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleFont(Font fontAttr) {
         this.popoverSectionTitleFont = fontAttr;
-        LOGGER.debug("Set popover section title font attributes: {}", this.popoverSectionTitleFont);
+        LOGGER.debug("Set Popover Section Title Font: {}", popoverSectionTitleFont);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+        LOGGER.debug("Set Language Code: {}", languageCode);
         return this;
     }
 
     @Override
     public ContextualContentComponentBuilder<JComponent> setPopoverSectionTitleColor(Color titleColor) {
         this.popoverSectionTitleColor = titleColor;
-        LOGGER.debug("Set popover section title color: {}", this.popoverSectionTitleColor);
+        LOGGER.debug("Set Popover Section Title Color: {}", popoverSectionTitleColor);
         return this;
     }
-  
+
     @Override
     public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
         this.enableArticle = enable;
-        LOGGER.debug("Set article display: {}", this.enableArticle);
+        LOGGER.debug("Enable Article: {}", enableArticle);
         return this;
     }
 
@@ -98,23 +122,22 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
             container.add(getBody(), BorderLayout.CENTER);
         } catch (InvalidUrlException | IOException e) {
             LOGGER.error("Error during the body creation", e);
-            container.add(getFailure(), BorderLayout.CENTER);
+            try{
+                container.add(getFailure(), BorderLayout.CENTER);
+            } catch(InvalidUrlException | IOException err) {
+                LOGGER.error("Error during the get failure method creation", err);
+            }
         }
 
         return container;
     }
 
     private JComponent getHeader() {
-        JLabel label;
+        JLabel label = new JLabel();
         if (contextItem != null) {
-            label = new JLabel(contextItem.getDescription());
+            label.setText(contextItem.getDescription());
             Font f = label.getFont();
             label.setFont(f.deriveFont((float) (f.getSize() + 1)));
-            label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
-        } else {
-            label = new JLabel("Warning");
-            Font f = label.getFont();
-            label.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD ^ f.getSize() + 1));
             label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         }
         return label;
@@ -124,6 +147,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         JPanel body = new JPanel();
         body.setLayout(new BorderLayout());
         body.setBackground(this.backgroundColor);
+
         if (contextItem != null) {
             LOGGER.debug("article size: {}", contextItem.articleSize());
             if (this.enableArticle && contextItem.articleSize() != 0) {
@@ -131,7 +155,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 articlePanel.setBackground(this.backgroundColor);
                 articlePanel.setLayout(new BoxLayout(articlePanel, BoxLayout.Y_AXIS));
                 articlePanel.setBorder(BorderFactory.createEmptyBorder(18, 0, 0, 0));
-                JLabel title = new JLabel(getLabel(TranslationConstants.ARTICLES_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
+                JLabel title = new JLabel(getLabel(ARTICLES_KEY.getValue(), contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 title.setForeground(popoverSectionTitleColor);
                 title.setFont(popoverSectionTitleFont);
                 articlePanel.add(title, BorderLayout.NORTH);
@@ -149,7 +173,7 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 linkPanel.setLayout(new BorderLayout());
                 linkPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
                 linkPanel.setBackground(this.backgroundColor);
-                JLabel title = new JLabel(getLabel(TranslationConstants.LINKS_KEY, contextItem.getLanguageCode(), contextItem.getPublicationId()));
+                JLabel title = new JLabel(getLabel(LINKS_KEY.getValue(), contextItem.getLanguageCode(), contextItem.getPublicationId()));
                 title.setForeground(popoverSectionTitleColor);
                 title.setFont(popoverSectionTitleFont);
                 linkPanel.add(title, BorderLayout.NORTH);
@@ -170,8 +194,37 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         return body;
     }
 
-    private JComponent getFailure() {
-        return new JLabel("Error to get information about this component");
+    public String addChar(String str, String character, int position) {
+        return str.substring(0, ++position) + character + str.substring(position);
+    }
+
+    private JComponent getFailure() throws InvalidUrlException, IOException {
+        Set<String> languagesCodes = Sets.newHashSet();
+        languagesCodes.add(languageCode);
+
+        String comingSoon = getLabel(COMING_SOON_KEY.getValue(), languageCode, null);
+        String failedData = getError(ERRORS_KEY.getValue(), languageCode, null);
+
+        if (errorBehavior == ErrorBehavior.ERROR_SHOWN) {
+            if(!failedData.isEmpty()){
+                errorMessage.setText("<html>" + addChar(failedData, "<br/>", failedData.indexOf("!")) + "</html>");
+            }
+            jLabelError = errorMessage;
+        }
+
+        if (errorBehavior == ErrorBehavior.FRIENDLY_MSG) {
+            if(!comingSoon.isEmpty()){
+                friendlyMessage.setText(comingSoon);
+            }
+            jLabelError = friendlyMessage;
+        }
+
+        jLabelError.setHorizontalAlignment(SwingConstants.CENTER);
+        Font f = jLabelError.getFont();
+        jLabelError.setFont(f.deriveFont(f.getStyle() ^ Font.PLAIN));
+        jLabelError.setBorder(BorderFactory.createEmptyBorder(6, 10, 0, 10));
+
+        return jLabelError;
     }
 
     private void openUrl(String url) {
@@ -214,5 +267,10 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private String getLabel(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
         LOGGER.debug("Getting label translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
         return this.edcClient.getLabel(key ,languageCode, publicationId);
+    }
+
+    private String getError(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
+        LOGGER.debug("Getting error translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
+        return this.edcClient.getError(key, languageCode, publicationId);
     }
 }

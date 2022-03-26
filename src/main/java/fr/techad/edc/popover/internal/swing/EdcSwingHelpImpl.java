@@ -6,6 +6,7 @@ import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.EdcHelpImpl;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.HelpListener;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     private final EdcClient edcClient;
     private final ContextualComponentBuilder<JComponent> contextualComponentBuilder;
     private final HelpListenerProvider helpListenerProvider;
+    private boolean enableContextItem = false;
 
     @Inject
     public EdcSwingHelpImpl(EdcClient edcClient, ContextualComponentBuilder<JComponent> contextualComponentBuilder, HelpConfiguration helpConfiguration, HelpListenerProvider helpListenerProvider) {
@@ -40,20 +42,27 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         String languageCode = helpConfiguration.getLanguageCode();
 
-        JComponent component = contextualComponentBuilder.setKeys(mainKey, subKey, languageCode)
+        try {
+            enableContextItem = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
+        } catch (InvalidUrlException | IOException e) {
+            LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
+        }
+
+        JComponent component = contextualComponentBuilder
+                .setKeys(mainKey, subKey, languageCode)
+                .setErrorBehavior(helpConfiguration.getErrorBehavior())
+                .setIconState(helpConfiguration.getIconState())
+                .setEnableContextItem(enableContextItem)
                 .setIconPath(iconPath)
+                .setErrorIconPath(helpConfiguration.getErrorIconPath())
                 .setLabel(helpConfiguration.getTooltipLabel())
                 .showTooltip(helpConfiguration.isShowTooltip())
                 .build();
-        if (helpConfiguration.isAutoDisabledInMissingContent()) {
-            boolean enabled = false;
-            try {
-                enabled = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
-            } catch (InvalidUrlException | IOException e) {
-                LOGGER.error("Impossible to get the context item for key ({}, {}) and languageCode: {}", mainKey, subKey, languageCode);
-            }
-            component.setEnabled(enabled);
+
+        if (helpConfiguration.getIconState() == IconState.DISABLED) {
+            component.setEnabled(enableContextItem);
         }
+
         return component;
     }
 

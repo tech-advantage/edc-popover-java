@@ -1,8 +1,11 @@
 package fr.techad.edc.popover;
 
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 import java.awt.Font;
+
 
 /**
  * Define the base functionality to manage the help display.
@@ -24,6 +27,12 @@ public interface EdcHelp {
      */
     void setCloseIconPath(String iconPath);
 
+    /**
+     * Define the path for the error icon to use.
+     *
+     * @param iconPath the icon path to set
+     */
+    void setErrorIconPath(String iconPath);
 
     /**
      * Define the language code which will be used to display the documentation and the popover labels.
@@ -74,6 +83,7 @@ public interface EdcHelp {
     void setViewerDesktopPath(String path);
 
     /**
+     * Show the title if enabled
      * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
      *
      * @param popoverPlacement
@@ -83,9 +93,9 @@ public interface EdcHelp {
     /**
      * Define the behavior : If true, the component will be disabled if the content is missing
      *
-     * @param state the state to set
+     * @param enable true to enable the title display.
      */
-    void setAutoDisabledMode(boolean state);
+    void setTitleDisplay(boolean enable);
 
     /**
      * Show the tooltip if enabled
@@ -94,18 +104,27 @@ public interface EdcHelp {
      */
     void setTooltipDisplay(boolean enable);
 
-     /** Show the separator if enabled
-     *
-     * @param enable true to enable the separator display.
+     /** 
+      * Define the error behavior of popover use with Enum Type: ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER
+      * Show the separator if enabled
+      *
+      * @param enable true to enable the separator display.
      */
     void setSeparatorDisplay(boolean enable);
 
     /**
      * Show the title if enabled
      *
-     * @param enable true to enable the title display.
+     * @param errorBehavior
      */
-    void setTitleDisplay(boolean enable);
+    void setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Define the icon state of popover use with Enum Type: ERROR, SHOWN, HIDDEN, DISABLED
+     *
+     * @param iconState
+     */
+    void setIconState(IconState iconState);
 
     /**
      * Show the related topics if enabled
