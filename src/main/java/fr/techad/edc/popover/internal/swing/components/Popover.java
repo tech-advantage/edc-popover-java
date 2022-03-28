@@ -8,8 +8,7 @@ import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
+import java.awt.event.*;
 
 /**
  * Popover to display the documentation.
@@ -100,6 +99,21 @@ public class Popover extends JFrame {
                 }
             }
         });
+    }
+
+
+    public void enableCloseOnLostFocus(){
+        if(this.getMouseListeners().length == 0){
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    Rectangle popoverBounds = e.getComponent().getBounds();
+                    boolean contain = popoverBounds.contains(e.getXOnScreen(), e.getYOnScreen());
+
+                    Popover.this.setVisible(contain);
+                }
+            });
+        }
     }
 
     public void addHeaderPanel(){

@@ -89,12 +89,13 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+        if (this.helpConfiguration.getPopoverDisplay()) {
+            openPopover(e.getXOnScreen(), e.getYOnScreen());
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     private void openBrowser() {
@@ -151,6 +152,9 @@ public class IconButtonListener implements HelpListener {
                 popover.pack();
                 popover.setVisible(true);
                 popover.setLocation(x, y);
+                if(helpConfiguration.isHoverDisplayPopover()){
+                    popover.enableCloseOnLostFocus();
+                }
                 LOGGER.debug("Popover size: {}", popover.getSize());
                 LOGGER.debug("component size: {}", jBodyComponent.getSize());
             }
