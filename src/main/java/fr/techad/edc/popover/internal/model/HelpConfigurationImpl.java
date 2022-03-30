@@ -173,15 +173,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public String getViewerDesktopPath() { return this.desktopViewerPath; }
 
     @Override
-    public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
-
-    @Override
-    public void setViewerDesktopPath(String desktopViewerPath) { this.desktopViewerPath = desktopViewerPath; }
-
-    @Override
-    public String getViewerDesktopPath() { return this.desktopViewerPath; }
-
-    @Override
     public boolean isAutoDisabledInMissingContent() {
         return autoDisabled;
     }

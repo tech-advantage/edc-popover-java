@@ -81,7 +81,6 @@ public class IconButtonListener implements HelpListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        popover.setVisible(false);
     }
 
     private void openBrowser() {
@@ -95,6 +94,8 @@ public class IconButtonListener implements HelpListener {
             LOGGER.error("Impossible to open the browser with url:{}", url);
         } catch (IOException e) {
             LOGGER.error("Error on IO", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -52,16 +52,6 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setHelpViewer(HelpViewer state) {
-        helpConfiguration.setHelpViewer(state);
-    }
-
-    @Override
-    public void setViewerDesktopPath(String path) {
-        helpConfiguration.setViewerDesktopPath(path);
-    }
-  
-    @Override
     public void setViewerDesktopPath(String path) {
         helpConfiguration.setViewerDesktopPath(path);
     }

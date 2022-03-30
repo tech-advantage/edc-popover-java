@@ -52,19 +52,6 @@ public interface EdcHelp {
      */
     void setSummaryDisplay(boolean enable);
 
-    /**
-     * Define the browser to use with Enum Type: DESKTOP_VIEWER, INTERNAL_BROWSER, BROWSER
-     *
-     * @param viewer
-     */
-    void setHelpViewer(HelpViewer viewer);
-
-    /**
-     * Define the path of the executable location
-     *
-     * @param path to executable
-     */
-    void setViewerDesktopPath(String path);
   
     /**
      * Active or deactivate the popover display when the mouse is over it.

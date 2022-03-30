@@ -239,35 +239,6 @@ public interface HelpConfiguration {
      * @return the path
      */
     String getViewerDesktopPath();
-  
-    /**
-     * Return the selected viewer type between : SYSTEM_BROWSER, EDC_DESKTOP_VIEWER and EMBEDDED_VIEWER
-     *
-     * @return Enum for the viewer selected
-     */
-    HelpViewer getHelpViewer();
-
-    /**
-     * Define the selected viewer type to display documentation
-     *
-     * @param viewer the viewer type to set
-     */
-    void setHelpViewer(HelpViewer viewer);
-
-
-    /**
-     * Define the path to the location of the application executable
-     *
-     * @param path to executable
-     */
-    void setViewerDesktopPath(String path);
-
-    /**
-     * Return the path of the executable
-     *
-     * @return the path
-     */
-    String getViewerDesktopPath();
 
     /**
      * Return the enum placement

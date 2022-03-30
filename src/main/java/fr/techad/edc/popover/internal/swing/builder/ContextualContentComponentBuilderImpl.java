@@ -179,6 +179,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
             LOGGER.error("Error on IO", e);
         } catch (URISyntaxException e) {
             LOGGER.error("Impossible to open the browser with url:{}", url);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
