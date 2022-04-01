@@ -68,7 +68,10 @@ public class IconButtonListener implements HelpListener {
         if (this.helpConfiguration.getSummaryDisplay()) {
             openPopover(e.getXOnScreen(), e.getYOnScreen());
         } else {
-            openBrowser();
+            if(!helpConfiguration.isHoverDisplayPopover()){
+                openBrowser();
+            }
+
         }
     }
 
