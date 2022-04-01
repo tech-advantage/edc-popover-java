@@ -1,13 +1,14 @@
 package fr.techad.edc.popover.internal;
 
 import fr.techad.edc.popover.EdcHelp;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 
 import java.awt.Font;
 import javax.inject.Inject;
-import java.awt.Font;
 
 /**
  * Edc Help Implementation.
@@ -31,6 +32,11 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setErrorIconPath(String iconPath) {
+        helpConfiguration.setErrorIconPath(iconPath);
+    }
+
+    @Override
     public void setLanguageCode(String languageCode) {
         helpConfiguration.setLanguageCode(languageCode);
     }
@@ -41,7 +47,7 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setSummaryDisplay(boolean enable) { helpConfiguration.setSummaryDisplay(enable); }
+    public void setPopoverDisplay(boolean enable) { helpConfiguration.setPopoverDisplay(enable); }
 
     @Override
     public void setHoverDisplayPopover(boolean enable) { helpConfiguration.setHoverDisplayPopover(enable); }
@@ -57,13 +63,22 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setPopoverPlacement(PopoverPlacement placement) {
-        helpConfiguration.setPopoverPlacement(placement);
+    public void setTitleDisplay(boolean enable) {
+        helpConfiguration.setShowTitle(enable);
     }
 
     @Override
-    public void setAutoDisabledMode(boolean state) {
-        helpConfiguration.setAutoDisabledInMissingContent(state);
+    public void setErrorBehavior(ErrorBehavior errorBehavior) {
+        helpConfiguration.setErrorBehavior(errorBehavior);
+    }
+
+    @Override
+    public void setIconState(IconState iconState) {
+        helpConfiguration.setIconState(iconState);
+    }
+
+    public void setPopoverPlacement(PopoverPlacement placement) {
+        helpConfiguration.setPopoverPlacement(placement);
     }
 
     @Override
@@ -82,18 +97,12 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setTitleDisplay(boolean enable) {
-        helpConfiguration.setShowTitle(enable);
-    }
-
-    @Override
     public void setRelatedTopicsDisplay(boolean enable) {
         helpConfiguration.setShowRelatedTopics(enable);
     }
     
     @Override
     public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
-
 
     @Override
     public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }

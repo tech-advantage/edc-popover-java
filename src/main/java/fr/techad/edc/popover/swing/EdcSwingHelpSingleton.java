@@ -5,6 +5,8 @@ import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
+import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
@@ -72,7 +74,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public JComponent createComponent(String mainKey, String subKey, String iconPath) {
+    public JComponent createComponent(String mainKey, String subKey, String iconPath){
         return edcSwingHelp.createComponent(mainKey, subKey, iconPath);
     }
 
@@ -92,9 +94,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setLanguageCode(String languageCode) {
-        edcSwingHelp.setLanguageCode(languageCode);
+    public void setErrorIconPath(String iconPath) {
+        edcSwingHelp.setErrorIconPath(iconPath);
     }
+
+    @Override
+    public void setLanguageCode(String languageCode) { edcSwingHelp.setLanguageCode(languageCode); }
 
     @Override
     public void setTooltipLabel(String label) {
@@ -102,8 +107,8 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
-    public void setSummaryDisplay(boolean enable) {
-        edcSwingHelp.setSummaryDisplay(enable);
+    public void setPopoverDisplay(boolean enable) {
+        edcSwingHelp.setPopoverDisplay(enable);
     }
 
     @Override
@@ -131,11 +136,6 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
-    public void setAutoDisabledMode(boolean state) {
-        edcSwingHelp.setAutoDisabledMode(state);
-    }
-
-    @Override
     public void setSeparatorDisplay(boolean state) {
         edcSwingHelp.setSeparatorDisplay(state);
     }
@@ -161,8 +161,18 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setHeaderTitleColor(Color titleColor) { edcSwingHelp.setHeaderTitleColor(titleColor); }
 
     @Override
+    public void setErrorBehavior(ErrorBehavior errorBehavior) {
+        edcSwingHelp.setErrorBehavior(errorBehavior);
+    }
+  
+    @Override
     public void setTooltipDisplay(boolean enable) {
         edcSwingHelp.setTooltipDisplay(enable);
+    }
+  
+    @Override
+    public void setIconState(IconState iconState) {
+        edcSwingHelp.setIconState(iconState);
     }
   
     @Override

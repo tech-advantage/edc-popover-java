@@ -1,5 +1,8 @@
 package fr.techad.edc.popover.internal.model;
+
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpConfiguration;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
 
@@ -12,17 +15,19 @@ import java.awt.Color;
 public class HelpConfigurationImpl implements HelpConfiguration {
     private String iconPath = "icons/icon-32px.png";
     private String closeIconPath = "popover/close1.png";
+    private String errorIconPath = "icons/icon_exclamation-32px.png";
     private String languageCode = "en";
     private String tooltipLabel = null;
-    private boolean summaryDisplay = false;
     private boolean popoverDisplay = false;
+    private boolean hoverPopoverDisplay = false;
     private int backgroundColor;
     private boolean internalBrowser = true;
-    private boolean autoDisabled = true;
     private int widthBrowser = 1024;
     private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
+    private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;
+    private IconState iconState = IconState.SHOWN;
     private boolean showTooltip = true;
     private boolean showRelatedTopics = true;
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
@@ -81,6 +86,16 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
+    public String getErrorIconPath() {
+        return errorIconPath;
+    }
+
+    @Override
+    public void setErrorIconPath(String iconPath) {
+        this.errorIconPath = iconPath;
+    }
+
+    @Override
     public String getLanguageCode() {
         return languageCode;
     }
@@ -101,23 +116,19 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public boolean getSummaryDisplay() {
-        return this.summaryDisplay;
-    }
+    public boolean getPopoverDisplay() { return this.popoverDisplay; }
 
     @Override
-    public void setSummaryDisplay(boolean enabled) {
-        this.summaryDisplay = enabled;
-    }
+    public void setPopoverDisplay(boolean enabled) { this.popoverDisplay = enabled; }
 
     @Override
     public boolean isHoverDisplayPopover() {
-        return this.popoverDisplay;
+        return this.hoverPopoverDisplay;
     }
 
     @Override
     public void setHoverDisplayPopover(boolean enabled) {
-        this.popoverDisplay = enabled;
+        this.hoverPopoverDisplay = enabled;
     }
 
     @Override
@@ -149,7 +160,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public HelpViewer getHelpViewer(){
         return this.helpViewer;
     }
-
+  
     @Override
     public PopoverPlacement getPopoverPlacement() {
         if(this.popoverPlacement == null) {
@@ -173,21 +184,25 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public String getViewerDesktopPath() { return this.desktopViewerPath; }
 
     @Override
-    public boolean isAutoDisabledInMissingContent() {
-        return autoDisabled;
+    public ErrorBehavior getErrorBehavior() {
+        return this.errorBehavior;
     }
 
     @Override
-    public void setAutoDisabledInMissingContent(boolean state) {
-        this.autoDisabled = state;
-    }
+    public void setErrorBehavior(ErrorBehavior errorBehavior) { this.errorBehavior = errorBehavior; }
+
+    @Override
+    public IconState getIconState() { return this.iconState; }
+
+    @Override
+    public void setIconState(IconState iconState) { this.iconState = iconState; }
 
     @Override
     public boolean isShowSeparator() { return showSeparator; }
 
     @Override
     public void setShowSeparator(boolean showSeparator) { this.showSeparator = showSeparator; }
-
+    
     @Override
     public boolean isShowTooltip() { return showTooltip; }
 

@@ -65,6 +65,20 @@ public interface HelpConfiguration {
     void setCloseIconPath(String iconPath);
 
     /**
+     * Return the error icon path
+     *
+     * @return the error icon path
+     */
+    String getErrorIconPath();
+
+    /**
+     * Set the error icon path
+     *
+     * @param iconPath the error icon path to set
+     */
+    void setErrorIconPath(String iconPath);
+
+    /**
      * Get the language code
      *
      * @return the language code
@@ -98,14 +112,14 @@ public interface HelpConfiguration {
      *
      * @return the state
      */
-    boolean getSummaryDisplay();
+    boolean getPopoverDisplay();
 
     /**
      * If false, the help will be displayed in the help component else a component will display it partially (ie popover for example)
      *
      * @param enabled the new state to set
      */
-    void setSummaryDisplay(boolean enabled);
+    void setPopoverDisplay(boolean enabled);
 
     /**
      * Return the status for the popover display.
@@ -255,11 +269,25 @@ public interface HelpConfiguration {
     void setPopoverPlacement(PopoverPlacement popoverPlacement);
 
     /**
-     * Return the mode
+     * Return the error behavior
      *
-     * @return true if the auto disabled mode is active
+     * @return error behavior
      */
-    boolean isAutoDisabledInMissingContent();
+    ErrorBehavior getErrorBehavior();
+
+    /**
+     * Define the error behavior
+     *
+     * @param errorBehavior
+     */
+    void setErrorBehavior(ErrorBehavior errorBehavior);
+
+    /**
+     * Return the icon state
+     *
+     * @return state
+     */
+    IconState getIconState();
 
     /**
      * Return true if the tooltip is shown when mouse is hover the component
@@ -276,11 +304,11 @@ public interface HelpConfiguration {
     void setShowTooltip(boolean showTooltip);
 
     /**
-     * Define the behavior to auto disabled the component if the content doesn't exist.
+     * Define the icon state
      *
-     * @param state the state to defined
+     * @param state
      */
-    void setAutoDisabledInMissingContent(boolean state);
+    void setIconState(IconState state);
 
     /**
      * Return the font attributes of the popover section title
