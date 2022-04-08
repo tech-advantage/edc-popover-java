@@ -231,12 +231,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         try {
             openUrlAction.openUrl(url);
             popover.setVisible(false);
-        } catch (IOException e) {
-            LOGGER.error("Error on IO", e);
-        } catch (URISyntaxException e) {
-            LOGGER.error("Impossible to open the browser with url:{}", url);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error", e);
         }
     }
 

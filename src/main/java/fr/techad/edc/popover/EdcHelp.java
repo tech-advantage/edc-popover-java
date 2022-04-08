@@ -84,6 +84,20 @@ public interface EdcHelp {
     void setViewerDesktopPath(String path);
 
     /**
+     * Define the port of viewer desktop url
+     *
+     * @param port
+     */
+    void setViewerDesktopPortURL(int port);
+
+    /**
+     * Define the host of viewer desktop url
+     *
+     * @param host
+     */
+    void setViewerDesktopHostURL(String host);
+
+    /**
      * Show the title if enabled
      * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
      *

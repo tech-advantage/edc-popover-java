@@ -239,6 +239,12 @@ public interface HelpConfiguration {
      */
     void setHelpViewer(HelpViewer viewer);
 
+    /**
+     * Return the path of the executable
+     *
+     * @return the path
+     */
+    String getViewerDesktopPath();
 
     /**
      * Define the path to the location of the application executable
@@ -248,11 +254,32 @@ public interface HelpConfiguration {
     void setViewerDesktopPath(String path);
 
     /**
-     * Return the path of the executable
+     * Return the port of viewer url
      *
-     * @return the path
+     * @return the port
      */
-    String getViewerDesktopPath();
+    int getViewerDesktopPortURL();
+
+    /**
+     * Define the port of viewer desktop url
+     *
+     * @param port
+     */
+    void setViewerDesktopPortURL(int port);
+
+    /**
+     * Return the host of viewer url
+     *
+     * @return the host
+     */
+    String getViewerDesktopHostURL();
+
+    /**
+     * Define the host of viewer desktop url
+     *
+     * @param host
+     */
+    void setViewerDesktopHostURL(String host);
 
     /**
      * Return the enum placement

@@ -63,6 +63,12 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setViewerDesktopPortURL(int port) { helpConfiguration.setViewerDesktopPortURL(port); }
+
+    @Override
+    public void setViewerDesktopHostURL(String host) { helpConfiguration.setViewerDesktopHostURL(host); }
+
+    @Override
     public void setTitleDisplay(boolean enable) {
         helpConfiguration.setShowTitle(enable);
     }

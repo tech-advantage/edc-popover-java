@@ -34,11 +34,10 @@ public class OpenUrlAction{
         super();
         this.browser = browser;
         this.helpConfiguration = helpConfiguration;
-
     }
 
-    private HttpURLConnection postViewerURL(String url) throws IOException {
-        String viewerUrl = "http://localhost:60000/viewerurl";
+    private int postViewerURL(String url) throws IOException {
+        String viewerUrl = helpConfiguration.getViewerDesktopHostURL() + helpConfiguration.getViewerDesktopPortURL() + "/viewerurl";
         URL obj = new URL(viewerUrl);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -58,7 +57,7 @@ public class OpenUrlAction{
         wr.close();
 
         int responseCode = con.getResponseCode();
-        LOGGER.debug("Sending 'POST' request to URL : " + url);
+        LOGGER.debug("Sending 'POST' request to URL : " + viewerUrl);
         LOGGER.debug("Post Data : " + input);
         LOGGER.debug("Response Code : " + responseCode);
 
@@ -75,8 +74,7 @@ public class OpenUrlAction{
         //printing result from response
         LOGGER.debug(response.toString());
 
-        con.disconnect();
-        return con;
+        return responseCode;
     }
 
 
@@ -87,7 +85,7 @@ public class OpenUrlAction{
         }
     }
 
-    private void setInterval(String url){
+    private void urlPostTimer(String url){
         Timer timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask(){
@@ -95,7 +93,7 @@ public class OpenUrlAction{
             @Override
             public void run(){
                 try {
-                    if(postViewerURL(url).getResponseCode() != 200){
+                    if(postViewerURL(url) != 200){
                         postViewerURL(url);
                     } else {
                         timer.cancel();
@@ -122,11 +120,9 @@ public class OpenUrlAction{
                 LOGGER.error("The path of the application must be entered");
             }else {
                 isAlive();
-
                 StreamGobbler streamGobbler = new StreamGobbler(edcDesktopProcess.getInputStream(), System.out::println);
                 Executors.newSingleThreadExecutor().submit(streamGobbler);
-
-                setInterval(url);
+                urlPostTimer(url);
             }
         }else if(helpConfiguration.getHelpViewer() == HelpViewer.EMBEDDED_VIEWER){
             browser.setSize(helpConfiguration.getWidthBrowser(), helpConfiguration.getHeightBrowser());

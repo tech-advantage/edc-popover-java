@@ -109,10 +109,8 @@ public class IconButtonListener implements HelpListener {
             LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", mainKey, subKey, this.helpConfiguration.getLanguageCode());
         } catch (URISyntaxException e) {
             LOGGER.error("Impossible to open the browser with url:{}", url);
-        } catch (IOException e) {
-            LOGGER.error("Error on IO", e);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error", e);
         }
     }
 

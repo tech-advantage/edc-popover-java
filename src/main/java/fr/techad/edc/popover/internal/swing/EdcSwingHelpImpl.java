@@ -109,6 +109,16 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
+    public void setViewerDesktopPortURL(int port) {
+        getHelpConfiguration().setViewerDesktopPortURL(port);
+    }
+
+    @Override
+    public void setViewerDesktopHostURL(String host) {
+        getHelpConfiguration().setViewerDesktopHostURL(host);
+    }
+
+    @Override
     public void setPopoverSectionTitleFont(Font fontAttr) {
         getHelpConfiguration().setPopoverSectionTitleFont(fontAttr);
     }

@@ -136,6 +136,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
+    public void setViewerDesktopPortURL(int port) { edcSwingHelp.setViewerDesktopPortURL(port); }
+
+    @Override
+    public void setViewerDesktopHostURL(String host) { edcSwingHelp.setViewerDesktopHostURL(host); }
+
+    @Override
     public void setSeparatorDisplay(boolean state) {
         edcSwingHelp.setSeparatorDisplay(state);
     }
