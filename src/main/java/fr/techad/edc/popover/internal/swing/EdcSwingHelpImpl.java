@@ -30,7 +30,12 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     private boolean enableContextItem = false;
 
     @Inject
-    public EdcSwingHelpImpl(EdcClient edcClient, ContextualComponentBuilder<JComponent> contextualComponentBuilder, HelpConfiguration helpConfiguration, HelpListenerProvider helpListenerProvider) {
+    public EdcSwingHelpImpl(
+            EdcClient edcClient,
+            ContextualComponentBuilder<JComponent> contextualComponentBuilder,
+            HelpConfiguration helpConfiguration,
+            HelpListenerProvider helpListenerProvider
+    ) {
         super(helpConfiguration);
         this.edcClient = edcClient;
         this.contextualComponentBuilder = contextualComponentBuilder;
@@ -66,7 +71,6 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         return component;
     }
 
-
     @Override
     public JComponent createComponent(String mainKey, String subKey) {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
@@ -95,7 +99,6 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
         getHelpConfiguration().setHeaderFontAttributes(fontAttributes);
     }
 
-
     @Override
     public void setBrowserSize(int width, int height) {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
@@ -109,13 +112,8 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
-    public void setViewerDesktopPortURL(int port) {
-        getHelpConfiguration().setViewerDesktopPortURL(port);
-    }
-
-    @Override
-    public void setViewerDesktopHostURL(String host) {
-        getHelpConfiguration().setViewerDesktopHostURL(host);
+    public void setViewerDesktopServerURL(String url) {
+        getHelpConfiguration().setViewerDesktopServerURL(url);
     }
 
     @Override

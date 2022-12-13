@@ -39,8 +39,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private String desktopViewerPath = "";
     private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
     private Color titleColor = Color.BLACK;
-    private int viewerDesktopPortURL = 60000;
-    private String viewerDesktopHostURL = "http://localhost:";
+    private String viewerDesktopServerURL = "http://localhost:60000";
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -180,19 +179,15 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     public void setHelpViewer(HelpViewer viewer) { this.helpViewer = viewer; }
 
     @Override
-    public void setViewerDesktopPath(String desktopViewerPath) { this.desktopViewerPath = desktopViewerPath; }
+    public void setViewerDesktopPath(String desktopViewerPath) {
+        this.desktopViewerPath = desktopViewerPath;
+    }
 
     @Override
-    public int getViewerDesktopPortURL() { return viewerDesktopPortURL; }
+    public String getViewerDesktopServerURL() { return viewerDesktopServerURL; }
 
     @Override
-    public void setViewerDesktopPortURL(int port) { this.viewerDesktopPortURL = port; }
-
-    @Override
-    public String getViewerDesktopHostURL() { return viewerDesktopHostURL; }
-
-    @Override
-    public void setViewerDesktopHostURL(String host) { this.viewerDesktopHostURL = host; }
+    public void setViewerDesktopServerURL(String url) { this.viewerDesktopServerURL = url; }
 
     @Override
     public String getViewerDesktopPath() { return this.desktopViewerPath; }

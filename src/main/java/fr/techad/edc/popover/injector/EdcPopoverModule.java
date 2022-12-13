@@ -11,8 +11,10 @@ import fr.techad.edc.popover.browser.Browser;
 import fr.techad.edc.popover.builder.ContextualComponentBuilder;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.builder.ContextualTitleComponentBuilder;
+import fr.techad.edc.popover.desktop.DesktopProcess;
 import fr.techad.edc.popover.injector.provider.HelpListenerProvider;
 import fr.techad.edc.popover.internal.browser.SwingBrowser;
+import fr.techad.edc.popover.internal.desktop.EdcDesktopProcess;
 import fr.techad.edc.popover.internal.model.HelpConfigurationImpl;
 import fr.techad.edc.popover.internal.swing.EdcSwingHelpImpl;
 import fr.techad.edc.popover.internal.swing.builder.ContextualComponentBuilderImpl;
@@ -33,7 +35,6 @@ public class EdcPopoverModule extends AbstractModule {
     protected void configure() {
         // Model
         bind(HelpConfiguration.class).to(HelpConfigurationImpl.class).in(Scopes.SINGLETON);
-
         // Builder
         bind(new TypeLiteral<ContextualComponentBuilder<JComponent>>() {}).to(ContextualComponentBuilderImpl.class);
         bind(new TypeLiteral<ContextualContentComponentBuilder<JComponent>>() {}).to(ContextualContentComponentBuilderImpl.class);
@@ -46,5 +47,6 @@ public class EdcPopoverModule extends AbstractModule {
         bind(EdcSwingHelp.class).to(EdcSwingHelpImpl.class).in(Scopes.SINGLETON);
         bind(Popover.class).in(Scopes.SINGLETON);
         bind(Browser.class).to(SwingBrowser.class).in(Scopes.SINGLETON);
+        bind(DesktopProcess.class).to(EdcDesktopProcess.class).in(Scopes.SINGLETON);
     }
 }

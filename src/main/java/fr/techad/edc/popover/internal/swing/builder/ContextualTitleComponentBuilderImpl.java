@@ -111,7 +111,6 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     private JComponent getBody() throws InvalidUrlException, IOException {
         Set<String> languagesCodes = Sets.newHashSet();
         languagesCodes.add(languageCode);
-
         String errorTitleFromLanguage = getLabel(ERROR_TITLE_KEY.getValue(), languageCode, null);
         JLabel jLabelError = new JLabel();
 

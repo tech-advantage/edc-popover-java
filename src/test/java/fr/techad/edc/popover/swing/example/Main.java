@@ -1,10 +1,12 @@
 package fr.techad.edc.popover.swing.example;
 
 import fr.techad.edc.client.model.InvalidUrlException;
-import fr.techad.edc.popover.model.PopoverPlacement;
+import fr.techad.edc.popover.desktop.DesktopProcess;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpViewer;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ import java.io.IOException;
  * Created by cochon on 22/06/2017.
  */
 public class Main {
+
     public static void main(String[] args) {
         /* Use an appropriate Look and Feel */
         try {
@@ -38,23 +41,42 @@ public class Main {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                try {
+                    createAndShowGUI();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    private static void createAndShowGUI() {
+    private static void createAndShowGUI() throws IOException {
+        /* Configuration for using the electron viewer desktop */
+        String viewerDesktopPath = "";
+        String viewerDesktopServerURL = "";
+
         /* Configuration */
-        EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
+        String serverUrl = "https://demo.easydoccontents.com";
+
+        if(!StringUtils.isEmpty(viewerDesktopServerURL) && !StringUtils.isEmpty(viewerDesktopPath)){
+            DesktopProcess edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
+            edcDesktop.createProcess(viewerDesktopPath);
+            if(edcDesktop.getProcess().isAlive()){
+                EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl(viewerDesktopServerURL);
+            }
+        } else {
+            EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl(serverUrl);
+        }
+
         EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
-        EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
+        EdcSwingHelpSingleton.getInstance().setRelatedTopicsDisplay(true);
         EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
         EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
-        EdcSwingHelpSingleton.getInstance().setAutoDisabledMode(true);
         EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
         EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
+
         /* Main wndow */
         JFrame f = new JFrame();
         f.setLayout(new BorderLayout());

@@ -6,6 +6,8 @@ import fr.techad.edc.client.internal.io.HttpReaderImpl;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.DocumentationItem;
 import static fr.techad.edc.client.model.I18nTranslation.*;
+import static fr.techad.edc.client.model.I18nTranslation.ARTICLES_KEY;
+import static fr.techad.edc.client.model.I18nTranslation.LINKS_KEY;
 import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.internal.swing.components.Popover;
@@ -18,11 +20,8 @@ import javax.inject.Inject;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
 
-import static fr.techad.edc.client.model.I18nTranslation.ARTICLES_KEY;
-import static fr.techad.edc.client.model.I18nTranslation.LINKS_KEY;
 
 /**
  * TECH ADVANTAGE
@@ -267,8 +266,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         return this.edcClient.getLabel(key ,languageCode, publicationId);
     }
 
-    private String getError(String key, String languageCode, String publicationId) throws IOException, InvalidUrlException {
+    private String getError(String key, String languageCode, String publicationId) throws InvalidUrlException, IOException {
         LOGGER.debug("Getting error translation for key {}, language code: {}, publication id {}", key, languageCode, publicationId);
-        return this.edcClient.getError(key, languageCode, publicationId);
+        return this.edcClient.getError(key ,languageCode, publicationId);
     }
 }

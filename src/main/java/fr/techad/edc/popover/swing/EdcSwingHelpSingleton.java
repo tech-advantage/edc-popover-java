@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
+import fr.techad.edc.popover.desktop.DesktopProcess;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
@@ -23,7 +24,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     private static EdcSwingHelpSingleton instance = null;
     private EdcSwingHelp edcSwingHelp;
     private EdcClient edcClient;
-
+    private DesktopProcess edcDesktop;
     /**
      * A private constructor to avoid to instantiate it.
      * Use the method {@link EdcSwingHelpSingleton#getInstance()}
@@ -54,6 +55,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
         // Get the instance
         edcSwingHelp = injector.getInstance(EdcSwingHelp.class);
         edcClient = injector.getInstance(EdcClient.class);
+        edcDesktop = injector.getInstance(DesktopProcess.class);
     }
 
     /**
@@ -66,6 +68,15 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
      */
     public EdcClient getEdcClient() {
         return this.edcClient;
+    }
+
+    /**
+     * Return desktopProcess instance
+     *
+     * @return desktopProcess instance
+     */
+    public DesktopProcess getEdcDesktop() {
+        return this.edcDesktop;
     }
 
     @Override
@@ -130,16 +141,18 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public HelpViewer getHelpViewer() {
+       return edcSwingHelp.getHelpViewer();
+    }
+
+    @Override
     public void setPopoverPlacement(PopoverPlacement popoverPlacement) { edcSwingHelp.setPopoverPlacement(popoverPlacement); }
     
     @Override
     public void setViewerDesktopPath(String path) { edcSwingHelp.setViewerDesktopPath(path); }
 
     @Override
-    public void setViewerDesktopPortURL(int port) { edcSwingHelp.setViewerDesktopPortURL(port); }
-
-    @Override
-    public void setViewerDesktopHostURL(String host) { edcSwingHelp.setViewerDesktopHostURL(host); }
+    public void setViewerDesktopServerURL(String url) { edcSwingHelp.setViewerDesktopServerURL(url); }
 
     @Override
     public void setSeparatorDisplay(boolean state) {

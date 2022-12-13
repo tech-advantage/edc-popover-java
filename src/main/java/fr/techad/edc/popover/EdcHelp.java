@@ -77,6 +77,13 @@ public interface EdcHelp {
     void setHelpViewer(HelpViewer viewer);
 
     /**
+     * Get the viewer browser
+     *
+     * @return
+     */
+    HelpViewer getHelpViewer();
+
+    /**
      * Define the path of the executable location
      *
      * @param path to executable
@@ -84,18 +91,11 @@ public interface EdcHelp {
     void setViewerDesktopPath(String path);
 
     /**
-     * Define the port of viewer desktop url
-     *
-     * @param port
-     */
-    void setViewerDesktopPortURL(int port);
-
-    /**
      * Define the host of viewer desktop url
      *
      * @param host
      */
-    void setViewerDesktopHostURL(String host);
+    void setViewerDesktopServerURL(String host);
 
     /**
      * Show the title if enabled
