@@ -256,7 +256,7 @@ public interface HelpConfiguration {
     /**
      * Return the url of desktop viewer
      *
-     * @return the host
+     * @return the url
      */
     String getViewerDesktopServerURL();
 
