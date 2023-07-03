@@ -36,7 +36,7 @@ public class OpenUrlAction{
     }
 
     private HttpURLConnection createHttpConnection() throws IOException {
-        viewerUrl = helpConfiguration.getViewerDesktopServerURL() + "/viewerurl";
+        viewerUrl = helpConfiguration.getViewerDesktopServerURL() + "/api/helpviewer";
         URL obj = new URL(viewerUrl);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");

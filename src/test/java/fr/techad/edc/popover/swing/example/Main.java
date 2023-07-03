@@ -72,6 +72,7 @@ public class Main {
         EdcSwingHelpSingleton.getInstance().setRelatedTopicsDisplay(true);
         EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
         EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
+        EdcSwingHelpSingleton.getInstance().setErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
         EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
         EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
         EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
@@ -91,10 +92,9 @@ public class Main {
         JComboBox<String> langSelect = createLangSelector();
         helpIconPanel.add(langSelect);
 
-        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
-        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses"));
-        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses2"));
-        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "icons/icon2-32px.png"));
+        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.showcase.mailreader", "leftmenu.account"));
+        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.showcase.mailreader", "menu"));
+
         helpIconPanel.setPreferredSize(new Dimension(400, 400));
 
         /* Bottom panel to expose mouse listener management */
@@ -103,7 +103,7 @@ public class Main {
         /* Button Help */
         JButton btn = new JButton("Help Info");
         buttonPanel.add(btn);
-        btn.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc", "help.center"));
+        //btn.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc", "help.center"));
 
         /* Jlabel Help */
         JLabel label = new JLabel("JLabel: Click here for help");
@@ -117,17 +117,17 @@ public class Main {
         link.setBorderPainted(false);
         link.setContentAreaFilled(false);
         link.setOpaque(false);
-        link.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc.configuration", "storehouses"));
+        //link.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc.configuration", "storehouses"));
         link.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         buttonPanel.add(link);
 
         f.add(buttonPanel, BorderLayout.SOUTH);
 
-        try {
-            EdcSwingHelpSingleton.getInstance().getEdcClient().loadContext();
-        } catch (IOException | InvalidUrlException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            EdcSwingHelpSingleton.getInstance().getEdcClient().loadContext();
+//        } catch (IOException | InvalidUrlException e) {
+//            e.printStackTrace();
+//        }
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();

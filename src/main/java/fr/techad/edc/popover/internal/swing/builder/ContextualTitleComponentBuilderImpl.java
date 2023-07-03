@@ -112,25 +112,25 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
         Set<String> languagesCodes = Sets.newHashSet();
         languagesCodes.add(languageCode);
         String errorTitleFromLanguage = getLabel(ERROR_TITLE_KEY.getValue(), languageCode, null);
-        JLabel jLabelError = new JLabel();
+        JLabel jLabelTitle = new JLabel();
 
         if (this.showTitle || errorBehavior == ErrorBehavior.ERROR_SHOWN) {
             if(!errorTitleFromLanguage.isEmpty()){
                 errorTitle.setText(errorTitleFromLanguage);
             }
-            jLabelError = errorTitle;
+            jLabelTitle = errorTitle;
         }
 
         if (this.showTitle || errorBehavior != ErrorBehavior.FRIENDLY_MSG) {
             if (contextItem != null) {
-                jLabelError.setText(contextItem.getLabel());
+                jLabelTitle.setText(contextItem.getLabel());
             }
         }
 
-        jLabelError.setFont(headerFontAttributes);
-        jLabelError.setForeground(titleColor);
-        jLabelError.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
-        return jLabelError;
+        jLabelTitle.setFont(headerFontAttributes);
+        jLabelTitle.setForeground(titleColor);
+        jLabelTitle.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
+        return jLabelTitle;
     }
 
     /**
