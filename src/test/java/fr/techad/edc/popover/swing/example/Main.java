@@ -33,7 +33,7 @@ public class Main {
             public void run()
             {
                 try {
-                    EdcSwingHelpSingleton.getInstance().getEdcDesktop().killDesktopProcess();
+                    EdcSwingHelpSingleton.getInstance().getEdcDesktop().shutDownDesktopProcess();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

@@ -27,11 +27,11 @@ public interface EdcDesktop {
     Process getProcess();
 
     /**
-     * Kill the edc desktop process
+     * Shut down the edc desktop process
      *
      * @throws IOException
      */
-    void killDesktopProcess() throws IOException;
+    void shutDownDesktopProcess() throws IOException;
 
     /**
      * Return the desktop viewer url api

@@ -21,8 +21,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean popoverDisplay = false;
     private boolean hoverPopoverDisplay = false;
     private int backgroundColor;
-    private int widthBrowser = 1024;
-    private int heightBrowser = 600;
     private int underlineColor;
     private boolean showTitle = true;
     private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;

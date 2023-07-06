@@ -39,7 +39,7 @@ public class EdcDesktopImpl implements EdcDesktop {
         }
     }
     @Override
-    public void killDesktopProcess() throws IOException {
+    public void shutDownDesktopProcess() throws IOException {
         if(helpConfiguration.getHelpViewer() == HelpViewer.EDC_DESKTOP_VIEWER){
             String shutDownApiPath = desktopViewerApiPath + "/api/helpviewer/shutdown";
             this.httpRequest.postData(shutDownApiPath, "{\"shutDown\": true}");
