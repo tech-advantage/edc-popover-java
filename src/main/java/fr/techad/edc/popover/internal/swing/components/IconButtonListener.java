@@ -32,7 +32,6 @@ public class IconButtonListener implements HelpListener {
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
     private ContextItem contextItem = null;
-
     private String mainKey;
     private String subKey;
 
@@ -125,6 +124,10 @@ public class IconButtonListener implements HelpListener {
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
                         .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
+                        .setPopoverLinksColor(helpConfiguration.getPopoverLinksColor())
+                        .setPopoverDescriptionColor(helpConfiguration.getPopoverDescriptionColor())
+                        .setPopoverLinksFont(helpConfiguration.getPopoverLinksFont())
+                        .setPopoverDescriptionFont(helpConfiguration.getPopoverDescriptionFont())
                         .enableArticle(helpConfiguration.isShowArticle())
                         .enableRelatedTopics(helpConfiguration.isShowRelatedTopics())
                         .build();
@@ -132,7 +135,7 @@ public class IconButtonListener implements HelpListener {
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
-                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
+                        .setHeaderTitleFont(helpConfiguration.getHeaderTitleFont())
                         .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
                         .build();

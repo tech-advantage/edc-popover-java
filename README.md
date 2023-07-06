@@ -6,6 +6,37 @@ To use edc publication in your Java application, you can use this utility. Work 
 
 Current release is compatible with edc v3.0+
 
+## Latest Release - Version 3.1.0
+
+The latest release of edc-popover-java introduces several new features, 
+improvements, and customization to enhance the overall functionalities and user experience. The key highlights of this release include :
+
+### New Functionnality
+#### Customizing Popover Display Options
+```java
+EdcSwingHelpSingleton.getInstance().setDisplayTooltip();
+EdcSwingHelpSingleton.getInstance().setDisplayPopover(); (formerly setSummaryDisplay)
+EdcSwingHelpSingleton.getInstance().setDisplaySeparator();
+EdcSwingHelpSingleton.getInstance().setDisplayArticles();
+EdcSwingHelpSingleton.getInstance().setDisplayRelatedTopics();
+```
+
+#### Customizing Popover style
+```java
+EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.BLUE);
+EdcSwingHelpSingleton.getInstance().setHeaderTitleFont(new Font("Dialog", Font.BOLD, 18));
+EdcSwingHelpSingleton.getInstance().setHeaderTitleColor(Color.BLACK);
+EdcSwingHelpSingleton.getInstance().setPopoverDescriptionColor(Color.BLACK);
+EdcSwingHelpSingleton.getInstance().setPopoverDescriptionFont(new Font("Dialog", Font.BOLD, 18));
+EdcSwingHelpSingleton.getInstance().setPopoverSectionTitleColor(Color.BLACK);
+EdcSwingHelpSingleton.getInstance().setPopoverSectionTitleFont(new Font("Dialog", Font.BOLD, 18));
+EdcSwingHelpSingleton.getInstance().setPopoverLinksColor(Color.BLUE);
+EdcSwingHelpSingleton.getInstance().setPopoverLinksFont(new Font("Dialog", Font.BOLD, 18));
+```
+
+#### Viewer display mode
+The functionnality of embedded browser was replaced by the edc desktop viewer (electron app)
+
 ## How can I get the latest release?
 
 You can pull it from the central Maven repositories:
@@ -39,17 +70,19 @@ We will be able to configure the url to get the documentation and the widget pro
 | Hover display popover | ``setHoverDisplayPopover`` |false| Display the popover when the mouse is over it |
 | Title | ``setTitleDisplay`` | true | Display the title in the help dialog |
 | Separator | ``setSeparatorDisplay`` | true | Display the separator in the help header |
-| Header title color | ``setHeaderTitleColor`` | BLACK | Color of the title in the header of the help dialog |
 | Background color | ``setBackgroundColor`` | WHITE | Background color of the help dialog |
+| Font attributes | ``setHeaderTitleFont`` | "Dialog", Font.BOLD, 12 | Font attributes of Popover main title in the header of the help dialog |
+| Header title color | ``setHeaderTitleColor`` | BLACK | Color of the title in the header of the help dialog |
 | Separator color | ``setSeparatorColor`` | #3C8DBC | Separator color of the help dialog |
-| Font attributes | ``setPopoverSectionTitleFont`` | "Dialog", Font.BOLD, 12 | Font attributes of the popover section title |
-| Title color | ``setPopoverSectionTitleColor`` | BLACK | Color of the popover section title in the help dialog |
-| Font attributes | ``setFontAttributes`` | "Dialog", Font.BOLD, 20 | Font attributes of the help dialog |
+| Font attributes | ``setPopoverDescriptionFont`` | "Dialog", Font.PLAIN, 12 | Font attributes of Popover description of the help dialog |
+| Popover description color | ``setPopoverDescriptionColor`` | BLACK | Color of the Popover description of the help dialog |
+| Font attributes | ``setPopoverSectionTitleFont`` | "Dialog", Font.BOLD, 12 | Font attributes of the popover section title ("Need more" & "Related topics") in the help dialog |
+| Title color | ``setPopoverSectionTitleColor`` | BLACK | Color of the popover section title ("Need more" & "Related topics") in the help dialog |
+| Font attributes | ``setPopoverLinksFont`` | "Dialog", Font.PLAIN, 12 | Font attributes of Popover links of the help dialog |
+| Popover description color | ``setPopoverLinksColor`` | BLACK | Color of the Popover links of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Error Icon | ``setErrorIconPath`` | icons/icon_exclamation-32px.png | The error icon displays in the component |
 | Popover placement | ``setPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |
-| Internal browser | ``setInternalBrowser`` | true | Use the internal browser to display the help content |
-| Internal Browser size | ``setBrowserSize`` | 1024, 600 | Set the embedded browser |
 | Error behavior | ``setErrorBehavior`` | ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER | Set the error behavior of popover |
 | Icon state | ``setIconState`` | ERROR, SHOWN, HIDDEN, DISABLED | Set the icon behavior of popover |
 | Related topics display | ``setRelatedTopicsDisplay`` | Enable the related topics |
@@ -86,7 +119,6 @@ public class Example {
     help.setBackgroundColor(Color.BLUE);
     help.setCloseIconPath("popover/close2.png");
     help.setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
-    help.setBrowserSize(1600, 900);
   }
 }
 ```
@@ -108,16 +140,21 @@ EdcSwingHelpSingleton.getInstance().setTooltipLabel("edc Help");
 EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
 EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
 EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
-EdcSwingHelpSingleton.getInstance().setInternalBrowser(false);
-EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
 ```
 
-#### Config desktop viewer path
+### Config desktop viewer path
 
 If you want to use the desktop viewer, you should define the path
 ```
-EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EDC_DESKTOP_VIEWER);
+HelpViewer helpViewerMode = HelpViewer.EDC_DESKTOP_VIEWER;
+...
+EdcSwingHelpSingleton.getInstance().setHelpViewer(helpViewerMode);
 EdcSwingHelpSingleton.getInstance().setViewerDesktopPath("Define the path here");
+```
+
+The default port is 60000, if you changed the port on the edc-desktop-viewer electron configuration, apply the new desktop server url with this method :
+```
+EdcSwingHelpSingleton.getInstance().setViewerDesktopServerURL("Define the desktop server path here");
 ```
 
 ## Add the contextual button
@@ -161,6 +198,20 @@ Get the instance of ``EdcSwingHelpSingleton`` and call the method ``createCompon
 EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center", "popover/close1.png");
 ```
 
+## Fail behavior
+You can customize the popover's behavior when an error occurs with the following property:
+- `SHOWN` The help icon is shown as usual
+- `DISABLED` The help icon is greyed out
+- `HIDDEN` The help icon is completely hidden
+- `ERROR` The help icon is replaced by an exclamation point
+
+For the popover when an error occurs:
+- `ERROR_SHOWN` An error message is shown in the popover
+- `FRIENDLY_MSG` A friendly and translated message is shown in the popover
+- `NO_POPOVER` No popover appears when the help icon is triggered
+
+By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
+
 ## Language selection
 You can set the language for the content and the popover labels by calling the method ``setLanguageCode`` (see the Example section below).
 
@@ -187,6 +238,9 @@ To see this utility in action, just run this example
 
 ```java
 public class Main {
+    private static EdcSwingHelp edcSwingHelp;
+    private static EdcClient edcClient;
+    
     public static void main(String[] args) {
          /* Use an appropriate Look and Feel */
         try {
@@ -207,26 +261,44 @@ public class Main {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                try {
+                    createAndShowGUI();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (InvalidUrlException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
 
     private static void createAndShowGUI() {
-         /* Configuration */
-        EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl("https://demo.easydoccontents.com");
-        EdcSwingHelpSingleton.getInstance().setIconPath("icons/icon-32px.png");
-        EdcSwingHelpSingleton.getInstance().setLanguageCode("en");
-        EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
-        EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
-        EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
-        EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
-        EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
-        EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
-        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
-        EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
-        EdcSwingHelpSingleton.getInstance().setFontAttributes(new Font("Dialog", Font.BOLD, 20));
-        EdcSwingHelpSingleton.getInstance().setHeaderTitleColor(Color.BLUE);
+        edcSwingHelp = EdcSwingHelpSingleton.getInstance();
+        edcClient = EdcSwingHelpSingleton.getInstance().getEdcClient();
+        /* Configuration for using the electron viewer desktop */
+        checkAndKillDesktopViewer();
+        String viewerDesktopPath = "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";// "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";
+        HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
+
+        /* Configuration */
+        String serverUrl = "https://demo.easydoccontents.com";
+
+        if(!StringUtils.isEmpty(viewerDesktopPath) && helpViewerMode == HelpViewer.EDC_DESKTOP_VIEWER){
+            DesktopProcess edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
+            edcDesktop.ConfigureDesktopProcess(edcSwingHelp, viewerDesktopPath);
+        }
+
+        edcSwingHelp.getInstance().setIconPath("icons/icon-32px.png");
+        edcSwingHelp.getInstance().setLanguageCode("en");
+        edcSwingHelp.getInstance().setTooltipLabel("Help");
+        edcSwingHelp.getInstance().setSummaryDisplay(true);
+        edcSwingHelp.getInstance().setTitleDisplay(true);
+        edcSwingHelp.getInstance().setBackgroundColor(Color.WHITE);
+        edcSwingHelp.getInstance().setSeparatorColor(Color.RED);
+        edcSwingHelp.getInstance().setCloseIconPath("popover/close2.png");
+        edcSwingHelp.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
+        edcSwingHelp.getInstance().setHeaderTitleFont(new Font("Dialog", Font.BOLD, 20));
+        edcSwingHelp.getInstance().setHeaderTitleColor(Color.BLUE);
         
         JFrame f = new JFrame();
         FlowLayout layout = new FlowLayout();
@@ -266,6 +338,17 @@ public class Main {
         return comboBox;
     }
 
+    private static void checkAndKillDesktopViewer() throws IOException {
+        Process process = Runtime.getRuntime().exec("tasklist /fi \"ImageName eq edc-help-viewer-desktop.exe\"");
+        process.getOutputStream().close();
+
+        BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        if(input != null){
+            Runtime.getRuntime().exec("taskkill /F /IM edc-help-viewer-desktop.exe /T");
+        }
+        input.close();
+    }
 }
 ```
 

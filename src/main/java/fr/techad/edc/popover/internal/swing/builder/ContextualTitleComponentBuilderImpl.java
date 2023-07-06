@@ -35,7 +35,7 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     private String languageCode = "en";
     private final JLabel errorTitle = new JLabel("Error");
     private Color titleColor = Color.BLACK;
-    private Font headerFontAttributes;
+    private Font headerTitleFont;
 
     @Inject
     public ContextualTitleComponentBuilderImpl(EdcClient edcClient) {
@@ -64,9 +64,9 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     }
 
     @Override
-    public ContextualTitleComponentBuilder<JComponent> setHeaderFontAttributes(Font fontAttributes) {
-        this.headerFontAttributes = fontAttributes;
-        LOGGER.debug("Set Header Font Attributes: {}", headerFontAttributes);
+    public ContextualTitleComponentBuilder<JComponent> setHeaderTitleFont(Font fontAttr) {
+        this.headerTitleFont = fontAttr;
+        LOGGER.debug("Set Header Title Font Attributes: {}", headerTitleFont);
         return this;
     }
 
@@ -127,7 +127,7 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
             }
         }
 
-        jLabelTitle.setFont(headerFontAttributes);
+        jLabelTitle.setFont(headerTitleFont);
         jLabelTitle.setForeground(titleColor);
         jLabelTitle.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         return jLabelTitle;

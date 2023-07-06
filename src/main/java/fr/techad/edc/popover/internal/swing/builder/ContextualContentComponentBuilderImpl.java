@@ -2,7 +2,6 @@ package fr.techad.edc.popover.internal.swing.builder;
 
 import com.google.common.collect.Sets;
 import fr.techad.edc.client.EdcClient;
-import fr.techad.edc.client.internal.io.HttpReaderImpl;
 import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.client.model.DocumentationItem;
 import static fr.techad.edc.client.model.I18nTranslation.*;
@@ -39,11 +38,14 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private JLabel jLabelError = new JLabel("Error");
     private final JLabel friendlyMessage = new JLabel("Contextual help is coming soon.");
     private final JLabel errorMessage = new JLabel("<html>An error occurred when fetching data ! <br/> Check the brick keys provided to the EdcHelp component.</html>");
-    private HttpReaderImpl httpReader;
     private String languageCode = "en";
     private boolean enableRelatedTopics = true;
     private Color popoverSectionTitleColor = Color.BLACK;
+    private Color popoverLinkColor = Color.BLUE;
+    private Color popoverDescriptionColor = Color.BLACK;
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
+    private Font popoverLinksFont = new Font("Dialog", Font.PLAIN, 8);
+    private Font popoverDescriptionFont = new Font("Dialog", Font.PLAIN, 12);
     private boolean enableArticle = true;
 
     @Inject
@@ -103,6 +105,34 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     }
 
     @Override
+    public ContextualContentComponentBuilder<JComponent> setPopoverLinksColor(Color linksColor) {
+        this.popoverLinkColor = linksColor;
+        LOGGER.debug("Set Popover links Color: {}", popoverLinkColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setPopoverLinksFont(Font fontAttr) {
+        this.popoverLinksFont = fontAttr;
+        LOGGER.debug("Set Popover links font attributes: {}", popoverLinksFont);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setPopoverDescriptionColor(Color descColor) {
+        this.popoverDescriptionColor = descColor;
+        LOGGER.debug("Set Popover links Color: {}", popoverDescriptionColor);
+        return this;
+    }
+
+    @Override
+    public ContextualContentComponentBuilder<JComponent> setPopoverDescriptionFont(Font fontAttr) {
+        this.popoverDescriptionFont = fontAttr;
+        LOGGER.debug("Set Popover description font attributes: {}", popoverDescriptionFont);
+        return this;
+    }
+
+    @Override
     public ContextualContentComponentBuilder<JComponent> enableArticle(boolean enable) {
         this.enableArticle = enable;
         LOGGER.debug("Enable Article: {}", enableArticle);
@@ -134,9 +164,8 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private JComponent getHeader() {
         JLabel label = new JLabel();
         if (contextItem != null) {
-            label.setText(contextItem.getDescription());
-            Font f = label.getFont();
-            label.setFont(f.deriveFont((float) (f.getSize() + 1)));
+            label.setText("<HTML><FONT color=\"" + convertRgbToHexa(this.popoverDescriptionColor) + "\">" + contextItem.getDescription() + "</FONT></HTML>");
+            label.setFont(this.popoverDescriptionFont);
             label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
         }
         return label;
@@ -183,7 +212,9 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
                 for (DocumentationItem documentationItem : contextItem.getLinks()) {
                     LOGGER.debug("Display link: {}", documentationItem);
                     String url = edcClient.getDocumentationWebHelpUrl(documentationItem.getId(), contextItem.getLanguageCode(), contextItem.getPublicationId());
-                    linkContentPanel.add(createButton(url, documentationItem.getLabel()));
+                    JTextArea area = new JTextArea(url);
+                    area.setForeground(Color.red);
+                    linkContentPanel.add(createButton(area.getText(), documentationItem.getLabel()));
                 }
                 body.add(linkPanel, BorderLayout.CENTER);
             }
@@ -235,9 +266,14 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         }
     }
 
+    private String convertRgbToHexa(Color color){
+        return Integer.toHexString(color.getRGB()).substring(2);
+    }
+
     private JButton createButton(String url, String label) {
         JButton button = new JButton();
-        button.setText("<HTML><FONT color=\"#000099\"><U>" + label + "</U></FONT></HTML>");
+        button.setText("<HTML><FONT color=\"" + convertRgbToHexa(this.popoverLinkColor) + "\"><U>" + label + "</U></FONT></HTML>");
+        button.setFont(this.popoverLinksFont);
         button.setHorizontalAlignment(SwingConstants.LEFT);
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);

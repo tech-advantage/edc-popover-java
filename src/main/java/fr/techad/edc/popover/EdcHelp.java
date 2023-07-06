@@ -4,8 +4,6 @@ import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
-import java.awt.Font;
-
 
 /**
  * Define the base functionality to manage the help display.
@@ -148,22 +146,9 @@ public interface EdcHelp {
      */
     void setRelatedTopicsDisplay(boolean enable);
 
-     /** Define the fonts attributes of the popover section title
-     *
-     * @param fontAttr
-     */
-    void setPopoverSectionTitleFont(Font fontAttr);
-
      /** Show the article if enabled
      *
      * @param enable true to enable the article display.
      */
     void setArticleDisplay(boolean enable);
-
-    /**
-     * Define the font attributes of the header title
-     *
-     * @param fontAttributes
-     */
-    void setHeaderFontAttributes(Font fontAttributes);
 }

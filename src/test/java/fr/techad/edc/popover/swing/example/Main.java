@@ -1,9 +1,11 @@
 package fr.techad.edc.popover.swing.example;
 
+import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.model.InvalidUrlException;
-import fr.techad.edc.popover.desktop.DesktopProcess;
+import fr.techad.edc.popover.desktop.EdcDesktop;
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.HelpViewer;
+import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.swing.EdcSwingHelp;
 import fr.techad.edc.popover.swing.EdcSwingHelpSingleton;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * TECH ADVANTAGE
@@ -20,8 +22,24 @@ import java.io.IOException;
  * Created by cochon on 22/06/2017.
  */
 public class Main {
+    private static EdcSwingHelp edcSwingHelp;
+    private static EdcClient edcClient;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                try {
+                    EdcSwingHelpSingleton.getInstance().getEdcDesktop().killDesktopProcess();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
         /* Use an appropriate Look and Feel */
         try {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -43,40 +61,44 @@ public class Main {
             public void run() {
                 try {
                     createAndShowGUI();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (InvalidUrlException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
     }
 
-    private static void createAndShowGUI() throws IOException {
+    private static void createAndShowGUI() throws IOException, InvalidUrlException {
+        edcSwingHelp = EdcSwingHelpSingleton.getInstance();
+        edcClient = EdcSwingHelpSingleton.getInstance().getEdcClient();
+
         /* Configuration for using the electron viewer desktop */
         String viewerDesktopPath = "";
-        String viewerDesktopServerURL = "";
 
         /* Configuration */
         String serverUrl = "https://demo.easydoccontents.com";
+        HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
 
-        if(!StringUtils.isEmpty(viewerDesktopServerURL) && !StringUtils.isEmpty(viewerDesktopPath)){
-            DesktopProcess edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
-            edcDesktop.createProcess(viewerDesktopPath);
-            if(edcDesktop.getProcess().isAlive()){
-                EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl(viewerDesktopServerURL);
-            }
-        } else {
-            EdcSwingHelpSingleton.getInstance().getEdcClient().setServerUrl(serverUrl);
+        if(!StringUtils.isEmpty(viewerDesktopPath) && helpViewerMode == HelpViewer.EDC_DESKTOP_VIEWER){
+            EdcDesktop edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
+            edcDesktop.ConfigureDesktopProcess(edcSwingHelp, viewerDesktopPath);
         }
-
-        EdcSwingHelpSingleton.getInstance().setTooltipLabel("Help");
-        EdcSwingHelpSingleton.getInstance().setRelatedTopicsDisplay(true);
-        EdcSwingHelpSingleton.getInstance().setTitleDisplay(true);
-        EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.WHITE);
-        EdcSwingHelpSingleton.getInstance().setErrorBehavior(ErrorBehavior.FRIENDLY_MSG);
-        EdcSwingHelpSingleton.getInstance().setSeparatorColor(Color.RED);
-        EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close3.png");
-        EdcSwingHelpSingleton.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
-        EdcSwingHelpSingleton.getInstance().setBrowserSize(1600, 900);
+        edcClient.setServerUrl(serverUrl);
+        edcSwingHelp.setTooltipLabel("Help");
+        edcSwingHelp.setTitleDisplay(true);
+        edcSwingHelp.setSeparatorDisplay(true);
+        edcSwingHelp.setSeparatorColor(Color.RED);
+        edcSwingHelp.setBackgroundColor(Color.WHITE);
+        edcSwingHelp.setPopoverDisplay(false);
+        edcSwingHelp.setHoverDisplayPopover(false);
+        edcSwingHelp.setIconState(IconState.ERROR);
+        edcSwingHelp.setErrorBehavior(ErrorBehavior.ERROR_SHOWN);
+        edcSwingHelp.setTooltipDisplay(true);
+        edcSwingHelp.setCloseIconPath("popover/close3.png");
+        edcSwingHelp.setHelpViewer(helpViewerMode);
+        edcSwingHelp.setLanguageCode("en");
 
         /* Main wndow */
         JFrame f = new JFrame();
@@ -92,8 +114,9 @@ public class Main {
         JComboBox<String> langSelect = createLangSelector();
         helpIconPanel.add(langSelect);
 
-        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.showcase.mailreader", "leftmenu.account"));
-        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.showcase.mailreader", "menu"));
+        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc", "help.center"));
+        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "storehouses"));
+        helpIconPanel.add(EdcSwingHelpSingleton.getInstance().createComponent("fr.techad.edc.configuration", "example with error"));
 
         helpIconPanel.setPreferredSize(new Dimension(400, 400));
 
@@ -103,7 +126,7 @@ public class Main {
         /* Button Help */
         JButton btn = new JButton("Help Info");
         buttonPanel.add(btn);
-        //btn.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc", "help.center"));
+        btn.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc", "help.center"));
 
         /* Jlabel Help */
         JLabel label = new JLabel("JLabel: Click here for help");
@@ -117,17 +140,17 @@ public class Main {
         link.setBorderPainted(false);
         link.setContentAreaFilled(false);
         link.setOpaque(false);
-        //link.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc.configuration", "storehouses"));
+        link.addMouseListener(EdcSwingHelpSingleton.getInstance().getMouseListener("fr.techad.edc.configuration", "storehouses"));
         link.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         buttonPanel.add(link);
 
         f.add(buttonPanel, BorderLayout.SOUTH);
 
-//        try {
-//            EdcSwingHelpSingleton.getInstance().getEdcClient().loadContext();
-//        } catch (IOException | InvalidUrlException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            EdcSwingHelpSingleton.getInstance().getEdcClient().loadContext();
+        } catch (IOException | InvalidUrlException e) {
+            e.printStackTrace();
+        }
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();

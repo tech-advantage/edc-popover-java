@@ -21,7 +21,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean popoverDisplay = false;
     private boolean hoverPopoverDisplay = false;
     private int backgroundColor;
-    private boolean internalBrowser = true;
     private int widthBrowser = 1024;
     private int heightBrowser = 600;
     private int underlineColor;
@@ -37,33 +36,17 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private boolean showSeparator = true;
     private HelpViewer helpViewer;
     private String desktopViewerPath = "";
-    private Font headerFontAttributes = new Font("Dialog", Font.BOLD, 20);
+    private Font headerTitleFont = new Font("Dialog", Font.BOLD, 20);
     private Color titleColor = Color.BLACK;
+    private Color popoverLinksColor = Color.BLUE;
+    private Font popoverLinksFont = new Font("Dialog", Font.PLAIN, 12);
+    private Color popoverDescriptionColor = Color.BLACK;
+    private Font popoverDescriptionFont = new Font("Dialog", Font.PLAIN, 12);
     private String viewerDesktopServerURL = "http://localhost:60000";
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
         this.underlineColor = new Color(60, 141, 188).getRGB();
-    }
-
-    @Override
-    public int getWidthBrowser() {
-        return widthBrowser;
-    }
-
-    @Override
-    public void setWidthBrowser(int width) {
-        this.widthBrowser = width;
-    }
-
-    @Override
-    public int getHeightBrowser() {
-        return heightBrowser;
-    }
-
-    @Override
-    public void setHeightBrowser(int height) {
-        this.heightBrowser = height;
     }
 
     @Override
@@ -150,11 +133,6 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     @Override
     public void setUnderlineColor(int underlineColor) {
         this.underlineColor = underlineColor;
-    }
-
-    @Override
-    public boolean isInternalBrowser() {
-        return internalBrowser;
     }
 
     @Override
@@ -261,14 +239,37 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     }
 
     @Override
-    public Font getHeaderFontAttributes() { return headerFontAttributes; }
+    public Font getHeaderTitleFont() { return headerTitleFont; }
 
     @Override
-    public void setHeaderFontAttributes(Font fontAttributes) { this.headerFontAttributes = fontAttributes; }
+    public void setHeaderTitleFont(Font fontAttr) { this.headerTitleFont = fontAttr; }
 
     @Override
     public Color getHeaderTitleColor() { return titleColor; }
 
     @Override
     public void setHeaderTitleColor(Color titleColor) { this.titleColor = titleColor; }
+
+    @Override
+    public void setPopoverLinksColor(Color linksColor) { this.popoverLinksColor = linksColor; }
+    @Override
+    public Color getPopoverLinksColor() { return popoverLinksColor; }
+
+    @Override
+    public void setPopoverLinksFont(Font fontAttr) { this.popoverLinksFont = fontAttr; }
+
+    @Override
+    public Font getPopoverLinksFont() { return popoverLinksFont; }
+
+    @Override
+    public void setPopoverDescriptionColor(Color descColor) { this.popoverDescriptionColor = descColor; }
+
+    @Override
+    public Color getPopoverDescriptionColor() { return popoverDescriptionColor; }
+
+    @Override
+    public void setPopoverDescriptionFont(Font fontAttr) { this.popoverDescriptionFont = fontAttr; }
+
+    @Override
+    public Font getPopoverDescriptionFont() { return popoverDescriptionFont; }
 }

@@ -38,10 +38,10 @@ public interface ContextualTitleComponentBuilder<T> {
     /**
      * Define the fonts attributes of the header title
      *
-     * @param fontAttributes
+     * @param fontAttr
      * @return the builder
      */
-    ContextualTitleComponentBuilder<T> setHeaderFontAttributes(Font fontAttributes);
+    ContextualTitleComponentBuilder<T> setHeaderTitleFont(Font fontAttr);
 
     /**
      * Show the title

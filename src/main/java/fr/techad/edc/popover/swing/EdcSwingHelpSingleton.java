@@ -4,7 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import fr.techad.edc.client.EdcClient;
 import fr.techad.edc.client.injector.EdcClientModule;
-import fr.techad.edc.popover.desktop.DesktopProcess;
+import fr.techad.edc.popover.desktop.EdcDesktop;
 import fr.techad.edc.popover.injector.EdcPopoverModule;
 import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
@@ -24,7 +24,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     private static EdcSwingHelpSingleton instance = null;
     private EdcSwingHelp edcSwingHelp;
     private EdcClient edcClient;
-    private DesktopProcess edcDesktop;
+    private EdcDesktop edcDesktop;
     /**
      * A private constructor to avoid to instantiate it.
      * Use the method {@link EdcSwingHelpSingleton#getInstance()}
@@ -55,7 +55,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
         // Get the instance
         edcSwingHelp = injector.getInstance(EdcSwingHelp.class);
         edcClient = injector.getInstance(EdcClient.class);
-        edcDesktop = injector.getInstance(DesktopProcess.class);
+        edcDesktop = injector.getInstance(EdcDesktop.class);
     }
 
     /**
@@ -75,7 +75,7 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
      *
      * @return desktopProcess instance
      */
-    public DesktopProcess getEdcDesktop() {
+    public EdcDesktop getEdcDesktop() {
         return this.edcDesktop;
     }
 
@@ -163,21 +163,29 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setTitleDisplay(boolean enable) {
         edcSwingHelp.setTitleDisplay(enable);
     }
+    
+    @Override
+    public void setHeaderTitleFont(Font fontAttr) { edcSwingHelp.setHeaderTitleFont(fontAttr); }
 
     @Override
-    public void setBrowserSize(int width, int height) { edcSwingHelp.setBrowserSize(width, height); }
+    public void setHeaderTitleColor(Color titleColor) { edcSwingHelp.setHeaderTitleColor(titleColor); }
+
+    @Override
+    public void setPopoverDescriptionColor(Color descColor) { edcSwingHelp.setPopoverDescriptionColor(descColor); }
+
+    @Override
+    public void setPopoverDescriptionFont(Font fontAttr) { edcSwingHelp.setPopoverDescriptionFont(fontAttr); }
 
     @Override
     public void setPopoverSectionTitleFont(Font fontAttr) { edcSwingHelp.setPopoverSectionTitleFont(fontAttr); }
 
     @Override
     public void setPopoverSectionTitleColor(Color titleColor) { edcSwingHelp.setPopoverSectionTitleColor(titleColor); }
-    
     @Override
-    public void setHeaderFontAttributes(Font fontAttributes) { edcSwingHelp.setHeaderFontAttributes(fontAttributes); }
+    public void setPopoverLinksColor(Color linkColor) { edcSwingHelp.setPopoverLinksColor(linkColor); }
 
     @Override
-    public void setHeaderTitleColor(Color titleColor) { edcSwingHelp.setHeaderTitleColor(titleColor); }
+    public void setPopoverLinksFont(Font fontAttr) { edcSwingHelp.setPopoverLinksFont(fontAttr); }
 
     @Override
     public void setErrorBehavior(ErrorBehavior errorBehavior) {

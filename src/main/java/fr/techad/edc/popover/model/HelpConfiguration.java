@@ -9,34 +9,6 @@ import java.awt.Font;
 public interface HelpConfiguration {
 
     /**
-     * Return the browser width
-     *
-     * @return the browser width
-     */
-    int getWidthBrowser();
-
-    /**
-     * Define the browser width
-     *
-     * @param width the width
-     */
-    void setWidthBrowser(int width);
-
-    /**
-     * Return the browser height
-     *
-     * @return the browser height
-     */
-    int getHeightBrowser();
-
-    /**
-     * Define the browser height
-     *
-     * @param height the height
-     */
-    void setHeightBrowser(int height);
-
-    /**
      * Return the icon path
      *
      * @return the icon path
@@ -219,13 +191,6 @@ public interface HelpConfiguration {
     void setUnderlineColor(int underlineColor);
 
     /**
-     * Return true if the browser to use is the internal browser
-     *
-     * @return true if the browser to use is the internal browser
-     */
-    boolean isInternalBrowser();
-
-    /**
      * Return the selected viewer type between : SYSTEM_BROWSER, EDC_DESKTOP_VIEWER and EMBEDDED_VIEWER
      *
      * @return Enum for the viewer selected
@@ -323,6 +288,33 @@ public interface HelpConfiguration {
      */
     void setIconState(IconState state);
 
+    /** Return the font attributes of the header title
+     *
+     * @return the fonts attributes
+     */
+    Font getHeaderTitleFont();
+
+    /**
+     * Define the fonts attributes for the header title
+     *
+     * @param fontAttr
+     */
+    void setHeaderTitleFont(Font fontAttr);
+
+    /**
+     * Return the header title color
+     *
+     * @return the header title color
+     */
+    Color getHeaderTitleColor();
+
+    /**
+     * Define the foreground color for the header title
+     *
+     * @param titleColor
+     */
+    void setHeaderTitleColor(Color titleColor);
+
     /**
      * Return the font attributes of the popover section title
      *
@@ -351,30 +343,59 @@ public interface HelpConfiguration {
      */
     void setPopoverSectionTitleColor(Color popoverTitleColor);
 
-    /** Return the font attributes of the header title
+    /**
+     * Define the color for the Popover description
      *
-     * @return the fonts attributes
+     * @param descColor
      */
-    Font getHeaderFontAttributes();
+    void setPopoverDescriptionColor(Color descColor);
 
     /**
-     * Define the fonts attributes for the header title
+     * Define the fonts description of the Popover
      *
-     * @param fontAttributes
+     * @param fontAttr
      */
-    void setHeaderFontAttributes(Font fontAttributes);
+    void setPopoverDescriptionFont(Font fontAttr);
 
     /**
-     * Return the header title color
+     * Return the description fonts attributes
      *
-     * @return the header title color
+     * @return the description fonts attributes
      */
-    Color getHeaderTitleColor();
+    Font getPopoverDescriptionFont();
 
     /**
-     * Define the foreground color for the header title
+     * Return the Popover description color
      *
-     * @param titleColor
+     * @return the Popover description color
      */
-    void setHeaderTitleColor(Color titleColor);
+    Color getPopoverDescriptionColor();
+
+    /**
+     * Define the foreground color for the links
+     *
+     * @param linksColor
+     */
+    void setPopoverLinksColor(Color linksColor);
+
+    /**
+     * Return the links color
+     *
+     * @return the links color
+     */
+    Color getPopoverLinksColor();
+
+    /**
+     * Define the fonts attributes for the Popover links
+     *
+     * @param fontAttr
+     */
+    void setPopoverLinksFont(Font fontAttr);
+
+    /**
+     * Return the links fonts attributes
+     *
+     * @return the links fonts attributes
+     */
+    Font getPopoverLinksFont();
 }

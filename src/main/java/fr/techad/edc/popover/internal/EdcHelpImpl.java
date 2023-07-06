@@ -7,7 +7,6 @@ import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 
-import java.awt.Font;
 import javax.inject.Inject;
 
 /**
@@ -37,9 +36,7 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setLanguageCode(String languageCode) {
-        helpConfiguration.setLanguageCode(languageCode);
-    }
+    public void setLanguageCode(String languageCode) { helpConfiguration.setLanguageCode(languageCode); }
 
     @Override
     public void setTooltipLabel(String label) {
@@ -106,13 +103,6 @@ public class EdcHelpImpl implements EdcHelp {
     public void setRelatedTopicsDisplay(boolean enable) {
         helpConfiguration.setShowRelatedTopics(enable);
     }
-    
-    @Override
-    public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
-
-    @Override
-    public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
-
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;
     }
