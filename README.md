@@ -87,6 +87,9 @@ We will be able to configure the url to get the documentation and the widget pro
 | Icon state | ``setIconState`` | ERROR, SHOWN, HIDDEN, DISABLED | Set the icon behavior of popover |
 | Related topics display | ``setRelatedTopicsDisplay`` | Enable the related topics |
 | Article display | ``setArticleDisplay`` | Enable the article |
+| Desktop Viewer | ``setViewerDesktopServerURL`` | http://localhost:60000 | Define the desktop viewer url |
+| Desktop Viewer | ``setViewerDesktopWidth`` | 1900 | Define the desktop viewer width |
+| Desktop Viewer | ``setViewerDesktopHeight`` | 1200 | Define the desktop viewer height |
 
 ### with Injection
 
@@ -142,7 +145,7 @@ EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
 EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 ```
 
-### Config desktop viewer path
+### Config desktop viewer
 
 If you want to use the desktop viewer, you should define the path
 ```
@@ -152,6 +155,11 @@ EdcSwingHelpSingleton.getInstance().setHelpViewer(helpViewerMode);
 EdcSwingHelpSingleton.getInstance().setViewerDesktopPath("Define the path here");
 ```
 
+If you want to configure the size of edc viewer desktop window, you should define the size with this method before the configureDesktop method
+```
+EdcSwingHelpSingleton.getInstance().setViewerDesktopWidth(1000);
+EdcSwingHelpSingleton.getInstance().setViewerDesktopHeight(800);
+```
 The default port is 60000, if you changed the port on the edc-desktop-viewer electron configuration, apply the new desktop server url with this method :
 ```
 EdcSwingHelpSingleton.getInstance().setViewerDesktopServerURL("Define the desktop server path here");
@@ -242,6 +250,19 @@ public class Main {
     private static EdcClient edcClient;
     
     public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                try {
+                    EdcSwingHelpSingleton.getInstance().getEdcDesktop().shutDownDesktopProcess();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        
          /* Use an appropriate Look and Feel */
         try {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -275,15 +296,17 @@ public class Main {
     private static void createAndShowGUI() {
         edcSwingHelp = EdcSwingHelpSingleton.getInstance();
         edcClient = EdcSwingHelpSingleton.getInstance().getEdcClient();
-        /* Configuration for using the electron viewer desktop */
-        checkAndKillDesktopViewer();
-        String viewerDesktopPath = "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";// "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";
         HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
-
+        
+        /* Configuration for using the electron viewer desktop */
+        String viewerDesktopPath = "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";// "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";
+        
         /* Configuration */
         String serverUrl = "https://demo.easydoccontents.com";
 
         if(!StringUtils.isEmpty(viewerDesktopPath) && helpViewerMode == HelpViewer.EDC_DESKTOP_VIEWER){
+            edcSwingHelp.setViewerDesktopWidth(1000); // Default (1900)
+            edcSwingHelp.setViewerDesktopHeight(800); // Default (1200)
             DesktopProcess edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
             edcDesktop.ConfigureDesktopProcess(edcSwingHelp, viewerDesktopPath);
         }
@@ -336,18 +359,6 @@ public class Main {
             }
         });
         return comboBox;
-    }
-
-    private static void checkAndKillDesktopViewer() throws IOException {
-        Process process = Runtime.getRuntime().exec("tasklist /fi \"ImageName eq edc-help-viewer-desktop.exe\"");
-        process.getOutputStream().close();
-
-        BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-        if(input != null){
-            Runtime.getRuntime().exec("taskkill /F /IM edc-help-viewer-desktop.exe /T");
-        }
-        input.close();
     }
 }
 ```

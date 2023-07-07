@@ -155,6 +155,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     public void setViewerDesktopServerURL(String url) { edcSwingHelp.setViewerDesktopServerURL(url); }
 
     @Override
+    public void setViewerDesktopWidth(int width) { edcSwingHelp.setViewerDesktopWidth(width); }
+
+    @Override
+    public void setViewerDesktopHeight(int height) { edcSwingHelp.setViewerDesktopHeight(height); }
+
+    @Override
     public void setSeparatorDisplay(boolean state) {
         edcSwingHelp.setSeparatorDisplay(state);
     }

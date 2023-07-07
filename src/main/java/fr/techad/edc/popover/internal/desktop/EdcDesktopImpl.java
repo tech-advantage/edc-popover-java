@@ -27,21 +27,24 @@ public class EdcDesktopImpl implements EdcDesktop {
     @Override
     public void createProcess(String path) throws IOException {
         if(edcDesktopProcess == null || !edcDesktopProcess.isAlive()){
-            edcDesktopProcess = Runtime.getRuntime().exec(path);
+            ProcessBuilder processBuilder = new ProcessBuilder(path, "app", String.valueOf(helpConfiguration.getViewerDesktopWidth()), String.valueOf(helpConfiguration.getViewerDesktopHeight()));
+            // Start the process
+            edcDesktopProcess = processBuilder.start();
         }
     }
 
-    public void ConfigureDesktopProcess(EdcSwingHelp edcHelp, String appPath) throws IOException {
+    public void ConfigureDesktopProcess(EdcSwingHelp edcHelp, String appPath) throws IOException, InterruptedException {
         this.createProcess(appPath);
         if (edcDesktopProcess.isAlive())
         {
             edcHelp.setViewerDesktopPath(appPath);
         }
     }
+
     @Override
     public void shutDownDesktopProcess() throws IOException {
         if(helpConfiguration.getHelpViewer() == HelpViewer.EDC_DESKTOP_VIEWER){
-            String shutDownApiPath = desktopViewerApiPath + "/api/helpviewer/shutdown";
+            String shutDownApiPath = this.getDesktopViewerUrlApi() + "/api/helpviewer/shutdown";
             this.httpRequest.postData(shutDownApiPath, "{\"shutDown\": true}");
         }
     }
@@ -59,15 +62,14 @@ public class EdcDesktopImpl implements EdcDesktop {
         return desktopViewerApiPath;
     }
 
-    public void handleDesktopPostViewerUrl(String url) throws IOException {
-        String viewerUrlApi = this.getDesktopViewerUrlApi() + "/api";
+    public void handleDesktopPostViewerUrl(String url) throws IOException, InterruptedException {
+        String viewerUrlApi = this.getDesktopViewerUrlApi() + "/api/helpviewer";
         String data = "{\"url\": \"" + url + "\"}";
-
         if (!edcDesktopProcess.isAlive()) {
             this.createProcess(helpConfiguration.getViewerDesktopPath());
             StreamGobbler streamGobbler = new StreamGobbler(edcDesktopProcess.getInputStream(), System.out::println);
             Executors.newSingleThreadExecutor().submit(streamGobbler);
         }
-        this.httpRequest.postData(viewerUrlApi + "/helpviewer", data);
+        this.httpRequest.postData(viewerUrlApi, data);
     }
 }

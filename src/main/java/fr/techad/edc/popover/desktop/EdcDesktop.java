@@ -7,8 +7,12 @@ public interface EdcDesktop {
 
     /**
      * Create the desktop process
+     *
+     * @param path
+     * @throws IOException
+     * @throws InterruptedException
      */
-    void createProcess(String path) throws IOException;
+    void createProcess(String path) throws IOException, InterruptedException;
 
     /**
      * Configuration of desktop process
@@ -17,7 +21,7 @@ public interface EdcDesktop {
      * @param appPath
      * @throws IOException
      */
-    void ConfigureDesktopProcess(EdcSwingHelp edcHelp, String appPath) throws IOException;
+    void ConfigureDesktopProcess(EdcSwingHelp edcHelp, String appPath) throws IOException, InterruptedException;
 
     /**
      * Get the process
@@ -46,5 +50,5 @@ public interface EdcDesktop {
      * @param url
      * @throws IOException
      */
-    void handleDesktopPostViewerUrl(String url) throws IOException;
+    void handleDesktopPostViewerUrl(String url) throws IOException, InterruptedException;
 }

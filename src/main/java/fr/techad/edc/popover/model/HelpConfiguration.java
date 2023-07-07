@@ -233,6 +233,34 @@ public interface HelpConfiguration {
     void setViewerDesktopServerURL(String url);
 
     /**
+     * Return the viewer desktop width
+     *
+     * @return the viewer desktop width
+     */
+    int getViewerDesktopWidth();
+
+    /**
+     * Define the viewer desktop width
+     *
+     * @param width
+     */
+    void setViewerDesktopWidth(int width);
+
+    /**
+     * Return the viewer desktop height
+     *
+     * @return the viewer desktop height
+     */
+    int getViewerDesktopHeight();
+
+    /**
+     * Define the viewer desktop height
+     *
+     * @param height
+     */
+    void setViewerDesktopHeight(int height);
+
+    /**
      * Return the enum placement
      *
      * @return Enum

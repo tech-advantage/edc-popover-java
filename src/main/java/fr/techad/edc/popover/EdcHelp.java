@@ -96,6 +96,20 @@ public interface EdcHelp {
     void setViewerDesktopServerURL(String host);
 
     /**
+     * Define the viewer desktop window width
+     *
+     * @param width
+     */
+    void setViewerDesktopWidth(int width);
+
+    /**
+     * Define the viewer desktop window height
+     *
+     * @param height
+     */
+    void setViewerDesktopHeight(int height);
+
+    /**
      * Show the title if enabled
      * Define the placement of popover use with Enum Type: TOP, RIGHT, BOTTOM, LEFT
      *

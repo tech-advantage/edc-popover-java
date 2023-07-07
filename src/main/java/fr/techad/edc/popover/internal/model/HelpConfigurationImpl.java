@@ -41,6 +41,8 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private Color popoverDescriptionColor = Color.BLACK;
     private Font popoverDescriptionFont = new Font("Dialog", Font.PLAIN, 12);
     private String viewerDesktopServerURL = "http://localhost:60000";
+    private int viewerDesktopWidth = 1900;
+    private int viewerDesktopHeight = 1200;
 
     public HelpConfigurationImpl() {
         this.backgroundColor = Color.WHITE.getRGB();
@@ -167,6 +169,18 @@ public class HelpConfigurationImpl implements HelpConfiguration {
 
     @Override
     public String getViewerDesktopPath() { return this.desktopViewerPath; }
+
+    @Override
+    public int getViewerDesktopWidth() { return this.viewerDesktopWidth; }
+
+    @Override
+    public void setViewerDesktopWidth(int width) { this.viewerDesktopWidth = width; }
+
+    @Override
+    public int getViewerDesktopHeight() { return this.viewerDesktopHeight; }
+
+    @Override
+    public void setViewerDesktopHeight(int height) { this.viewerDesktopHeight = height; }
 
     @Override
     public ErrorBehavior getErrorBehavior() {

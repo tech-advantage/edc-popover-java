@@ -63,7 +63,19 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setViewerDesktopServerURL(String url) { helpConfiguration.setViewerDesktopServerURL(url); }
+    public void setViewerDesktopServerURL(String url) {
+        helpConfiguration.setViewerDesktopServerURL(url);
+    }
+
+    @Override
+    public void setViewerDesktopWidth(int width) {
+        helpConfiguration.setViewerDesktopWidth(width);
+    }
+
+    @Override
+    public void setViewerDesktopHeight(int height) {
+        helpConfiguration.setViewerDesktopHeight(height);
+    }
 
     @Override
     public void setTitleDisplay(boolean enable) {

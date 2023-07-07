@@ -65,17 +65,21 @@ public class Main {
                     ex.printStackTrace();
                 } catch (InvalidUrlException ex) {
                     throw new RuntimeException(ex);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
     }
 
-    private static void createAndShowGUI() throws IOException, InvalidUrlException {
+    private static void createAndShowGUI() throws IOException, InvalidUrlException, InterruptedException {
         edcSwingHelp = EdcSwingHelpSingleton.getInstance();
         edcClient = EdcSwingHelpSingleton.getInstance().getEdcClient();
 
         /* Configuration for using the electron viewer desktop */
         String viewerDesktopPath = "";
+        edcSwingHelp.setViewerDesktopWidth(800);
+        edcSwingHelp.setViewerDesktopHeight(800);
 
         /* Configuration */
         String serverUrl = "https://demo.easydoccontents.com";
@@ -85,13 +89,14 @@ public class Main {
             EdcDesktop edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
             edcDesktop.ConfigureDesktopProcess(edcSwingHelp, viewerDesktopPath);
         }
+
         edcClient.setServerUrl(serverUrl);
         edcSwingHelp.setTooltipLabel("Help");
         edcSwingHelp.setTitleDisplay(true);
         edcSwingHelp.setSeparatorDisplay(true);
         edcSwingHelp.setSeparatorColor(Color.RED);
         edcSwingHelp.setBackgroundColor(Color.WHITE);
-        edcSwingHelp.setPopoverDisplay(false);
+        edcSwingHelp.setPopoverDisplay(true);
         edcSwingHelp.setHoverDisplayPopover(false);
         edcSwingHelp.setIconState(IconState.ERROR);
         edcSwingHelp.setErrorBehavior(ErrorBehavior.ERROR_SHOWN);

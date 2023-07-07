@@ -113,6 +113,16 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
+    public void setViewerDesktopWidth(int width){
+        getHelpConfiguration().setViewerDesktopWidth(width);
+    }
+
+    @Override
+    public void setViewerDesktopHeight(int height){
+        getHelpConfiguration().setViewerDesktopHeight(height);
+    }
+
+    @Override
     public void setPopoverSectionTitleFont(Font fontAttr) {
         getHelpConfiguration().setPopoverSectionTitleFont(fontAttr);
     }
