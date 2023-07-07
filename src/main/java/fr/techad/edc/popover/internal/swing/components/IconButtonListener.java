@@ -32,7 +32,6 @@ public class IconButtonListener implements HelpListener {
     private final Popover popover;
     private final OpenUrlAction openUrlAction;
     private ContextItem contextItem = null;
-
     private String mainKey;
     private String subKey;
 
@@ -82,14 +81,16 @@ public class IconButtonListener implements HelpListener {
             if (this.helpConfiguration.getPopoverDisplay()) {
                openPopover(e.getXOnScreen(), e.getYOnScreen());
             } else {
-               openBrowser();
+               if(!helpConfiguration.isHoverDisplayPopover()){
+                  openBrowser();
+               }
             }
         }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (this.helpConfiguration.getPopoverDisplay()) {
+        if (this.helpConfiguration.isHoverDisplayPopover()) {
             openPopover(e.getXOnScreen(), e.getYOnScreen());
         }
     }
@@ -107,8 +108,8 @@ public class IconButtonListener implements HelpListener {
             LOGGER.error("Impossible to get the url for key ({}, {}) and languageCode: {}", mainKey, subKey, this.helpConfiguration.getLanguageCode());
         } catch (URISyntaxException e) {
             LOGGER.error("Impossible to open the browser with url:{}", url);
-        } catch (IOException e) {
-            LOGGER.error("Error on IO", e);
+        } catch (Exception e) {
+            LOGGER.error("Error", e);
         }
     }
 
@@ -123,6 +124,10 @@ public class IconButtonListener implements HelpListener {
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setPopoverSectionTitleColor(helpConfiguration.getPopoverSectionTitleColor())
                         .setPopoverSectionTitleFont(helpConfiguration.getPopoverSectionTitleFont())
+                        .setPopoverLinksColor(helpConfiguration.getPopoverLinksColor())
+                        .setPopoverDescriptionColor(helpConfiguration.getPopoverDescriptionColor())
+                        .setPopoverLinksFont(helpConfiguration.getPopoverLinksFont())
+                        .setPopoverDescriptionFont(helpConfiguration.getPopoverDescriptionFont())
                         .enableArticle(helpConfiguration.isShowArticle())
                         .enableRelatedTopics(helpConfiguration.isShowRelatedTopics())
                         .build();
@@ -130,7 +135,7 @@ public class IconButtonListener implements HelpListener {
                         .setContextItem(contextItem)
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
-                        .setHeaderFontAttributes(helpConfiguration.getHeaderFontAttributes())
+                        .setHeaderTitleFont(helpConfiguration.getHeaderTitleFont())
                         .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
                         .build();

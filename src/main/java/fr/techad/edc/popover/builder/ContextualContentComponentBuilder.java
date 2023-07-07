@@ -65,6 +65,38 @@ public interface ContextualContentComponentBuilder<T> {
      */
     ContextualContentComponentBuilder<T> setPopoverSectionTitleFont(Font fontAttr);
 
+    /**
+     * Define the links color
+     *
+     * @param linksColor
+     * @return
+     */
+    ContextualContentComponentBuilder<T> setPopoverLinksColor(Color linksColor);
+
+    /**
+     * Define the Popover links font attributes
+     *
+     * @param fontAttr
+     * @return the Popover links font attributes
+     */
+    ContextualContentComponentBuilder<T> setPopoverLinksFont(Font fontAttr);
+
+    /**
+     * Define the description color
+     *
+     * @param descColor
+     * @return
+     */
+    ContextualContentComponentBuilder<T> setPopoverDescriptionColor(Color descColor);
+
+    /**
+     * Define the Popover description font attributes
+     *
+     * @param fontAttr
+     * @return the Popover description font attributes
+     */
+    ContextualContentComponentBuilder<T> setPopoverDescriptionFont(Font fontAttr);
+
      /** Enable the article display
      *
      * @param enable

@@ -35,7 +35,7 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     private String languageCode = "en";
     private final JLabel errorTitle = new JLabel("Error");
     private Color titleColor = Color.BLACK;
-    private Font headerFontAttributes;
+    private Font headerTitleFont;
 
     @Inject
     public ContextualTitleComponentBuilderImpl(EdcClient edcClient) {
@@ -64,9 +64,9 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     }
 
     @Override
-    public ContextualTitleComponentBuilder<JComponent> setHeaderFontAttributes(Font fontAttributes) {
-        this.headerFontAttributes = fontAttributes;
-        LOGGER.debug("Set Header Font Attributes: {}", headerFontAttributes);
+    public ContextualTitleComponentBuilder<JComponent> setHeaderTitleFont(Font fontAttr) {
+        this.headerTitleFont = fontAttr;
+        LOGGER.debug("Set Header Title Font Attributes: {}", headerTitleFont);
         return this;
     }
 
@@ -111,27 +111,26 @@ public class ContextualTitleComponentBuilderImpl implements ContextualTitleCompo
     private JComponent getBody() throws InvalidUrlException, IOException {
         Set<String> languagesCodes = Sets.newHashSet();
         languagesCodes.add(languageCode);
-
         String errorTitleFromLanguage = getLabel(ERROR_TITLE_KEY.getValue(), languageCode, null);
-        JLabel jLabelError = new JLabel();
+        JLabel jLabelTitle = new JLabel();
 
         if (this.showTitle || errorBehavior == ErrorBehavior.ERROR_SHOWN) {
             if(!errorTitleFromLanguage.isEmpty()){
                 errorTitle.setText(errorTitleFromLanguage);
             }
-            jLabelError = errorTitle;
+            jLabelTitle = errorTitle;
         }
 
         if (this.showTitle || errorBehavior != ErrorBehavior.FRIENDLY_MSG) {
             if (contextItem != null) {
-                jLabelError.setText(contextItem.getLabel());
+                jLabelTitle.setText(contextItem.getLabel());
             }
         }
 
-        jLabelError.setFont(headerFontAttributes);
-        jLabelError.setForeground(titleColor);
-        jLabelError.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
-        return jLabelError;
+        jLabelTitle.setFont(headerTitleFont);
+        jLabelTitle.setForeground(titleColor);
+        jLabelTitle.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
+        return jLabelTitle;
     }
 
     /**

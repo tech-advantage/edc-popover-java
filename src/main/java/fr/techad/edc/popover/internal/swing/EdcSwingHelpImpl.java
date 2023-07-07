@@ -23,14 +23,18 @@ import java.io.IOException;
  */
 public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     private static final Logger LOGGER = LoggerFactory.getLogger(EdcSwingHelpImpl.class);
-
     private final EdcClient edcClient;
     private final ContextualComponentBuilder<JComponent> contextualComponentBuilder;
     private final HelpListenerProvider helpListenerProvider;
     private boolean enableContextItem = false;
 
     @Inject
-    public EdcSwingHelpImpl(EdcClient edcClient, ContextualComponentBuilder<JComponent> contextualComponentBuilder, HelpConfiguration helpConfiguration, HelpListenerProvider helpListenerProvider) {
+    public EdcSwingHelpImpl(
+            EdcClient edcClient,
+            ContextualComponentBuilder<JComponent> contextualComponentBuilder,
+            HelpConfiguration helpConfiguration,
+            HelpListenerProvider helpListenerProvider
+    ) {
         super(helpConfiguration);
         this.edcClient = edcClient;
         this.contextualComponentBuilder = contextualComponentBuilder;
@@ -41,7 +45,7 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     public JComponent createComponent(String mainKey, String subKey, String iconPath) {
         HelpConfiguration helpConfiguration = getHelpConfiguration();
         String languageCode = helpConfiguration.getLanguageCode();
-
+        
         try {
             enableContextItem = edcClient.getContextItem(mainKey, subKey, languageCode) != null;
         } catch (InvalidUrlException | IOException e) {
@@ -65,7 +69,6 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
 
         return component;
     }
-
 
     @Override
     public JComponent createComponent(String mainKey, String subKey) {
@@ -91,21 +94,32 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
-    public void setHeaderFontAttributes(Font fontAttributes) {
-        getHelpConfiguration().setHeaderFontAttributes(fontAttributes);
-    }
-
-
-    @Override
-    public void setBrowserSize(int width, int height) {
-        HelpConfiguration helpConfiguration = getHelpConfiguration();
-        helpConfiguration.setWidthBrowser(width);
-        helpConfiguration.setHeightBrowser(height);
-    }
-
-    @Override
     public void setPopoverSectionTitleColor(Color titleColor) {
         getHelpConfiguration().setPopoverSectionTitleColor(titleColor);
+    }
+
+    @Override
+    public void setHeaderTitleFont(Font fontAttr) {
+        getHelpConfiguration().setHeaderTitleFont(fontAttr);
+    }
+    @Override
+    public void setHeaderTitleColor(Color titleColor) {
+        getHelpConfiguration().setHeaderTitleColor(titleColor);
+    }
+
+    @Override
+    public void setViewerDesktopServerURL(String url) {
+        getHelpConfiguration().setViewerDesktopServerURL(url);
+    }
+
+    @Override
+    public void setViewerDesktopWidth(int width){
+        getHelpConfiguration().setViewerDesktopWidth(width);
+    }
+
+    @Override
+    public void setViewerDesktopHeight(int height){
+        getHelpConfiguration().setViewerDesktopHeight(height);
     }
 
     @Override
@@ -114,7 +128,22 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
     }
 
     @Override
-    public void setHeaderTitleColor(Color titleColor) {
-        getHelpConfiguration().setHeaderTitleColor(titleColor);
+    public void setPopoverLinksColor(Color linkColor) {
+        getHelpConfiguration().setPopoverLinksColor(linkColor);
+    }
+
+    @Override
+    public void setPopoverLinksFont(Font fontAttr) {
+        getHelpConfiguration().setPopoverLinksFont(fontAttr);
+    }
+
+    @Override
+    public void setPopoverDescriptionColor(Color descColor) {
+        getHelpConfiguration().setPopoverDescriptionColor(descColor);
+    }
+
+    @Override
+    public void setPopoverDescriptionFont(Font fontAttr) {
+        getHelpConfiguration().setPopoverDescriptionFont(fontAttr);
     }
 }

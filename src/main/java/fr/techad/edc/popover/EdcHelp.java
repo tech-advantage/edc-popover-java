@@ -4,8 +4,6 @@ import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import fr.techad.edc.popover.model.HelpViewer;
-import java.awt.Font;
-
 
 /**
  * Define the base functionality to manage the help display.
@@ -60,6 +58,7 @@ public interface EdcHelp {
      */
     void setPopoverDisplay(boolean enable);
 
+  
     /**
      * Active or deactivate the popover display when the mouse is over it.
      *
@@ -76,11 +75,39 @@ public interface EdcHelp {
     void setHelpViewer(HelpViewer viewer);
 
     /**
+     * Get the viewer browser
+     *
+     * @return
+     */
+    HelpViewer getHelpViewer();
+
+    /**
      * Define the path of the executable location
      *
      * @param path to executable
      */
     void setViewerDesktopPath(String path);
+
+    /**
+     * Define the host of viewer desktop url
+     *
+     * @param host
+     */
+    void setViewerDesktopServerURL(String host);
+
+    /**
+     * Define the viewer desktop window width
+     *
+     * @param width
+     */
+    void setViewerDesktopWidth(int width);
+
+    /**
+     * Define the viewer desktop window height
+     *
+     * @param height
+     */
+    void setViewerDesktopHeight(int height);
 
     /**
      * Show the title if enabled
@@ -133,22 +160,9 @@ public interface EdcHelp {
      */
     void setRelatedTopicsDisplay(boolean enable);
 
-     /** Define the fonts attributes of the popover section title
-     *
-     * @param fontAttr
-     */
-    void setPopoverSectionTitleFont(Font fontAttr);
-
      /** Show the article if enabled
      *
      * @param enable true to enable the article display.
      */
     void setArticleDisplay(boolean enable);
-
-    /**
-     * Define the font attributes of the header title
-     *
-     * @param fontAttributes
-     */
-    void setHeaderFontAttributes(Font fontAttributes);
 }

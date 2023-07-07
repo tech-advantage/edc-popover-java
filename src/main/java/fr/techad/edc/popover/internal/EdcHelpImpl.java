@@ -7,7 +7,6 @@ import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.model.IconState;
 import fr.techad.edc.popover.model.PopoverPlacement;
 
-import java.awt.Font;
 import javax.inject.Inject;
 
 /**
@@ -37,9 +36,7 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
-    public void setLanguageCode(String languageCode) {
-        helpConfiguration.setLanguageCode(languageCode);
-    }
+    public void setLanguageCode(String languageCode) { helpConfiguration.setLanguageCode(languageCode); }
 
     @Override
     public void setTooltipLabel(String label) {
@@ -58,8 +55,26 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public HelpViewer getHelpViewer() { return helpConfiguration.getHelpViewer(); }
+
+    @Override
     public void setViewerDesktopPath(String path) {
         helpConfiguration.setViewerDesktopPath(path);
+    }
+
+    @Override
+    public void setViewerDesktopServerURL(String url) {
+        helpConfiguration.setViewerDesktopServerURL(url);
+    }
+
+    @Override
+    public void setViewerDesktopWidth(int width) {
+        helpConfiguration.setViewerDesktopWidth(width);
+    }
+
+    @Override
+    public void setViewerDesktopHeight(int height) {
+        helpConfiguration.setViewerDesktopHeight(height);
     }
 
     @Override
@@ -100,13 +115,6 @@ public class EdcHelpImpl implements EdcHelp {
     public void setRelatedTopicsDisplay(boolean enable) {
         helpConfiguration.setShowRelatedTopics(enable);
     }
-    
-    @Override
-    public void setPopoverSectionTitleFont(Font fontAttr) { helpConfiguration.setPopoverSectionTitleFont(fontAttr); }
-
-    @Override
-    public void setHeaderFontAttributes(Font fontAttributes) { helpConfiguration.setHeaderFontAttributes(fontAttributes); }
-
     protected HelpConfiguration getHelpConfiguration() {
         return helpConfiguration;
     }
