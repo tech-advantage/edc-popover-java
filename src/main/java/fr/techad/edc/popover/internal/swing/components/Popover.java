@@ -79,7 +79,6 @@ public class Popover extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
-        mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
         // Header Panel (Contains the title and the closable icon if it's top position)
         headerSeparator = new JSeparator();
         this.headerPanel = new JPanel(new BorderLayout());
@@ -90,7 +89,7 @@ public class Popover extends JFrame {
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(1, 1));
         contentPanel.setBackground(Color.WHITE);
-        contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         setClosePosition(this.closablePosition);
