@@ -43,12 +43,6 @@ public class Popover extends JFrame {
         this(VERTICAL);
     }
 
-    public void addSeparator(){
-        this.headerSeparator = new JSeparator();
-        headerSeparator.setForeground(Color.BLACK);
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
-    }
-
     public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior, boolean showTitle){
         if(contextItem != null || errorBehavior == ErrorBehavior.ERROR_SHOWN){
             mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
@@ -84,10 +78,7 @@ public class Popover extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
         // Header Panel (Contains the title and the closable icon if it's top position)
-        headerSeparator = new JSeparator();
         this.headerPanel = new JPanel(new BorderLayout());
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
-
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
         // Body Panel (contains the brick information)
         contentPanel = new JPanel();
@@ -118,7 +109,6 @@ public class Popover extends JFrame {
         });
     }
 
-
     public void enableCloseOnLostFocus(){
         if(this.getMouseListeners().length == 0){
             this.addMouseListener(new MouseAdapter() {
@@ -133,12 +123,13 @@ public class Popover extends JFrame {
         }
     }
 
-    public void addHeaderPanel(){
-        if(headerSeparator == null){
-            headerSeparator = new JSeparator();
+    public void addHeaderPanel(boolean showSeparator){
+        if(showSeparator){
+            if(headerSeparator == null){
+                headerSeparator = new JSeparator();
+            }
+            this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
         }
-
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
     }
 
@@ -171,7 +162,6 @@ public class Popover extends JFrame {
      * @param c the color to set
      */
     public void setSeparatorColor(Color c) {
-
         LOGGER.debug("Define new content separator color: {}", c);
         if (c != null) {
             this.headerSeparator.setForeground(c);
