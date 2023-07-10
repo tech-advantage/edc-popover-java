@@ -49,10 +49,14 @@ public class Popover extends JFrame {
         this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
     }
 
-    public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior){
+    public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior, boolean showTitle){
         if(contextItem != null || errorBehavior == ErrorBehavior.ERROR_SHOWN){
             mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
-            contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+            if(showTitle){
+                contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+            } else {
+                contentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+            }
         } else {
             if(errorBehavior == ErrorBehavior.FRIENDLY_MSG){
                 mainPanel.setBorder(new EmptyBorder(0, 10, 0, 10));

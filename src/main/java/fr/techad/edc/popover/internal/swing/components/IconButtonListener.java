@@ -136,6 +136,7 @@ public class IconButtonListener implements HelpListener {
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setHeaderTitleFont(helpConfiguration.getHeaderTitleFont())
+                        .setErrorBehavior(helpConfiguration.getErrorBehavior())
                         .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
                         .build();
@@ -152,7 +153,7 @@ public class IconButtonListener implements HelpListener {
                 popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
-                popover.setEmptyBorder(contextItem, helpConfiguration.getErrorBehavior());
+                popover.setEmptyBorder(contextItem, helpConfiguration.getErrorBehavior(), helpConfiguration.isShowTitle());
                 popover.setIconPath(helpConfiguration.getCloseIconPath());
                 popover.pack();
                 popover.setVisible(true);
