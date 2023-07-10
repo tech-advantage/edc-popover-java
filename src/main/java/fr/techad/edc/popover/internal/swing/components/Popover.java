@@ -1,6 +1,8 @@
 package fr.techad.edc.popover.internal.swing.components;
 
+import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +47,18 @@ public class Popover extends JFrame {
         this.headerSeparator = new JSeparator();
         headerSeparator.setForeground(Color.BLACK);
         this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
+    }
+
+    public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior){
+        if(contextItem != null || errorBehavior == ErrorBehavior.ERROR_SHOWN){
+            mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
+            contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+        } else {
+            if(errorBehavior == ErrorBehavior.FRIENDLY_MSG){
+                mainPanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+                contentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+            }
+        }
     }
 
     /**

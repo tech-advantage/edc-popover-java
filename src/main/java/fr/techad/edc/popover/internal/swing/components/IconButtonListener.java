@@ -152,7 +152,7 @@ public class IconButtonListener implements HelpListener {
                 popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
-
+                popover.setEmptyBorder(contextItem, helpConfiguration.getErrorBehavior());
                 popover.setIconPath(helpConfiguration.getCloseIconPath());
                 popover.pack();
                 popover.setVisible(true);
