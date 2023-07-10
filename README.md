@@ -314,7 +314,7 @@ public class Main {
         edcSwingHelp.getInstance().setIconPath("icons/icon-32px.png");
         edcSwingHelp.getInstance().setLanguageCode("en");
         edcSwingHelp.getInstance().setTooltipLabel("Help");
-        edcSwingHelp.getInstance().setSummaryDisplay(true);
+        edcSwingHelp.getInstance().setRelatedTopicsDisplay(true);
         edcSwingHelp.getInstance().setTitleDisplay(true);
         edcSwingHelp.getInstance().setBackgroundColor(Color.WHITE);
         edcSwingHelp.getInstance().setSeparatorColor(Color.RED);
