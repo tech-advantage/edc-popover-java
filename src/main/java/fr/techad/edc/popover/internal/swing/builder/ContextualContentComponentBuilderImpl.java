@@ -252,7 +252,6 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         jLabelError.setHorizontalAlignment(SwingConstants.CENTER);
         Font f = jLabelError.getFont();
         jLabelError.setFont(f.deriveFont(f.getStyle() ^ Font.PLAIN));
-        jLabelError.setBorder(BorderFactory.createEmptyBorder(6, 10, 0, 10));
 
         return jLabelError;
     }

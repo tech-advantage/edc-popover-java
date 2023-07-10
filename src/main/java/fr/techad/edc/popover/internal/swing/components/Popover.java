@@ -1,6 +1,8 @@
 package fr.techad.edc.popover.internal.swing.components;
 
+import fr.techad.edc.client.model.ContextItem;
 import fr.techad.edc.popover.internal.swing.tools.ImageIconCreator;
+import fr.techad.edc.popover.model.ErrorBehavior;
 import fr.techad.edc.popover.model.PopoverPlacement;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +49,20 @@ public class Popover extends JFrame {
         this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
     }
 
+    public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior){
+        if(contextItem != null || errorBehavior == ErrorBehavior.ERROR_SHOWN){
+            mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
+            contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+        } else {
+            if(errorBehavior == ErrorBehavior.FRIENDLY_MSG){
+                mainPanel.repaint();
+                contentPanel.repaint();
+                mainPanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+                contentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+            }
+        }
+    }
+
     /**
      * Creates a new popover with a specific direction (create a padding according the direction)
      *
@@ -65,7 +81,6 @@ public class Popover extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
-        mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
         // Header Panel (Contains the title and the closable icon if it's top position)
         headerSeparator = new JSeparator();
         this.headerPanel = new JPanel(new BorderLayout());
@@ -76,7 +91,7 @@ public class Popover extends JFrame {
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(1, 1));
         contentPanel.setBackground(Color.WHITE);
-        contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         setClosePosition(this.closablePosition);
