@@ -33,6 +33,20 @@ public interface EdcHelp {
     void setErrorIconPath(String iconPath);
 
     /**
+     * Define the path for the dark icon to use.
+     *
+     * @param iconPath
+     */
+    void setIconDarkModePath(String iconPath);
+
+    /**
+     * Enable the dark mode
+     *
+     * @param enable
+     */
+    void setDarkMode(boolean enable);
+
+    /**
      * Define the language code which will be used to display the documentation and the popover labels.
      * If content was not found in the requested language, publication default language will be used.
      *

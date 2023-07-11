@@ -316,6 +316,34 @@ public interface HelpConfiguration {
      */
     void setIconState(IconState state);
 
+    /**
+     * Return the icon Dark mode path
+     *
+     * @return the icon Dark mode path
+     */
+    String getIconDarkModePath();
+
+    /**
+     * Set the icon Dark mode path
+     *
+     * @param iconPath
+     */
+    void setIconDarkModePath(String iconPath);
+
+    /**
+     * Return true if enable
+     *
+     * @return true if enable
+     */
+    boolean isDarkMode();
+
+    /**
+     * Enable the dark mode
+     *
+     * @param enable
+     */
+    void setDarkMode(boolean enable);
+
     /** Return the font attributes of the header title
      *
      * @return the fonts attributes

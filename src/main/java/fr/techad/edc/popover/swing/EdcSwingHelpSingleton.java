@@ -100,6 +100,12 @@ public class EdcSwingHelpSingleton implements EdcSwingHelp {
     }
 
     @Override
+    public void setIconDarkModePath(String iconPath) { edcSwingHelp.setIconDarkModePath(iconPath); }
+
+    @Override
+    public void setDarkMode(boolean enable) { edcSwingHelp.setDarkMode(enable); }
+
+    @Override
     public void setCloseIconPath(String iconPath) {
         edcSwingHelp.setCloseIconPath(iconPath);
     }

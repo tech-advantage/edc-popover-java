@@ -36,6 +36,12 @@ public class EdcHelpImpl implements EdcHelp {
     }
 
     @Override
+    public void setIconDarkModePath(String iconPath) { helpConfiguration.setIconDarkModePath(iconPath); }
+
+    @Override
+    public void setDarkMode(boolean enable) { helpConfiguration.setDarkMode(enable); }
+
+    @Override
     public void setLanguageCode(String languageCode) { helpConfiguration.setLanguageCode(languageCode); }
 
     @Override

@@ -30,6 +30,8 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     private IconState iconState;
     private boolean enableMainKey;
     private boolean showTooltip = true;
+    private String iconDarkModePath;
+    private boolean darkMode;
 
     @Inject
     public ContextualComponentBuilderImpl(HelpListenerProvider helpListenerProvider) {
@@ -49,6 +51,20 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
     public ContextualComponentBuilder<JComponent> setIconPath(String iconPath) {
         this.iconPath = iconPath;
         LOGGER.debug("Set Icon Path: {}", iconPath);
+        return this;
+    }
+
+    @Override
+    public ContextualComponentBuilder<JComponent> setIconDarkModePath(String iconPath) {
+        this.iconDarkModePath = iconPath;
+        LOGGER.debug("Set Icon DarkMode path: {}", enableMainKey);
+        return this;
+    }
+
+    @Override
+    public ContextualComponentBuilder<JComponent> setDarkMode(boolean enable) {
+        this.darkMode = enable;
+        LOGGER.debug("Enable DarkMode: {}", enable);
         return this;
     }
 
@@ -100,7 +116,7 @@ public class ContextualComponentBuilderImpl implements ContextualComponentBuilde
                 errorBehavior == ErrorBehavior.NO_POPOVER && !enableMainKey ||
                         iconState == IconState.HIDDEN && !enableMainKey ?
                         "" : iconState == IconState.ERROR && !enableMainKey ?
-                        errorIconPath : iconPath
+                        errorIconPath : darkMode == true ? iconDarkModePath : iconPath
         );
         IconButton iconButton = new IconButton(showTooltip ? label : null, imageIcon);
         HelpListener helpListener = helpListenerProvider.get();
