@@ -126,7 +126,7 @@ public class Example {
     help.setPopoverDisplay(true);
     help.setBackgroundColor(Color.BLUE);
     help.setCloseIconPath("popover/close2.png");
-    help.setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
+    help.setHelpViewer(HelpViewer.SYSTEM_BROWSER);
   }
 }
 ```
@@ -332,7 +332,7 @@ public class Main {
         edcSwingHelp.getInstance().setBackgroundColor(Color.WHITE);
         edcSwingHelp.getInstance().setSeparatorColor(Color.RED);
         edcSwingHelp.getInstance().setCloseIconPath("popover/close2.png");
-        edcSwingHelp.getInstance().setHelpViewer(HelpViewer.EMBEDDED_VIEWER);
+        edcSwingHelp.getInstance().setHelpViewer(helpViewerMode);
         edcSwingHelp.getInstance().setHeaderTitleFont(new Font("Dialog", Font.BOLD, 20));
         edcSwingHelp.getInstance().setHeaderTitleColor(Color.BLUE);
         
