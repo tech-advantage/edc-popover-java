@@ -43,16 +43,14 @@ public class Popover extends JFrame {
         this(VERTICAL);
     }
 
-    public void addSeparator(){
-        this.headerSeparator = new JSeparator();
-        headerSeparator.setForeground(Color.BLACK);
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
-    }
-
-    public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior){
+    public void setEmptyBorder(ContextItem contextItem, ErrorBehavior errorBehavior, boolean showTitle){
         if(contextItem != null || errorBehavior == ErrorBehavior.ERROR_SHOWN){
             mainPanel.setBorder(new EmptyBorder(0, 8, 8, 5));
-            contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+            if(showTitle){
+                contentPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
+            } else {
+                contentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+            }
         } else {
             if(errorBehavior == ErrorBehavior.FRIENDLY_MSG){
                 mainPanel.setBorder(new EmptyBorder(0, 10, 0, 10));
@@ -80,10 +78,7 @@ public class Popover extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
         // Header Panel (Contains the title and the closable icon if it's top position)
-        headerSeparator = new JSeparator();
         this.headerPanel = new JPanel(new BorderLayout());
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
-
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
         // Body Panel (contains the brick information)
         contentPanel = new JPanel();
@@ -114,7 +109,6 @@ public class Popover extends JFrame {
         });
     }
 
-
     public void enableCloseOnLostFocus(){
         if(this.getMouseListeners().length == 0){
             this.addMouseListener(new MouseAdapter() {
@@ -129,12 +123,13 @@ public class Popover extends JFrame {
         }
     }
 
-    public void addHeaderPanel(){
-        if(headerSeparator == null){
-            headerSeparator = new JSeparator();
+    public void addHeaderPanel(boolean showSeparator){
+        if(showSeparator){
+            if(headerSeparator == null){
+                headerSeparator = new JSeparator();
+            }
+            this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
         }
-
-        this.headerPanel.add(headerSeparator, BorderLayout.SOUTH);
         mainPanel.add(this.headerPanel, BorderLayout.NORTH);
     }
 
@@ -167,7 +162,6 @@ public class Popover extends JFrame {
      * @param c the color to set
      */
     public void setSeparatorColor(Color c) {
-
         LOGGER.debug("Define new content separator color: {}", c);
         if (c != null) {
             this.headerSeparator.setForeground(c);
@@ -221,19 +215,20 @@ public class Popover extends JFrame {
         int width = getWidth();
         int height = getHeight();
 
+        GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] devices = environment.getScreenDevices();
+
         GraphicsConfiguration config = this.getGraphicsConfiguration();
         GraphicsDevice currentDevice = config.getDevice();
-        int widthDisplay = currentDevice.getDisplayMode().getWidth();
-        int heightDisplay = currentDevice.getDisplayMode().getHeight();
 
         int newX = x;
         int newY = y;
-        LOGGER.debug("width: {}, height: {}, widthDisplay: {}, heightDisplay: {}, currentDevice: {}", width, height, widthDisplay, heightDisplay, currentDevice);
+
+        LOGGER.debug("width: {}, height: {}, currentDevice: {}", width, height, currentDevice);
 
         int padX = 0;
         int padY = 0;
         boolean reverseX = false;
-        boolean reverseY = false;
 
         if (direction == HORIZONTAL)
             padY = 5;
@@ -242,19 +237,60 @@ public class Popover extends JFrame {
 
         LOGGER.debug("full width: {}", x + width + padX);
 
-        if (x + width + padX > widthDisplay) {
-            newX = x - width;
-            reverseX = true;
-            LOGGER.debug("Reverse width, newX: {}", newX);
+        // Find the correct screen for positioning the window
+        GraphicsDevice targetDevice = currentDevice;
+        for (GraphicsDevice device : devices) {
+            if (device.getDefaultConfiguration().getBounds().contains(newX, newY)) {
+                targetDevice = device;
+                break;
+            }
         }
-        if (y + height + padY > heightDisplay) {
-            newY = y - height;
-            reverseY = true;
+
+        // Get the screen dimensions for positioning
+        Rectangle targetBounds = targetDevice.getDefaultConfiguration().getBounds();
+        int targetWidth = targetBounds.width;
+        int targetHeight = targetBounds.height;
+
+        switch (this.popoverPlacement) {
+            case RIGHT:
+                LOGGER.debug("Popover positioned on RIGHT side");
+                newX = newX + (reverseX ? -padX : padX);
+                break;
+            case LEFT:
+                LOGGER.debug("Popover positioned on LEFT side");
+                newX = x - width;
+                if (newX < targetBounds.x) {
+                    newX = newX + width;
+                    reverseX = false;
+                }
+                break;
+            case TOP:
+                LOGGER.debug("Popover positioned on TOP side");
+                newY = y - height;
+                newX = newX - width / 2;
+                if (newY < targetBounds.y) {
+                    newY = y;
+                }
+                break;
+            case BOTTOM:
+                LOGGER.debug("Popover positioned on BOTTOM side");
+                newX = newX + (reverseX ? -padX : padX) - width / 2;
+                if (newX < targetBounds.x) {
+                    newX = x;
+                }
+                break;
+            default:
+                newX = newX + (reverseX ? -padX : padX);
         }
-        if (direction == HORIZONTAL)
-            newY = newY + (reverseY ? -padY : padX);
-        else
-            newX = newX + (reverseX ? -padX : padX);
+
+        // Adjust the position to fit within the screen bounds
+        if (newX + width > targetBounds.x + targetWidth) {
+            newX = targetBounds.x + targetWidth - width;
+        }
+        if (newY + height > targetBounds.y + targetHeight) {
+            newY = targetBounds.y + targetHeight - height;
+        }
+
         LOGGER.debug("New computed location: ({}, {})", newX, newY);
 
         super.setLocation(newX, newY);

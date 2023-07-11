@@ -18,6 +18,8 @@ EdcSwingHelpSingleton.getInstance().setDisplayTooltip();
 EdcSwingHelpSingleton.getInstance().setDisplayPopover(); (formerly setSummaryDisplay)
 EdcSwingHelpSingleton.getInstance().setDisplaySeparator();
 EdcSwingHelpSingleton.getInstance().setDisplayArticles();
+EdcSwingHelpSingleton.getInstance().setHelpViewer();
+EdcSwingHelpSingleton.getInstance().setPopoverPlacement()
 EdcSwingHelpSingleton.getInstance().setDisplayRelatedTopics();
 ```
 
@@ -63,6 +65,8 @@ We will be able to configure the url to get the documentation and the widget pro
 | Properties | Method | Default | Description |
 |--|--|--|--|
 | Icon Path| ``setIconPath`` | icons/icon-32px.png| The help icon displays in the component |
+| DarkMode | ``setDarkMode`` | false | Enable the dark mode for icon |
+| Icon Dark Mode Path | ``setIconDarkModePath`` | icons/icon2-32px.png | The help icon dark display in the component |
 | Language Code | ``setLanguageCode`` | en | The help language code |
 | Tooltip | ``setTooltipLabel`` | '' | The tooltip displays on the help icon |
 | Tooltip display | ``setTooltipDisplay`` | true | Display the tooltip on the help icon and close icon in popover |
@@ -82,11 +86,12 @@ We will be able to configure the url to get the documentation and the widget pro
 | Popover description color | ``setPopoverLinksColor`` | BLACK | Color of the Popover links of the help dialog |
 | Close Icon | ``setCloseIconPath`` | popover/close1.png | The close icon display in the summary dialog |
 | Error Icon | ``setErrorIconPath`` | icons/icon_exclamation-32px.png | The error icon displays in the component |
+| Help Viewer | ``setHelpViewer`` | SYSTEM_BROWSER, EDC_DESKTOP_VIEWER | The mode to display the help documentation |
 | Popover placement | ``setPopoverPlacement`` | TOP, RIGHT, BOTTOM, LEFT | Set the position of popover |
 | Error behavior | ``setErrorBehavior`` | ERROR_SHOWN, FRIENDLY_MSG, NO_POPOVER | Set the error behavior of popover |
 | Icon state | ``setIconState`` | ERROR, SHOWN, HIDDEN, DISABLED | Set the icon behavior of popover |
-| Related topics display | ``setRelatedTopicsDisplay`` | Enable the related topics |
-| Article display | ``setArticleDisplay`` | Enable the article |
+| Related topics display | ``setRelatedTopicsDisplay`` | true | Enable the related topics |
+| Article display | ``setArticleDisplay`` | true | Enable the article |
 | Desktop Viewer | ``setViewerDesktopServerURL`` | http://localhost:60000 | Define the desktop viewer url |
 | Desktop Viewer | ``setViewerDesktopWidth`` | 1900 | Define the desktop viewer width |
 | Desktop Viewer | ``setViewerDesktopHeight`` | 1200 | Define the desktop viewer height |
@@ -140,7 +145,7 @@ To change the icon path and the default language
 EdcSwingHelpSingleton.getInstance().setIconPath("my-icon.png");
 EdcSwingHelpSingleton.getInstance().setLanguageCode("fr");
 EdcSwingHelpSingleton.getInstance().setTooltipLabel("edc Help");
-EdcSwingHelpSingleton.getInstance().setSummaryDisplay(true);
+EdcSwingHelpSingleton.getInstance().setPopoverDisplay(true);
 EdcSwingHelpSingleton.getInstance().setBackgroundColor(Color.BLUE);
 EdcSwingHelpSingleton.getInstance().setCloseIconPath("popover/close2.png");
 ```
@@ -151,8 +156,8 @@ If you want to use the desktop viewer, you should define the path
 ```
 HelpViewer helpViewerMode = HelpViewer.EDC_DESKTOP_VIEWER;
 ...
-EdcSwingHelpSingleton.getInstance().setHelpViewer(helpViewerMode);
 EdcSwingHelpSingleton.getInstance().setViewerDesktopPath("Define the path here");
+EdcSwingHelpSingleton.getInstance().setHelpViewer(helpViewerMode);
 ```
 
 If you want to configure the size of edc viewer desktop window, you should define the size with this method before the configureDesktop method
@@ -234,7 +239,13 @@ As an example, here is the en.json file used by default:
 {
   "labels": {
     "articles": "Need more...",
-    "links": "Related topics"
+    "links": "Related topics",
+    "iconAlt": "Help",
+    "comingSoon": "Contextual help is coming soon.",
+    "errorTitle":  "Error"
+  },
+  "errors": {
+    "failedData": "An error occurred when fetching data !\nCheck the brick keys provided to the EdcHelp component."
   }
 }
 ```
@@ -296,17 +307,19 @@ public class Main {
     private static void createAndShowGUI() {
         edcSwingHelp = EdcSwingHelpSingleton.getInstance();
         edcClient = EdcSwingHelpSingleton.getInstance().getEdcClient();
+        
+        /* Declare the Help Viewer mode */
         HelpViewer helpViewerMode = HelpViewer.SYSTEM_BROWSER;
         
         /* Configuration for using the electron viewer desktop */
-        String viewerDesktopPath = "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";// "C:\\Users\\bracq\\Desktop\\edc\\edc-help-viewer-desktop\\out\\edc-help-viewer-desktop-win32-x64\\edc-help-viewer-desktop.exe";
+        String viewerDesktopPath = "";
         
         /* Configuration */
         String serverUrl = "https://demo.easydoccontents.com";
 
         if(!StringUtils.isEmpty(viewerDesktopPath) && helpViewerMode == HelpViewer.EDC_DESKTOP_VIEWER){
-            edcSwingHelp.setViewerDesktopWidth(1000); // Default (1900)
-            edcSwingHelp.setViewerDesktopHeight(800); // Default (1200)
+            edcSwingHelp.setViewerDesktopWidth(1200);
+            edcSwingHelp.setViewerDesktopHeight(1000);
             DesktopProcess edcDesktop = EdcSwingHelpSingleton.getInstance().getEdcDesktop();
             edcDesktop.ConfigureDesktopProcess(edcSwingHelp, viewerDesktopPath);
         }
@@ -314,7 +327,7 @@ public class Main {
         edcSwingHelp.getInstance().setIconPath("icons/icon-32px.png");
         edcSwingHelp.getInstance().setLanguageCode("en");
         edcSwingHelp.getInstance().setTooltipLabel("Help");
-        edcSwingHelp.getInstance().setRelatedTopicsDisplay(true);
+        edcSwingHelp.getInstance().setPopoverDisplay(true);
         edcSwingHelp.getInstance().setTitleDisplay(true);
         edcSwingHelp.getInstance().setBackgroundColor(Color.WHITE);
         edcSwingHelp.getInstance().setSeparatorColor(Color.RED);

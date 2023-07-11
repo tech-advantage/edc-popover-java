@@ -136,6 +136,7 @@ public class IconButtonListener implements HelpListener {
                         .setBackgroundColor(helpConfiguration.getBackgroundColor())
                         .setLanguageCode(helpConfiguration.getLanguageCode())
                         .setHeaderTitleFont(helpConfiguration.getHeaderTitleFont())
+                        .setErrorBehavior(helpConfiguration.getErrorBehavior())
                         .setShowTitle(helpConfiguration.isShowTitle())
                         .setHeaderTitleColor(helpConfiguration.getHeaderTitleColor())
                         .build();
@@ -143,16 +144,16 @@ public class IconButtonListener implements HelpListener {
 
                 popover.setContentBackground(bgColor);
                 popover.setPopoverPlacement(helpConfiguration.getPopoverPlacement());
-                if(helpConfiguration.isShowSeparator()) {
-                    popover.addSeparator();
-                    popover.setSeparatorColor(helpConfiguration.isShowTitle() ? new Color(helpConfiguration.getUnderlineColor()) : bgColor);
-                }
+
                 popover.clear();
-                popover.addHeaderPanel();
+                popover.addHeaderPanel(helpConfiguration.isShowSeparator());
+                if(helpConfiguration.isShowSeparator()) {
+                    popover.setSeparatorColor(new Color(helpConfiguration.getUnderlineColor()));
+                }
                 popover.setShowTooltip(helpConfiguration.isShowTooltip());
                 popover.setTitle(jTitleComponent);
                 popover.add(jBodyComponent);
-                popover.setEmptyBorder(contextItem, helpConfiguration.getErrorBehavior());
+                popover.setEmptyBorder(contextItem, helpConfiguration.getErrorBehavior(), helpConfiguration.isShowTitle());
                 popover.setIconPath(helpConfiguration.getCloseIconPath());
                 popover.pack();
                 popover.setVisible(true);

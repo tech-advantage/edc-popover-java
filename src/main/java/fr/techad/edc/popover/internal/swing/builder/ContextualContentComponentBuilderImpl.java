@@ -11,6 +11,7 @@ import fr.techad.edc.client.model.InvalidUrlException;
 import fr.techad.edc.popover.builder.ContextualContentComponentBuilder;
 import fr.techad.edc.popover.internal.swing.components.Popover;
 import fr.techad.edc.popover.model.ErrorBehavior;
+import fr.techad.edc.popover.model.HelpConfiguration;
 import fr.techad.edc.popover.utils.OpenUrlAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,13 +47,16 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
     private Font popoverSectionTitleFont = new Font("Dialog", Font.BOLD, 12);
     private Font popoverLinksFont = new Font("Dialog", Font.PLAIN, 8);
     private Font popoverDescriptionFont = new Font("Dialog", Font.PLAIN, 12);
+
+    private HelpConfiguration helpConfiguration;
     private boolean enableArticle = true;
 
     @Inject
-    public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover) {
+    public ContextualContentComponentBuilderImpl(EdcClient edcClient, OpenUrlAction openUrlAction, Popover popover, HelpConfiguration helpConfiguration) {
         this.edcClient = edcClient;
         this.openUrlAction = openUrlAction;
         this.popover = popover;
+        this.helpConfiguration = helpConfiguration;
     }
 
     @Override
@@ -166,7 +170,12 @@ public class ContextualContentComponentBuilderImpl implements ContextualContentC
         if (contextItem != null) {
             label.setText("<HTML><FONT color=\"" + convertRgbToHexa(this.popoverDescriptionColor) + "\">" + contextItem.getDescription() + "</FONT></HTML>");
             label.setFont(this.popoverDescriptionFont);
-            label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
+            if(this.helpConfiguration.isShowTitle()){
+                label.setBorder(BorderFactory.createEmptyBorder(8, 10, 0, 10));
+            } else {
+                label.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+            }
+
         }
         return label;
     }

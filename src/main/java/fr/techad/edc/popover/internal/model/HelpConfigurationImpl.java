@@ -14,6 +14,7 @@ import java.awt.Color;
  */
 public class HelpConfigurationImpl implements HelpConfiguration {
     private String iconPath = "icons/icon-32px.png";
+    private String iconDarkModePath = "icons/icon2-32px.png";
     private String closeIconPath = "popover/close1.png";
     private String errorIconPath = "icons/icon_exclamation-32px.png";
     private String languageCode = "en";
@@ -23,6 +24,7 @@ public class HelpConfigurationImpl implements HelpConfiguration {
     private int backgroundColor;
     private int underlineColor;
     private boolean showTitle = true;
+    private boolean darkMode = false;
     private ErrorBehavior errorBehavior = ErrorBehavior.FRIENDLY_MSG;
     private IconState iconState = IconState.SHOWN;
     private boolean showTooltip = true;
@@ -195,6 +197,18 @@ public class HelpConfigurationImpl implements HelpConfiguration {
 
     @Override
     public void setIconState(IconState iconState) { this.iconState = iconState; }
+
+    @Override
+    public String getIconDarkModePath() { return this.iconDarkModePath; }
+
+    @Override
+    public void setIconDarkModePath(String iconPath) { this.iconDarkModePath = iconPath; }
+
+    @Override
+    public boolean isDarkMode() { return darkMode; }
+
+    @Override
+    public void setDarkMode(boolean enable) { this.darkMode = enable; }
 
     @Override
     public boolean isShowSeparator() { return showSeparator; }

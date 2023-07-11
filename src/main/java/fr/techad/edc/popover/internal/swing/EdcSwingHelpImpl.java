@@ -58,6 +58,8 @@ public class EdcSwingHelpImpl extends EdcHelpImpl implements EdcSwingHelp {
                 .setIconState(helpConfiguration.getIconState())
                 .setEnableContextItem(enableContextItem)
                 .setIconPath(iconPath)
+                .setDarkMode(helpConfiguration.isDarkMode())
+                .setIconDarkModePath(helpConfiguration.getIconDarkModePath())
                 .setErrorIconPath(helpConfiguration.getErrorIconPath())
                 .setLabel(helpConfiguration.getTooltipLabel())
                 .showTooltip(helpConfiguration.isShowTooltip())

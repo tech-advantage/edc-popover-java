@@ -35,6 +35,22 @@ public interface ContextualComponentBuilder<T> {
     ContextualComponentBuilder<T> setIconPath(String iconPath);
 
     /**
+     * Define the icon dark mode path
+     *
+     * @param iconPath
+     * @return the builder
+     */
+    ContextualComponentBuilder<T> setIconDarkModePath(String iconPath);
+
+    /**
+     * Enable darkMode
+     *
+     * @param enable
+     * @return the builder
+     */
+    ContextualComponentBuilder<T> setDarkMode(boolean enable);
+
+    /**
      * Define the error iconpath
      *
      * @param iconPath the error icon path to set
